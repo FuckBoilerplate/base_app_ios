@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="yOB-kX-JkW">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--Dashboard View Controller-->
+        <scene sceneID="rxT-R4-uHG">
+            <objects>
+                <viewController storyboardIdentifier="DashboardViewController" id="yOB-kX-JkW" customClass="DashboardViewController" customModule="base_app_ios" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="eo3-Gx-BgS"/>
+                        <viewControllerLayoutGuide type="bottom" id="weU-Ob-7Je"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ifd-0P-92M">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2o8-rh-YgN">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="0eG-gk-de7">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="16"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DashboardTableViewCellIdentifier" id="Q7i-BM-uDa" customClass="DashboardTableViewCell" customModule="base_app_ios" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="44" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Q7i-BM-uDa" id="9uV-p3-Z6Z">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7R5-KH-QNp">
+                                                    <rect key="frame" x="8" y="11" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" red="0.46274509803921571" green="0.67843137254901964" blue="0.71372549019607845" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstItem="7R5-KH-QNp" firstAttribute="leading" secondItem="9uV-p3-Z6Z" secondAttribute="leadingMargin" id="Llx-tC-LyQ"/>
+                                                <constraint firstItem="7R5-KH-QNp" firstAttribute="top" secondItem="9uV-p3-Z6Z" secondAttribute="topMargin" constant="3" id="aTj-Oe-4yd"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <accessibility key="accessibilityConfiguration" identifier="DashboardTableViewCellIdentifier">
+                                            <bool key="isElement" value="YES"/>
+                                        </accessibility>
+                                        <connections>
+                                            <outlet property="titleLabel" destination="7R5-KH-QNp" id="NBd-bf-09D"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.46274509800000002" green="0.67843137249999996" blue="0.71372549019999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="2o8-rh-YgN" firstAttribute="top" secondItem="ifd-0P-92M" secondAttribute="top" id="0cC-Xd-ybH"/>
+                            <constraint firstAttribute="trailing" secondItem="2o8-rh-YgN" secondAttribute="trailing" id="kfb-1t-d4K"/>
+                            <constraint firstItem="2o8-rh-YgN" firstAttribute="leading" secondItem="ifd-0P-92M" secondAttribute="leading" id="qRW-QL-ZmO"/>
+                            <constraint firstItem="weU-Ob-7Je" firstAttribute="top" secondItem="2o8-rh-YgN" secondAttribute="bottom" id="u5D-SY-znY"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="2o8-rh-YgN" id="jis-rg-l7R"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UCU-Y1-Xfc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="231" y="248"/>
+        </scene>
+    </scenes>
+</document>

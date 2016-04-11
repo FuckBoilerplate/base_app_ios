@@ -1,0 +1,25 @@
+//
+//  DomainPresentationModule.swift
+//  base-app-ios
+//
+//  Created by Roberto Frontado on 2/11/16.
+//  Copyright © 2016 Roberto Frontado. All rights reserved.
+//
+
+import Swinject
+
+class DomainPresentationModule {
+    
+    static func setup(defaultContainer: Container) {
+        
+        defaultContainer.register(ObserveOn.self) { _ in PresentationObserveOn() }
+        
+        defaultContainer.register(Wireframe.self) { _ in WireframeDomain() }
+            .inObjectScope(.Container)
+        
+        defaultContainer.register(UIDomain.self) { _ in UIDomainImplementation() }
+            .inObjectScope(.Container)
+        
+    }
+    
+}

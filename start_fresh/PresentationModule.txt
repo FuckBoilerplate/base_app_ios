@@ -1,0 +1,25 @@
+//
+//  PresentationModule.swift
+//  base-app-ios
+//
+//  Created by Roberto Frontado on 2/11/16.
+//  Copyright © 2016 Roberto Frontado. All rights reserved.
+//
+
+import Swinject
+
+class PresentationModule {
+    
+    static func setup(defaultContainer: Container) {
+        
+        DataPresentationModule.setup(defaultContainer)
+        DomainPresentationModule.setup(defaultContainer)
+        
+	// MARK: - View Controllers
+
+        defaultContainer.registerForStoryboard(LaunchViewController.self) { r, c in
+            c.presenter = r.resolve(LaunchPresenter.self)!
+        }
+        
+    }
+}

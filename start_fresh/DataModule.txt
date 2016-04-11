@@ -1,0 +1,22 @@
+//
+//  DataModule.swift
+//  base-app-ios
+//
+//  Created by Roberto Frontado on 2/11/16.
+//  Copyright © 2016 Roberto Frontado. All rights reserved.
+//
+
+import Swinject
+
+class DataModule {
+    
+    static func setup(defaultContainer: Container) {
+        
+        defaultContainer.register(RxCache.self) { _ in RxCache.Providers }
+        
+        defaultContainer.register(RestApi.self) { _ in RestApiMoya() }
+            .inObjectScope(.Container)
+        
+        // Repositories
+    }
+}
