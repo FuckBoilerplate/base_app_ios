@@ -19,9 +19,8 @@ class UserPresenter: Presenter {
     
     override func attachView(view: BaseView) {
         super.attachView(view)
-        
-        safetyReportError(wireframe.getWireframeCurrentObject())
-            .disposable { oUser in (view as! UserViewController).showUser(oUser) }
+        let oUser: Observable<User> = wireframe.getWireframeCurrentObject().safetyReportError(view)
+        (view as! UserViewController).showUser(oUser)
     }
     
     func goToSearchScreen() {

@@ -20,18 +20,14 @@ class UsersPresenter: Presenter, OkViewCellDelegate {
     
     override func attachView(view: BaseView) {
         super.attachView(view)
-        
-        safetyReportError(repository.askForUsers()).disposable { (oUsers) -> Disposable in
-            (view as! UsersViewController).showUsers(oUsers)
-        }
+        let oUsers: Observable<[User]> = repository.askForUsers().safetyReportError(view)
+        (view as! UsersViewController).showUsers(oUsers)
     }
     
     private func goToDetail(user: User) {
-        safetyReportError(wireframe.setWireframeCurrentObject(user))
-            .disposable { oSuccess in
-                oSuccess.subscribeNext { self.wireframe.userScreen() }
-        }
-        
+        wireframe.setWireframeCurrentObject(user)
+            .safetyReportError(view)
+            .subscribeNext { self.wireframe.userScreen() }
     }
     
     // MARK: - OkViewCellDelegate

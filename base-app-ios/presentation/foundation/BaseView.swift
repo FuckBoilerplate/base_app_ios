@@ -14,7 +14,7 @@
 import RxSwift
 
 protocol BaseView {
-//    func showAlert(oTitle: Observable<String>)
-//    func showLoading()
-//    func hideLoading()
+    func showAlert(oTitle: Observable<String>)
+    func showLoading()
+    func hideLoading()
 }

@@ -21,8 +21,9 @@ class DashboardPresenter: Presenter, OkViewCellDelegate {
     
     override func attachView(view: BaseView) {
         super.attachView(view)
-        safetyReportError(itemsMenu())
-            .disposable { oItemsMenu in (self.view as! DashboardViewController).showItemsMenu(oItemsMenu) }
+        
+        let oItemsMenu: Observable<[ItemMenu]> = itemsMenu().safetyReportError(view)
+        (view as! DashboardViewController).showItemsMenu(oItemsMenu)
     }
     
     private func itemsMenu() -> Observable<[ItemMenu]> {

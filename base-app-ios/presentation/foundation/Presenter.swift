@@ -47,38 +47,39 @@ class Presenter {
     */
     func resumeView() {}
     
+    func dispose() {
+        if !subscriptions.disposed {
+            subscriptions.dispose()
+        }
+    }
+}
+
+// MARK: - Apply loading & safety report
+extension ObservableType {
+    
     /**
      * Handles observable subscriptions and not throw any exception.
      */
-    func safety<T>(observable: Observable<T>) -> Disposing<T> {
-        let configured = schedulers(observable).catchError { error in Observable.empty() }
-        
-        return Disposing(observable: configured, subscriptions: subscriptions)
+    func safety() -> Observable<E> {
+        return applyLoading().catchError { error in Observable.empty() }
     }
     
     /**
      * Handles observable subscriptions, not throw any exception and report it using feedback.
      */
-    func safetyReportError<T>(observable: Observable<T>) -> Disposing<T> {
-        let configured = schedulers(observable).catchError({ (error) -> Observable<T> in
-//            self.uiDomain.showFeedback(Observable.just((error as NSError).domain))
+    func safetyReportError(view: BaseView?) -> Observable<E> {
+        return applyLoading().catchError { error in
+            view?.showAlert(Observable.just((error as NSError).domain))
             return Observable.empty()
-        })
-        
-        return Disposing(observable: configured, subscriptions: subscriptions)
+        }
     }
-
+    
     /**
      * Handles observable schedulers.
      */
-    private func schedulers<T>(observable: Observable<T>) -> Observable<T> {
-        return observable.subscribeOn(SerialDispatchQueueScheduler(globalConcurrentQueueQOS: .Background))
-            .observeOn(MainScheduler.instance)
-    }
     
-    func dispose() {
-        if !subscriptions.disposed {
-            subscriptions.dispose()
-        }
+    func applyLoading() -> Observable<E> {
+        return self.subscribeOn(SerialDispatchQueueScheduler(globalConcurrentQueueQOS: .Background))
+            .observeOn(MainScheduler.instance)
     }
 }

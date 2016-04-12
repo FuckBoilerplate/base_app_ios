@@ -18,8 +18,8 @@ class SearchUserPresenter: Presenter {
     }
     
     func getUserByName(username: String) {
-        safetyReportError(repository.searchByUserName(username))
-            .disposable { oUser in (self.view as! SearchUserViewController).showUser(oUser) }
+        let oUser: Observable<User> = repository.searchByUserName(username).safetyReportError(view)
+        (view as! SearchUserViewController).showUser(oUser)
     }
     
 }
