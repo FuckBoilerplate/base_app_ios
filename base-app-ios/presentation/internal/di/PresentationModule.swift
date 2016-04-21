@@ -12,14 +12,10 @@ class PresentationModule {
     
     static func setup(defaultContainer: Container) {
         
-        DataPresentationModule.setup(defaultContainer)
-        DomainPresentationModule.setup(defaultContainer)
-        
         defaultContainer.register(Wireframe.self) { r in Wireframe(wireframeRepository: r.resolve(WireframeRepository.self)!) }
         
         resolvePresenters(defaultContainer)
         resolveViewControllers(defaultContainer)
-        
     }
     
     static func resolveViewControllers(defaultContainer: Container) {
@@ -43,37 +39,33 @@ class PresentationModule {
         defaultContainer.registerForStoryboard(SearchUserViewController.self) { r, c in
             c.presenter = r.resolve(SearchUserPresenter.self)!
         }
-
     }
     
     static func resolvePresenters(defaultContainer: Container) {
         
         // MARK: - Launch
         defaultContainer.register(LaunchPresenter.self) { r in
-            LaunchPresenter(wireframe: r.resolve(Wireframe.self)!, notificationRepository: r.resolve(NotificationRepository.self)!)
+            LaunchPresenter(wireframe: r.resolve(Wireframe.self)!)
         }
 
         // MARK: - Dashboard
         defaultContainer.register(DashboardPresenter.self) { r in
-            DashboardPresenter(wireframe: r.resolve(Wireframe.self)!, notificationRepository: r.resolve(NotificationRepository.self)!)
+            DashboardPresenter(wireframe: r.resolve(Wireframe.self)!)
         }
         
         // MARK: - Users
         defaultContainer.register(UsersPresenter.self) { r in
-            UsersPresenter(wireframe: r.resolve(Wireframe.self)!, notificationRepository: r.resolve(NotificationRepository.self)!, repository: r.resolve(UserRepository.self)!)
+            UsersPresenter(wireframe: r.resolve(Wireframe.self)!, userRepository: r.resolve(UserRepository.self)!)
         }
         
         // MARK: - User
         defaultContainer.register(UserPresenter.self) { r in
-            UserPresenter(wireframe: r.resolve(Wireframe.self)!, notificationRepository: r.resolve(NotificationRepository.self)!, repository: r.resolve(UserRepository.self)!)
+            UserPresenter(wireframe: r.resolve(Wireframe.self)!)
         }
         
         // MARK: - Search user
         defaultContainer.register(SearchUserPresenter.self) { r in
-            SearchUserPresenter(wireframe: r.resolve(Wireframe.self)!, notificationRepository: r.resolve(NotificationRepository.self)!, repository: r.resolve(UserRepository.self)!)
+            SearchUserPresenter(wireframe: r.resolve(Wireframe.self)!, userRepository: r.resolve(UserRepository.self)!)
         }
-
-        
     }
-    
 }

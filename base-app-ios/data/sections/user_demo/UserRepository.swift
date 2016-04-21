@@ -11,13 +11,17 @@ import ObjectMapper
 import RxCache
 
 class UserRepository: Repository {
-
+    
+    static let FIRST_ID_QUERIED = 0
+    static let USERS_PER_PAGE = 50
+    static let MAX_USERS_TO_LOAD = 300
+    
     override init(restApi: RestApi, rxProviders: RxCache) {
         super.init(restApi: restApi, rxProviders: rxProviders)
     }
     
     func searchByUserName(nameUser: String) -> Observable<User> {
-        return restApi.getUser(nameUser)
+        return restApi.getUserByName(nameUser)
             .flatMap { (response) -> Observable<User> in
             
                 if let error: Observable<User> = self.handleError(response) {
@@ -28,13 +32,13 @@ class UserRepository: Repository {
                     let responseUser: User = try response.mapObject()
                     return Observable.just(responseUser)
                 } catch {
-                    return self.buildObservableError("")
+                    return self.buildObservableError("Error mapping the response")
                 }
         }
     }
     
-    func askForUsers() -> Observable<[User]> {
-        return restApi.getUsers()
+    func getUsers(lastIdQueried: Int?, refresh: Bool) -> Observable<[User]> {
+        var oLoader = restApi.getUsers(lastIdQueried, perPage: UserRepository.USERS_PER_PAGE)
             .flatMap { (response) -> Observable<[User]> in
                 
                 if let error: Observable<[User]> = self.handleError(response) {
@@ -45,20 +49,16 @@ class UserRepository: Repository {
                     let responseUser: [User] = try response.mapArray()
                     return Observable.just(responseUser)
                 } catch {
-                    return self.buildObservableError("")
+                    return self.buildObservableError("Error mapping the response")
                 }
         }
-    }
-    
-    func getSelectedUserDemoList() -> Observable<User> {
-        let provider = RxCacheProviders.GetSelectedUserDemoList(evict: false)
-        return rxProviders.cache(RxCache.errorObservable(User.self), provider: provider)
-    }
-    
-    func saveSelectedUserDemoList(user: User) -> Observable<Bool> {
-        let provider = RxCacheProviders.GetSelectedUserDemoList(evict: true)
-        return rxProviders.cache(Observable.just(user), provider: provider)
-            .map { user in true }
+        
+        if lastIdQueried == UserRepository.FIRST_ID_QUERIED {
+            let provider = RxCacheProviders.GetUsers(evict: refresh)
+            oLoader = rxProviders.cache(oLoader, provider: provider)
+        }
+        
+        return oLoader
     }
 
 }

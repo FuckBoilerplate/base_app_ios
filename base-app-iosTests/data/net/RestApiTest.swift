@@ -12,9 +12,10 @@ import Nimble
 import Moya
 import ObjectMapper
 import Moya_ObjectMapper
+import Google
 @testable import base_app_ios
 
-class RestApiTest: BaseTest {
+class RestApiTest: XCTestCase {
     
     private let VALID_USERNAME = "RefineriaWeb"
     private let INVALID_USERNAME = ""
@@ -26,34 +27,40 @@ class RestApiTest: BaseTest {
         restApiUT = RestApiMoya()
     }
     
-    func testWhenGetUserWithValidUserNameThenGetUserDemo() {
-
+    func test1WhenGetUserWithValidUsernameThenGetUser() {
         var success = false
-        restApiUT.getUser(VALID_USERNAME).mapObject(UserDemoEntity.self).subscribeNext { (user) -> Void in
-            success = true
-            expect(user.id).notTo(equal(0))
+        
+        restApiUT.getUserByName(VALID_USERNAME)
+            .mapObject(User.self)
+            .subscribeNext { user in
+                success = true
+                expect(user.id).notTo(beNil())
+                expect(user.id).notTo(equal(0))
         }
-        expect(success).toEventually(equal(true))
+        expect(success).toEventually(beTrue())
     }
     
-    func testWhenGetUserWithInvalidUserNameThenThrowAnExceptionOnSubscriber() {
-        
+    func test2WhenGetuserWithInvalidUsernameThenGetANilUser() {
         var success = false
-        restApiUT.getUser(INVALID_USERNAME).mapObject(UserDemoEntity.self).subscribeNext { (user) -> Void in
-            success = true
-            expect(user.id).to(beNil())
+        
+        restApiUT.getUserByName(INVALID_USERNAME)
+            .mapObject(User.self)
+            .subscribeNext { user in
+                success = true
+                expect(user.id).to(beNil())
         }
-        expect(success).toEventually(equal(true))
+        expect(success).toEventually(beTrue())
     }
     
-    func testWhenGetUsersThenGetUsers() {
-        
+    func test3WhenGetUsersThenGetUsers() {
         var success = false
-        restApiUT.getUsers().mapArray(UserDemoEntity.self).subscribeNext { (users) -> Void in
-            success = true
-            expect(users.count).notTo(equal(0))
-        }
-        expect(success).toEventually(equal(true))
-    }
         
+        restApiUT.getUsers(nil, perPage: 25)
+            .mapArray(User.self)
+            .subscribeNext { users in
+                success = true
+                expect(users.count).notTo(equal(0))
+        }
+        expect(success).toEventually(beTrue())
+    }
 }

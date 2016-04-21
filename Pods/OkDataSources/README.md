@@ -23,28 +23,31 @@ class TableViewController: UIViewController {
         super.viewDidLoad()
         dataSource = OkTableViewDataSource()
         tableView.dataSource = dataSource
-        showMockItems()
-    }
-    
-    private func showMockItems() {
-        var items = [Item]()
-        for i in 0..<10 {
-            items.append(Item(value: "Item \(i)"))
-        }
-        dataSource.items = items
-        tableView.reloadData()
     }
     
 }
 
-
 ```
 
-Look that `OkTableViewDataSource<Item, TableViewCell>` needs a **object** and  a **tableViewCell** (which has to conform [OkViewCell](OkViewCell) protocol)
+Look that `OkTableViewDataSource<Item, TableViewCell>` needs an object and a `tableViewCell` (which has to conform [OkViewCell](https://github.com/FuckBoilerplate/OkDataSources/blob/master/Library/OkViewCell.swift) protocol)
 
-In the **Storyboard** that cell needs to have an identifier like this "\(CLASSNAME)Idenfitier" (Example: **TableViewCellReuseIdenfitier**)
+```swift
+class TableViewCell: UITableViewCell, OkViewCell {
+    
+    @IBOutlet weak var valueLabel: UILabel!
+    
+    func configureItem(item: Item) {
+        valueLabel.text = item.value
+    }
+}
+```
 
-If you want to receive feedback about items selection, you need to add an `OkTableViewDelegate` to your `ViewController` and also it needs to conform [OkViewCellDelegate](OkViewCellDelegate) protocol.  
+In the **Storyboard** the cell needs to have an identifier like this **"\\(CLASSNAME)Idenfitier"** (For instance: **TableViewCellReuseIdenfitier**)
+
+![TableViewCell - 1](http://i.imgur.com/SAj4XMP.png)
+![TableViewCell - 2](http://i.imgur.com/HNfk3GT.png)
+
+If you want to receive feedback about items selection, you need to add an `OkTableViewDelegate` to your `ViewController` and also it needs to conform [OkViewCellDelegate](https://github.com/FuckBoilerplate/OkDataSources/blob/master/Library/OkViewCellDelegate.swift) protocol.  
 
 ```swift
 class TableViewController: UIViewController, OkViewCellDelegate {
@@ -59,16 +62,6 @@ class TableViewController: UIViewController, OkViewCellDelegate {
         delegate = OkTableViewDelegate(dataSource: dataSource, presenter: self)
         tableView.dataSource = dataSource
         tableView.delegate = delegate
-        showMockItems()
-    }
-    
-    private func showMockItems() {
-        var items = [Item]()
-        for i in 0..<10 {
-            items.append(Item(value: "Item \(i)"))
-        }
-        dataSource.items = items
-        tableView.reloadData()
     }
     
     // MARK: - OkViewCellDelegate
@@ -77,7 +70,6 @@ class TableViewController: UIViewController, OkViewCellDelegate {
     }
 
 }
-
 ```
 
 ## CollectionView
@@ -92,26 +84,30 @@ class CollectionViewController: UIViewController {
         super.viewDidLoad()
         dataSource = OkCollectionViewDataSource()
         collectionView.dataSource = dataSource
-        showMockItems()
-    }
-    
-    private func showMockItems() {
-        var items = [Item]()
-        for i in 0..<10 {
-            items.append(Item(value: "Item \(i)"))
-        }
-        dataSource.items = items
-        collectionView.reloadData()
     }
     
 }
 ```
 
-Look that `OkCollectionViewDataSource<Item, CollectionViewCell>` needs a **object** and  a **collectionViewCell** (which has to conform [OkViewCell](OkViewCell) protocol)
+Look that `OkCollectionViewDataSource<Item, CollectionViewCell>` needs an object and  a `collectionViewCell` (which has to conform [OkViewCell](https://github.com/FuckBoilerplate/OkDataSources/blob/master/Library/OkViewCell.swift) protocol)
 
-In the **Storyboard** that cell needs to have an identifier like this "\(CLASSNAME)ReuseIdenfitier" (Example: **CollectionViewCellReuseIdentifier**)
+```swift
+class CollectionViewCell: UICollectionViewCell, OkViewCell {
+    
+    @IBOutlet weak var valueLabel: UILabel!
+    
+    func configureItem(item: Item) {
+        valueLabel.text = item.value
+    }
+}
+```
 
-If you want to receive feedback about items selection, you need to add an `OkCollectionViewDelegate` to your `ViewController` and also it needs to conform [OkViewCellDelegate](OkViewCellDelegate) protocol.  
+In the **Storyboard** the cells needs to have an identifier like this **"\\(CLASSNAME)ReuseIdenfitier"** (For instance: **CollectionViewCellReuseIdentifier**)
+
+![CollectionViewCell - 1](http://i.imgur.com/BatGgD8.png)
+![CollectionViewCell - 2](http://i.imgur.com/pYtw3Jr.png)
+
+If you want to receive feedback about items selection, you need to add an `OkCollectionViewDelegate` to your `ViewController` and also it needs to conform [OkViewCellDelegate](https://github.com/FuckBoilerplate/OkDataSources/blob/master/Library/OkViewCellDelegate.swift) protocol.  
 
 ```swift
 class CollectionViewController: UIViewController, OkViewCellDelegate {
@@ -126,16 +122,6 @@ class CollectionViewController: UIViewController, OkViewCellDelegate {
         delegate = OkCollectionViewDelegate(dataSource: dataSource, presenter: self)
         collectionView.dataSource = dataSource
         collectionView.delegate = delegate
-        showMockItems()
-    }
-    
-    private func showMockItems() {
-        var items = [Item]()
-        for i in 0..<10 {
-            items.append(Item(value: "Item \(i)"))
-        }
-        dataSource.items = items
-        collectionView.reloadData()
     }
     
     // MARK: - OkViewCellDelegate
@@ -147,9 +133,43 @@ class CollectionViewController: UIViewController, OkViewCellDelegate {
 
 ```
 
+##Also they has PullToRefresh and Pagination functinalities in their OkDelegates
+
+### PullToRefresh
+
+Using tableViews
+
+```swift
+delegate.setOnPullToRefresh(tableView) { (refreshControl) -> Void in
+            print("refreshed")    
+            // You need to stop the UIRefreshControl manually when you want to
+            refreshControl.endRefreshing()
+        }
+```
+
+Using collectionViews
+
+```swift
+delegate.setOnPullToRefresh(collectionView) { (refreshControl) -> Void in
+            print("refreshed")   
+             // You need to stop the UIRefreshControl manually when you want to
+            refreshControl.endRefreshing()
+        }
+```
+
+### Pagination
+
+For tableViews and collectionViews
+
+```swift
+delegate.setOnPagination { (item) -> Void in
+           // Ask for more items
+        }
+```
+
 ##For more Customization
 
-If you need a fully customization of  DataSource or Delegate (TableView, CollectionView) you can simply create a class that inherits from them and just override the methods that you need
+If you need a fully customization of `DataSource` or `Delegate` (`TableView`, `CollectionView`) you can simply create a class that inherits from them and just override the methods that you need
 
 ```swift
 class ExampleTableViewDataSource: OkTableViewDataSource<Item, TableViewCell> {
@@ -170,5 +190,6 @@ class ExampleTableViewDataSource: OkTableViewDataSource<Item, TableViewCell> {
 }
 ```
 
+
 ##Credits
-This approach is based in https://github.com/Karumi/BothamUI
+This approach is based on https://github.com/Karumi/BothamUI

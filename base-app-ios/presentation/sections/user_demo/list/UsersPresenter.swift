@@ -11,23 +11,32 @@ import OkDataSources
 
 class UsersPresenter: Presenter, OkViewCellDelegate {
 
-    private let repository: UserRepository
+    private let userRepository: UserRepository
 
-    init(wireframe: Wireframe, notificationRepository: NotificationRepository, repository: UserRepository) {
-        self.repository = repository
-        super.init(wireframe: wireframe, notificationRepository: notificationRepository)
+    init(wireframe: Wireframe, userRepository: UserRepository) {
+        self.userRepository = userRepository
+        super.init(wireframe: wireframe)
     }
     
     override func attachView(view: BaseView) {
         super.attachView(view)
-        let oUsers: Observable<[User]> = repository.askForUsers().safetyReportError(view)
-        (view as! UsersViewController).showUsers(oUsers)
+        nextPage(nil)
     }
     
-    private func goToDetail(user: User) {
+    func goToDetail(user: User) {
         wireframe.setWireframeCurrentObject(user)
             .safetyReportError(view)
             .subscribeNext { self.wireframe.userScreen() }
+    }
+    
+    func nextPage(user: User?) {
+        let oUsers = userRepository.getUsers(user?.id, refresh: false).safetyReportError(view)
+        (view as! UsersViewController).showMoreUsers(oUsers)
+    }
+    
+    func refreshList() {
+        let oUsers = userRepository.getUsers(nil, refresh: true).safetyReportError(view)
+        (view as! UsersViewController).showUsers(oUsers)
     }
     
     // MARK: - OkViewCellDelegate

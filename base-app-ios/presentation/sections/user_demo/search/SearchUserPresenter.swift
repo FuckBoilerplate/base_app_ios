@@ -10,15 +10,15 @@ import RxSwift
 
 class SearchUserPresenter: Presenter {
 
-    private let repository: UserRepository
+    private let userRepository: UserRepository
     
-    init(wireframe: Wireframe, notificationRepository: NotificationRepository, repository: UserRepository) {
-        self.repository = repository
-        super.init(wireframe: wireframe, notificationRepository: notificationRepository)
+    init(wireframe: Wireframe, userRepository: UserRepository) {
+        self.userRepository = userRepository
+        super.init(wireframe: wireframe)
     }
     
     func getUserByName(username: String) {
-        let oUser: Observable<User> = repository.searchByUserName(username).safetyReportError(view)
+        let oUser: Observable<User> = userRepository.searchByUserName(username).safetyReportError(view)
         (view as! SearchUserViewController).showUser(oUser)
     }
     

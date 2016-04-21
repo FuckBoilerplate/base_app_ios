@@ -10,8 +10,8 @@ import RxSwift
 
 class LaunchPresenter: Presenter {
 
-    override init(wireframe: Wireframe, notificationRepository: NotificationRepository) {
-        super.init(wireframe: wireframe, notificationRepository: notificationRepository)
+    override init(wireframe: Wireframe) {
+        super.init(wireframe: wireframe)
     }
 
     override func resumeView() {

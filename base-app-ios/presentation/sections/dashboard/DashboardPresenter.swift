@@ -15,8 +15,8 @@ class DashboardPresenter: Presenter, OkViewCellDelegate {
     private let ID_USER = 2
     private let ID_SEARCH = 3
 
-    override init(wireframe: Wireframe, notificationRepository: NotificationRepository) {
-        super.init(wireframe: wireframe, notificationRepository: notificationRepository)
+    override init(wireframe: Wireframe) {
+        super.init(wireframe: wireframe)
     }
     
     override func attachView(view: BaseView) {

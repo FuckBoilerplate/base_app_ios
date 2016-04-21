@@ -9,12 +9,9 @@
 import RxSwift
 
 class UserPresenter: Presenter {
-
-    private let repository: UserRepository
     
-    init(wireframe: Wireframe, notificationRepository: NotificationRepository, repository: UserRepository) {
-        self.repository = repository
-        super.init(wireframe: wireframe, notificationRepository: notificationRepository)
+    override init(wireframe: Wireframe) {
+        super.init(wireframe: wireframe)
     }
     
     override func attachView(view: BaseView) {

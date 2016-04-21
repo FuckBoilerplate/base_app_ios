@@ -9,7 +9,7 @@
 import UIKit
 import RxSwift
 
-class BaseViewController<P: Presenter>: UIViewController, BaseView {
+class BaseViewController<P: Presenter>: UIViewController, BaseView, GcmReceiverUIForeground {
     
     var presenter: P!
     
@@ -30,7 +30,7 @@ class BaseViewController<P: Presenter>: UIViewController, BaseView {
     
     // MARK: - BaseView
     func showAlert(oTitle: Observable<String>) {
-        
+        oTitle.subscribeNext { message in self.showAlertMessage(message) }
     }
     
     func showLoading() {
@@ -40,6 +40,20 @@ class BaseViewController<P: Presenter>: UIViewController, BaseView {
     func hideLoading() {
         
     }
+    
+    // MARK: - GcmReceiverUIForeground
+    func onTargetNotification(oMessage: Observable<RxMessage>) {
+        presenter.onTargetNotification(oMessage)
+    }
+    
+    func onMismatchTargetNotification(oMessage: Observable<RxMessage>) {
+        presenter.onMismatchTargetNotification(oMessage)
+    }
+    
+    func target() -> String {
+        return presenter.target()
+    }
+    
 }
 
 extension UIViewController {

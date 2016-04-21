@@ -1,6 +1,6 @@
 #include "SDWebImage.xcconfig"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Private" "${PODS_ROOT}/Headers/Private/SDWebImage" "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/R.swift"
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Private" "${PODS_ROOT}/Headers/Private/SDWebImage" "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/GGLInstanceID" "${PODS_ROOT}/Headers/Public/Google" "${PODS_ROOT}/Headers/Public/Google/Google" "${PODS_ROOT}/Headers/Public/GoogleCloudMessaging" "${PODS_ROOT}/Headers/Public/GoogleIPhoneUtilities" "${PODS_ROOT}/Headers/Public/GoogleInterchangeUtilities" "${PODS_ROOT}/Headers/Public/GoogleNetworkingUtilities" "${PODS_ROOT}/Headers/Public/GoogleSymbolUtilities" "${PODS_ROOT}/Headers/Public/GoogleUtilities" "${PODS_ROOT}/Headers/Public/R.swift"
 OTHER_LDFLAGS = ${SDWEBIMAGE_OTHER_LDFLAGS}
 PODS_ROOT = ${SRCROOT}
 SKIP_INSTALL = YES

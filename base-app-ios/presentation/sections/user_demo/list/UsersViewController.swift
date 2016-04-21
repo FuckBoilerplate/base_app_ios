@@ -21,6 +21,11 @@ class UsersViewController: BaseViewController<UsersPresenter> {
         super.viewDidLoad()
         dataSource = OkTableViewDataSource()
         delegate = OkTableViewDelegate(dataSource: dataSource, presenter: presenter)
+        delegate.setOnPullToRefresh(tableView) { (refreshControl) -> Void in
+            refreshControl.endRefreshing()
+            self.presenter.refreshList()
+        }
+        delegate.setOnPagination { item in self.presenter.nextPage(item) }
         tableView.dataSource = dataSource
         tableView.delegate = delegate
     }
@@ -41,10 +46,20 @@ class UsersViewController: BaseViewController<UsersPresenter> {
     }
     
     // MARK: - Public methods
-    func showUsers(oUsers: Observable<[User]>) -> Disposable {
+    func showUsers(oUsers: Observable<[User]>) {
         showLoading()
-        return oUsers.subscribe(onNext: { (users) -> Void in
+        oUsers.subscribe(onNext: { (users) -> Void in
             self.dataSource.items = users
+            self.tableView.reloadData()
+            }, onCompleted: { () -> Void in
+                self.hideLoading()
+        })
+    }
+    
+    func showMoreUsers(oUsers: Observable<[User]>) {
+        showLoading()
+        oUsers.subscribe(onNext: { (users) -> Void in
+            self.dataSource.items.appendContentsOf(users)
             self.tableView.reloadData()
             }, onCompleted: { () -> Void in
                 self.hideLoading()

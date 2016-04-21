@@ -11,6 +11,7 @@ pod 'OkDataSources'
 
 pod 'Alamofire', '~> 3.1.0'
 pod 'ObjectMapper', '~> 1.0'
+pod 'Google/CloudMessaging'
 
 pod 'Swinject', '~> 1.0'
 pod 'RxSwift', '~> 2.0'
