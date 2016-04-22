@@ -10,56 +10,60 @@ class StartFresh
 
 	def copyData 
 
+		puts("Removing files in data layer")
 		data = '../base-app-ios/data/'
 	    Helper.removeDir(data+'sections/user_demo')
-		Helper.moveFileDeleting('DataModule.txt', data+'internal/di/DataModule.swift')
-		Helper.moveFileDeleting('RestApi.txt', data+'net/RestApi.swift')
-		Helper.moveFileDeleting('RestApiMoya.txt', data+'RestApiMoya.swift')
-		Helper.moveFileDeleting('RxCacheProviders.txt', data+'storage/RxCacheProviders.swift')
+		puts("You'll need to remove /base-app-ios/data/sections/user_demo reference manually! :(")
+		Helper.moveFileDeleting('DataModule.txt', data+'foundation/internal/di/DataModule.swift')
+		Helper.moveFileDeleting('RestApi.txt', data+'foundation/net/RestApi.swift')
+		Helper.moveFileDeleting('RestApiMoya.txt', data+'foundation/net/RestApiMoya.swift')
+		Helper.moveFileDeleting('RxCacheProviders.txt', data+'foundation/cache/RxCacheProviders.swift')
 
+		puts("Removing tests files")
 		dataTest = '../base-app-iosTests/data/'
-	    Helper.removeDir(dataTest+'user_demo')
 	    Helper.removeDir(dataTest+'net')
+		puts("You'll need to remove /base-app-ios/data/net reference manually! :(")
 	end
 
 	def copyDomain
 
+		puts("Removing files in domain layer")
 		domain = '../base-app-ios/domain/'
 	    Helper.removeDir(domain+'sections/user_demo')
+		puts("You'll need to remove /base-app-ios/domain/user_demo reference manually! :(")
 	    Helper.removeDir(domain+'sections/dashboard')
-		Helper.moveFileDeleting('DomainModule.txt', domain+'internal/di/DomainModule.swift')
-	    Helper.moveFileDeleting('Wireframe.txt', domain+'sections/Wireframe.swift')
-	    Helper.moveFileDeleting('LaunchPresenter.txt', domain+'sections/launch/LaunchPresenter.swift')
+		puts("You'll need to remove /base-app-ios/domain/dashboard reference manually! :(")
 
-		domainTest = '../base-app-iosTests/domain/'
-	    Helper.removeDir(domainTest+'sections/user_demo')
-	    Helper.removeDir(domainTest+'sections/dashboard')
 	end
 
 	def copyPresentation
 
+		puts("Removing files in Presentation layer")
 		presentation = '../base-app-ios/presentation/'
 	    Helper.removeDir(presentation+'sections/user_demo')
+		puts("You'll need to remove /base-app-ios/presentation/sections/user_demo reference manually! :(")
 	    Helper.removeDir(presentation+'sections/dashboard')
+		puts("You'll need to remove /base-app-ios/presentation/sections/dashboard reference manually! :(")
 	    Helper.moveFileDeleting('PresentationModule.txt', presentation+'internal/di/PresentationModule.swift')
-	    Helper.moveFileDeleting('DomainPresentationModule.txt', presentation+'internal/di/DomainPresentationModule.swift')
 
-		Helper.moveFileDeleting('WireframeDomain.txt', presentation+'sections/WireframeDomain.swift')
+		Helper.moveFileDeleting('Wireframe.txt', presentation+'sections/Wireframe.swift')
 
 		appPath = '../base-app-ios/'
 		Helper.moveFileDeleting('AppDelegate.txt', appPath+'AppDelegate.swift')
 		Helper.moveFileDeleting('README.md', appPath+'README.md')
 		Helper.moveFileDeleting('LICENSE', appPath+'LICENSE')
 
+		puts("Now UnitTests")
 		presentationTest = '../base-app-iosTests/presentation/'
 	    Helper.removeDir(presentationTest+'sections/user_demo')
+		puts("You'll need to remove /base-app-iosTests/presentation/sections/user_demo reference manually! :(")
 	    Helper.removeDir(presentationTest+'sections/dashboard')
+		puts("You'll need to remove /base-app-iosTests/presentation/sections/dashboard reference manually! :(")
         
         Helper.removeDir('../.git')
 	 	Helper.removeDir('../start_fresh')
 
-	 	puts("Remember clean, remove deleted directories/files and build the project")
-
+	 	puts("Remember clean, remove deleted references/directories/files and build the project")
 	end
 
 end

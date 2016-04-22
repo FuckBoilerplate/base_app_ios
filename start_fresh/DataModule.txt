@@ -7,6 +7,7 @@
 //
 
 import Swinject
+import RxCache
 
 class DataModule {
     
@@ -18,5 +19,9 @@ class DataModule {
             .inObjectScope(.Container)
         
         // Repositories
+        
+        defaultContainer.register(WireframeRepository.self) { r in
+            WireframeRepository(restApi: r.resolve(RestApi.self)!, rxProviders: r.resolve(RxCache.self)!) }
+            .inObjectScope(.Container)
     }
 }

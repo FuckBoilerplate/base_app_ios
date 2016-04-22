@@ -1,20 +1,21 @@
 //
 //  RxCacheProviders.swift
-//  app_pesca_ios
+//  base-app-ios
 //
 //  Created by Roberto Frontado on 2/4/16.
 //  Copyright © 2016 jaime. All rights reserved.
 //
 
+import RxCache
+
 enum RxCacheProviders {
-    case Example(evict : Bool)
+    case GetWireframeCurrentObject(evict: Bool)
 }
 
 extension RxCacheProviders: Provider {
     
     var lifeCache: LifeCache? {
         switch self {
-        case  Example: return LifeCache(duration: 5, timeUnit: LifeCache.TimeUnit.Hours)
         default:
             return nil
         }
@@ -35,7 +36,7 @@ extension RxCacheProviders: Provider {
     
     var evict: EvictProvider? {
         switch self {
-        case let Example(evict): return EvictProvider(evict: evict)
+        case let GetWireframeCurrentObject(evict): return EvictProvider(evict: evict)
         default:
             return nil
         }

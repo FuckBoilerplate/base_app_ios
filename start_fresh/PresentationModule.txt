@@ -12,13 +12,24 @@ class PresentationModule {
     
     static func setup(defaultContainer: Container) {
         
-        DataPresentationModule.setup(defaultContainer)
-        DomainPresentationModule.setup(defaultContainer)
+        defaultContainer.register(Wireframe.self) { r in Wireframe(wireframeRepository: r.resolve(WireframeRepository.self)!) }
         
-	// MARK: - View Controllers
-
+        resolvePresenters(defaultContainer)
+        resolveViewControllers(defaultContainer)
+    }
+    
+    static func resolveViewControllers(defaultContainer: Container) {
+        
         defaultContainer.registerForStoryboard(LaunchViewController.self) { r, c in
             c.presenter = r.resolve(LaunchPresenter.self)!
+        }
+    }
+    
+    static func resolvePresenters(defaultContainer: Container) {
+        
+        // MARK: - Launch
+        defaultContainer.register(LaunchPresenter.self) { r in
+            LaunchPresenter(wireframe: r.resolve(Wireframe.self)!)
         }
         
     }

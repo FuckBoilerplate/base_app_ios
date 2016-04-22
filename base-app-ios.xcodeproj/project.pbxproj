@@ -43,7 +43,6 @@
 		A264867A1C9814A7003BFE21 /* DomainModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26486781C9814A7003BFE21 /* DomainModule.swift */; };
 		A29D5ADE1CBBD48200A6D1E3 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29D5ADC1CBBD48200A6D1E3 /* BaseView.swift */; };
 		A29D5ADF1CBBD48200A6D1E3 /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29D5ADD1CBBD48200A6D1E3 /* Presenter.swift */; };
-		A29D5AE31CBBD50900A6D1E3 /* NotificationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29D5AE21CBBD50900A6D1E3 /* NotificationRepository.swift */; };
 		A29D5AE51CBBE4DF00A6D1E3 /* WireframeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29D5AE41CBBE4DF00A6D1E3 /* WireframeRepository.swift */; };
 		A29D5AEB1CBBE74700A6D1E3 /* DashboardPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29D5AEA1CBBE74700A6D1E3 /* DashboardPresenter.swift */; };
 		A29D5AED1CBBE88E00A6D1E3 /* LaunchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29D5AEC1CBBE88E00A6D1E3 /* LaunchPresenter.swift */; };
@@ -135,7 +134,6 @@
 		A26486781C9814A7003BFE21 /* DomainModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DomainModule.swift; sourceTree = "<group>"; };
 		A29D5ADC1CBBD48200A6D1E3 /* BaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseView.swift; path = "base-app-ios/presentation/foundation/BaseView.swift"; sourceTree = SOURCE_ROOT; };
 		A29D5ADD1CBBD48200A6D1E3 /* Presenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Presenter.swift; path = "base-app-ios/presentation/foundation/Presenter.swift"; sourceTree = SOURCE_ROOT; };
-		A29D5AE21CBBD50900A6D1E3 /* NotificationRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationRepository.swift; sourceTree = "<group>"; };
 		A29D5AE41CBBE4DF00A6D1E3 /* WireframeRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WireframeRepository.swift; path = "base-app-ios/data/sections/WireframeRepository.swift"; sourceTree = SOURCE_ROOT; };
 		A29D5AEA1CBBE74700A6D1E3 /* DashboardPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DashboardPresenter.swift; path = "base-app-ios/presentation/sections/dashboard/DashboardPresenter.swift"; sourceTree = SOURCE_ROOT; };
 		A29D5AEC1CBBE88E00A6D1E3 /* LaunchPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LaunchPresenter.swift; path = "base-app-ios/presentation/sections/launch/LaunchPresenter.swift"; sourceTree = SOURCE_ROOT; };
@@ -264,7 +262,6 @@
 			isa = PBXGroup;
 			children = (
 				A29D5AE01CBBD4FA00A6D1E3 /* foundation */,
-				A29D5AE11CBBD4FA00A6D1E3 /* gcm_notifications */,
 				A2C189C91C75CA45007A45F5 /* user_demo */,
 				A29D5AE41CBBE4DF00A6D1E3 /* WireframeRepository.swift */,
 			);
@@ -515,15 +512,6 @@
 			);
 			name = foundation;
 			path = "base-app-ios/data/sections/foundation";
-			sourceTree = SOURCE_ROOT;
-		};
-		A29D5AE11CBBD4FA00A6D1E3 /* gcm_notifications */ = {
-			isa = PBXGroup;
-			children = (
-				A29D5AE21CBBD50900A6D1E3 /* NotificationRepository.swift */,
-			);
-			name = gcm_notifications;
-			path = "base-app-ios/data/sections/gcm_notifications";
 			sourceTree = SOURCE_ROOT;
 		};
 		A2AB70E41C904B4200C62A51 /* data */ = {
@@ -889,7 +877,6 @@
 				A247D5D81CC945DC000E4DC9 /* Persistence.swift in Sources */,
 				A2C189C81C75C8E4007A45F5 /* UsersTableViewCell.swift in Sources */,
 				A29D5AE51CBBE4DF00A6D1E3 /* WireframeRepository.swift in Sources */,
-				A29D5AE31CBBD50900A6D1E3 /* NotificationRepository.swift in Sources */,
 				A247D5DA1CC945DC000E4DC9 /* RxGcm.swift in Sources */,
 				A247D5BD1CC945BA000E4DC9 /* RxCacheProviders.swift in Sources */,
 				A2C189B41C75B4A6007A45F5 /* SearchUserViewController.swift in Sources */,

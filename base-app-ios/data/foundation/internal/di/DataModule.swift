@@ -24,10 +24,6 @@ class DataModule {
             WireframeRepository(restApi: r.resolve(RestApi.self)!, rxProviders: r.resolve(RxCache.self)!) }
             .inObjectScope(.Container)
         
-        defaultContainer.register(NotificationRepository.self) { r in
-            NotificationRepository(restApi: r.resolve(RestApi.self)!, rxProviders: r.resolve(RxCache.self)!) }
-            .inObjectScope(.Container)
-        
         defaultContainer.register(UserRepository.self) { r in
             UserRepository(restApi: r.resolve(RestApi.self)!, rxProviders: r.resolve(RxCache.self)!) }
             .inObjectScope(.Container)
