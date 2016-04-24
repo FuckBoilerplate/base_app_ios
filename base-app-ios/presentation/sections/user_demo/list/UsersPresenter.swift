@@ -9,7 +9,7 @@
 import RxSwift
 import OkDataSources
 
-class UsersPresenter: Presenter, OkViewCellDelegate {
+class UsersPresenter: Presenter {
 
     private let userRepository: UserRepository
 
@@ -18,29 +18,17 @@ class UsersPresenter: Presenter, OkViewCellDelegate {
         super.init(wireframe: wireframe)
     }
     
-    override func attachView(view: BaseView) {
-        super.attachView(view)
-        nextPage(nil)
+    func goToDetail(user: User) -> Observable<Void> {
+        return wireframe.setWireframeCurrentObject(user)
+            .doOn(onNext: { self.wireframe.userScreen() } )
     }
     
-    func goToDetail(user: User) {
-        wireframe.setWireframeCurrentObject(user)
-            .safetyReportError(view)
-            .subscribeNext { self.wireframe.userScreen() }
+    func nextPage(user: User?) -> Observable<[User]> {
+        return userRepository.getUsers(user?.id, refresh: false)
     }
-    
-    func nextPage(user: User?) {
-        let oUsers = userRepository.getUsers(user?.id, refresh: false).safetyReportError(view)
-        (view as! UsersViewController).showMoreUsers(oUsers)
+
+    func refreshList() -> Observable<[User]> {
+        return userRepository.getUsers(nil, refresh: true)
     }
-    
-    func refreshList() {
-        let oUsers = userRepository.getUsers(nil, refresh: true).safetyReportError(view)
-        (view as! UsersViewController).showUsers(oUsers)
-    }
-    
-    // MARK: - OkViewCellDelegate
-    func onItemClick(item: User, position: Int) {
-        goToDetail(item)
-    }
+
 }

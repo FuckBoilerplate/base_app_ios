@@ -1,3 +1,12 @@
+# 2016-02-25 -- v1.2.1
+- Fix incorrect caching during library updates.
+
+# 2016-02-17 -- v1.2.0
+- Add Bitcode markers.
+
+# 2016-01-25 -- v1.1.7
+- Fix bug in InstanceID generation
+
 # 2016-01-25 -- v1.1.6
 - Greatly reduce IID library size.
 - Bug fixes.

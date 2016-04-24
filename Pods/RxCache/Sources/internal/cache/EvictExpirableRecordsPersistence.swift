@@ -31,13 +31,11 @@ class EvictExpirableRecordsPersistence {
     private let persistence : Persistence
     var maxMgPersistenceCache : Int!
     var couldBeExpirableRecords : Bool
-    var executedTasks : Int //testing purposes
     var isRunning : Bool
     
     init (persistence : Persistence) {
         self.persistence = persistence
         self.couldBeExpirableRecords = true
-        self.executedTasks = 0
         self.isRunning = false
     }
     
@@ -49,8 +47,6 @@ class EvictExpirableRecordsPersistence {
             }
             
             self.isRunning = true
-            
-            self.executedTasks++
             
             if !self.couldBeExpirableRecords {
                 self.isRunning  = false
@@ -79,9 +75,11 @@ class EvictExpirableRecordsPersistence {
                     break
                 }
                 
-                if let record : Record<CacheablePlaceholder> = self.persistence.retrieveRecord(key) where self.isRecordExpirable(record) && record.sizeOnMb != nil  {
-                    self.persistence.evict(key);
-                    releasedMBSoFar += record.sizeOnMb
+                if let record : Record<CacheablePlaceholder> = self.persistence.retrieveRecord(key) {
+                    if record.isExpirable && record.sizeOnMb != nil {
+                        self.persistence.evict(key);
+                        releasedMBSoFar += record.sizeOnMb
+                    }
                 }
             }
             
@@ -89,10 +87,6 @@ class EvictExpirableRecordsPersistence {
             
             self.isRunning  = false
         }
-    }
-    
-    private func isRecordExpirable(record : Record<CacheablePlaceholder>) -> Bool {
-        return record.lifeTimeInSeconds != 0
     }
     
     private func reachedPercentageMemoryToStop(storedMBWhenStarted: Int, releasedMBSoFar: Double) -> Bool {

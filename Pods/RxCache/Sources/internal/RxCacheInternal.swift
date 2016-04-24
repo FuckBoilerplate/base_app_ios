@@ -51,7 +51,8 @@ extension RxCache {
             
                 self.clearKeyIfNeeded(provider)
                 
-                self.twoLayersCache.save(provider.providerKey, dynamicKey: provider.dynamicKey, dynamicKeyGroup: provider.dynamicKeyGroup, cacheables: cacheables, lifeCache: provider.lifeCache, maxMBPersistenceCache : self.maxMBPersistenceCache)
+                
+                self.twoLayersCache.save(provider.providerKey, dynamicKey: provider.dynamicKey, dynamicKeyGroup: provider.dynamicKeyGroup, cacheables: cacheables, lifeCache: provider.lifeCache, maxMBPersistenceCache : self.maxMBPersistenceCache, isExpirable: provider.expirable())
                 return Reply(source: Source.Cloud, cacheables: cacheables)
             
             }.catchError({ (errorType) -> Observable<Reply<[T]>> in

@@ -13,9 +13,5 @@ class LaunchPresenter: Presenter {
     override init(wireframe: Wireframe) {
         super.init(wireframe: wireframe)
     }
-
-    override func resumeView() {
-        super.resumeView()
-        wireframe.dashboard()
-    }
+    
 }

@@ -9,6 +9,31 @@
 /* Begin PBXBuildFile section */
 		5D2337FB722CAFB9698930FD /* Pods_base_app_iosTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 204B0381122523288FEA45AC /* Pods_base_app_iosTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		81EAAC97ED43060FD925ADA3 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC3FD93C61B51E1E7E49C8A4 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		A20956E91CCA7C2D00C67D9D /* RxCacheProviders.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20956C91CCA7C2D00C67D9D /* RxCacheProviders.swift */; };
+		A20956EA1CCA7C2D00C67D9D /* GcmBackgroundReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20956CB1CCA7C2D00C67D9D /* GcmBackgroundReceiver.swift */; };
+		A20956EB1CCA7C2D00C67D9D /* GcmMessageReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20956CC1CCA7C2D00C67D9D /* GcmMessageReceiver.swift */; };
+		A20956EC1CCA7C2D00C67D9D /* GcmTokenReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20956CD1CCA7C2D00C67D9D /* GcmTokenReceiver.swift */; };
+		A20956ED1CCA7C2D00C67D9D /* GcmReceiverData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20956CF1CCA7C2D00C67D9D /* GcmReceiverData.swift */; };
+		A20956EE1CCA7C2D00C67D9D /* GcmReceiverUIBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20956D01CCA7C2D00C67D9D /* GcmReceiverUIBackground.swift */; };
+		A20956EF1CCA7C2D00C67D9D /* GcmReceiverUIForeground.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20956D11CCA7C2D00C67D9D /* GcmReceiverUIForeground.swift */; };
+		A20956F01CCA7C2D00C67D9D /* GcmRefreshTokenReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20956D21CCA7C2D00C67D9D /* GcmRefreshTokenReceiver.swift */; };
+		A20956F11CCA7C2D00C67D9D /* AppDelegate+RxGcmLifeCycle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20956D41CCA7C2D00C67D9D /* AppDelegate+RxGcmLifeCycle.swift */; };
+		A20956F21CCA7C2D00C67D9D /* Array+RemoveObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20956D51CCA7C2D00C67D9D /* Array+RemoveObject.swift */; };
+		A20956F31CCA7C2D00C67D9D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20956D61CCA7C2D00C67D9D /* Constants.swift */; };
+		A20956F41CCA7C2D00C67D9D /* GetGcmReceiversUIForeground.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20956D71CCA7C2D00C67D9D /* GetGcmReceiversUIForeground.swift */; };
+		A20956F51CCA7C2D00C67D9D /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20956D81CCA7C2D00C67D9D /* Persistence.swift */; };
+		A20956F61CCA7C2D00C67D9D /* UIViewController+RegisterAsGcmReceiversUIForeground.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20956D91CCA7C2D00C67D9D /* UIViewController+RegisterAsGcmReceiversUIForeground.swift */; };
+		A20956F71CCA7C2D00C67D9D /* RxGcm.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20956DA1CCA7C2D00C67D9D /* RxGcm.swift */; };
+		A20956F81CCA7C2D00C67D9D /* RxMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20956DB1CCA7C2D00C67D9D /* RxMessage.swift */; };
+		A20956F91CCA7C2D00C67D9D /* TokenUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20956DC1CCA7C2D00C67D9D /* TokenUpdate.swift */; };
+		A20956FA1CCA7C2D00C67D9D /* DataModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20956DF1CCA7C2D00C67D9D /* DataModule.swift */; };
+		A20956FB1CCA7C2D00C67D9D /* RestApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20956E11CCA7C2D00C67D9D /* RestApi.swift */; };
+		A20956FC1CCA7C2D00C67D9D /* RestApiMoya.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20956E21CCA7C2D00C67D9D /* RestApiMoya.swift */; };
+		A20956FD1CCA7C2D00C67D9D /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20956E31CCA7C2D00C67D9D /* Repository.swift */; };
+		A20956FE1CCA7C2D00C67D9D /* UserMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20956E61CCA7C2D00C67D9D /* UserMapping.swift */; };
+		A20956FF1CCA7C2D00C67D9D /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20956E71CCA7C2D00C67D9D /* UserRepository.swift */; };
+		A20957001CCA7C2D00C67D9D /* WireframeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20956E81CCA7C2D00C67D9D /* WireframeRepository.swift */; };
+		A20957021CCA7F6B00C67D9D /* SyncScreens.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20957011CCA7F6B00C67D9D /* SyncScreens.swift */; };
 		A20F565E1C6C823100029B9D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20F565D1C6C823100029B9D /* AppDelegate.swift */; };
 		A20F56651C6C823100029B9D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A20F56641C6C823100029B9D /* Assets.xcassets */; };
 		A20F56681C6C823100029B9D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A20F56661C6C823100029B9D /* LaunchScreen.storyboard */; };
@@ -17,33 +42,11 @@
 		A20F56C31C6CBD9F00029B9D /* UIApplication+TopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20F56C21C6CBD9F00029B9D /* UIApplication+TopViewController.swift */; };
 		A20F56CF1C6CC06D00029B9D /* Wireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20F56CE1C6CC06D00029B9D /* Wireframe.swift */; };
 		A20F570F1C6CCE4800029B9D /* ItemMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20F570E1C6CCE4800029B9D /* ItemMenu.swift */; };
-		A247D5BD1CC945BA000E4DC9 /* RxCacheProviders.swift in Sources */ = {isa = PBXBuildFile; fileRef = A247D5B51CC945BA000E4DC9 /* RxCacheProviders.swift */; };
-		A247D5BE1CC945BA000E4DC9 /* DataModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = A247D5B91CC945BA000E4DC9 /* DataModule.swift */; };
-		A247D5BF1CC945BA000E4DC9 /* RestApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = A247D5BB1CC945BA000E4DC9 /* RestApi.swift */; };
-		A247D5C01CC945BA000E4DC9 /* RestApiMoya.swift in Sources */ = {isa = PBXBuildFile; fileRef = A247D5BC1CC945BA000E4DC9 /* RestApiMoya.swift */; };
-		A247D5D01CC945DC000E4DC9 /* GcmReceiverData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A247D5C21CC945DC000E4DC9 /* GcmReceiverData.swift */; };
-		A247D5D11CC945DC000E4DC9 /* GcmReceiverUIBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = A247D5C31CC945DC000E4DC9 /* GcmReceiverUIBackground.swift */; };
-		A247D5D21CC945DC000E4DC9 /* GcmReceiverUIForeground.swift in Sources */ = {isa = PBXBuildFile; fileRef = A247D5C41CC945DC000E4DC9 /* GcmReceiverUIForeground.swift */; };
-		A247D5D31CC945DC000E4DC9 /* GcmRefreshTokenReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = A247D5C51CC945DC000E4DC9 /* GcmRefreshTokenReceiver.swift */; };
-		A247D5D41CC945DC000E4DC9 /* AppDelegate+RxGcmLifeCycle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A247D5C71CC945DC000E4DC9 /* AppDelegate+RxGcmLifeCycle.swift */; };
-		A247D5D51CC945DC000E4DC9 /* Array+RemoveObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = A247D5C81CC945DC000E4DC9 /* Array+RemoveObject.swift */; };
-		A247D5D61CC945DC000E4DC9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A247D5C91CC945DC000E4DC9 /* Constants.swift */; };
-		A247D5D71CC945DC000E4DC9 /* GetGcmReceiversUIForeground.swift in Sources */ = {isa = PBXBuildFile; fileRef = A247D5CA1CC945DC000E4DC9 /* GetGcmReceiversUIForeground.swift */; };
-		A247D5D81CC945DC000E4DC9 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = A247D5CB1CC945DC000E4DC9 /* Persistence.swift */; };
-		A247D5D91CC945DC000E4DC9 /* UIViewController+RegisterAsGcmReceiversUIForeground.swift in Sources */ = {isa = PBXBuildFile; fileRef = A247D5CC1CC945DC000E4DC9 /* UIViewController+RegisterAsGcmReceiversUIForeground.swift */; };
-		A247D5DA1CC945DC000E4DC9 /* RxGcm.swift in Sources */ = {isa = PBXBuildFile; fileRef = A247D5CD1CC945DC000E4DC9 /* RxGcm.swift */; };
-		A247D5DB1CC945DC000E4DC9 /* RxMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A247D5CE1CC945DC000E4DC9 /* RxMessage.swift */; };
-		A247D5DC1CC945DC000E4DC9 /* TokenUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A247D5CF1CC945DC000E4DC9 /* TokenUpdate.swift */; };
-		A247D5DF1CC945E8000E4DC9 /* GcmMessageReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = A247D5DD1CC945E8000E4DC9 /* GcmMessageReceiver.swift */; };
-		A247D5E01CC945E8000E4DC9 /* GcmTokenReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = A247D5DE1CC945E8000E4DC9 /* GcmTokenReceiver.swift */; };
-		A247D5E41CC94920000E4DC9 /* GcmBackgroundReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = A247D5E31CC94920000E4DC9 /* GcmBackgroundReceiver.swift */; };
 		A247D5E71CC94CCF000E4DC9 /* GcmNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = A247D5E61CC94CCF000E4DC9 /* GcmNotification.swift */; };
 		A26486711C98147C003BFE21 /* ApplicationModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = A264866C1C98147C003BFE21 /* ApplicationModule.swift */; };
 		A26486741C98147C003BFE21 /* PresentationModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = A264866F1C98147C003BFE21 /* PresentationModule.swift */; };
 		A264867A1C9814A7003BFE21 /* DomainModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26486781C9814A7003BFE21 /* DomainModule.swift */; };
-		A29D5ADE1CBBD48200A6D1E3 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29D5ADC1CBBD48200A6D1E3 /* BaseView.swift */; };
 		A29D5ADF1CBBD48200A6D1E3 /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29D5ADD1CBBD48200A6D1E3 /* Presenter.swift */; };
-		A29D5AE51CBBE4DF00A6D1E3 /* WireframeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29D5AE41CBBE4DF00A6D1E3 /* WireframeRepository.swift */; };
 		A29D5AEB1CBBE74700A6D1E3 /* DashboardPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29D5AEA1CBBE74700A6D1E3 /* DashboardPresenter.swift */; };
 		A29D5AED1CBBE88E00A6D1E3 /* LaunchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29D5AEC1CBBE88E00A6D1E3 /* LaunchPresenter.swift */; };
 		A2A3182F1CBBF0FC008F04F8 /* UsersPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A3182E1CBBF0FC008F04F8 /* UsersPresenter.swift */; };
@@ -56,14 +59,9 @@
 		A2C189B41C75B4A6007A45F5 /* SearchUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C189B31C75B4A6007A45F5 /* SearchUserViewController.swift */; };
 		A2C189B61C75B4BB007A45F5 /* User.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2C189B51C75B4BB007A45F5 /* User.storyboard */; };
 		A2C189C81C75C8E4007A45F5 /* UsersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C189C71C75C8E4007A45F5 /* UsersTableViewCell.swift */; };
-		A2C189CB1C75CA59007A45F5 /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C189CA1C75CA59007A45F5 /* UserRepository.swift */; };
-		A2C189CD1C75D0BF007A45F5 /* UserMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C189CC1C75D0BF007A45F5 /* UserMapping.swift */; };
 		A2C189CF1C75D551007A45F5 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C189CE1C75D551007A45F5 /* R.generated.swift */; };
 		A2C189D11C75DE82007A45F5 /* UIColor+BaseAppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C189D01C75DE82007A45F5 /* UIColor+BaseAppColors.swift */; };
 		A2C189D31C75DEE2007A45F5 /* UIImage+ImageWithColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C189D21C75DEE2007A45F5 /* UIImage+ImageWithColor.swift */; };
-		A2E025121CBC2F5300A0EECB /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E025111CBC2F5300A0EECB /* Repository.swift */; };
-		A2E025141CBC2F7B00A0EECB /* Disposing.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E025131CBC2F7B00A0EECB /* Disposing.swift */; };
-		A2E025161CBC2FCE00A0EECB /* Observable+ObserveOnBackgroundThread.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E025151CBC2FCE00A0EECB /* Observable+ObserveOnBackgroundThread.swift */; };
 		A2E6AE2B1C6CE03F007ECCB5 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E6AE2A1C6CE03F007ECCB5 /* LaunchViewController.swift */; };
 		A2E6AE2D1C6CE047007ECCB5 /* Launch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2E6AE2C1C6CE047007ECCB5 /* Launch.storyboard */; };
 		A2F276FD1C748C180020B4F9 /* SlideMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F276FC1C748C180020B4F9 /* SlideMenuController.swift */; };
@@ -93,6 +91,31 @@
 		0856568C2F0B605C5FFA8064 /* Pods-base-app-iosTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-base-app-iosTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-base-app-iosTests/Pods-base-app-iosTests.debug.xcconfig"; sourceTree = "<group>"; };
 		1F1087B53FAA51035A5371C3 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		204B0381122523288FEA45AC /* Pods_base_app_iosTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_base_app_iosTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A20956C91CCA7C2D00C67D9D /* RxCacheProviders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxCacheProviders.swift; sourceTree = "<group>"; };
+		A20956CB1CCA7C2D00C67D9D /* GcmBackgroundReceiver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GcmBackgroundReceiver.swift; sourceTree = "<group>"; };
+		A20956CC1CCA7C2D00C67D9D /* GcmMessageReceiver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GcmMessageReceiver.swift; sourceTree = "<group>"; };
+		A20956CD1CCA7C2D00C67D9D /* GcmTokenReceiver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GcmTokenReceiver.swift; sourceTree = "<group>"; };
+		A20956CF1CCA7C2D00C67D9D /* GcmReceiverData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GcmReceiverData.swift; sourceTree = "<group>"; };
+		A20956D01CCA7C2D00C67D9D /* GcmReceiverUIBackground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GcmReceiverUIBackground.swift; sourceTree = "<group>"; };
+		A20956D11CCA7C2D00C67D9D /* GcmReceiverUIForeground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GcmReceiverUIForeground.swift; sourceTree = "<group>"; };
+		A20956D21CCA7C2D00C67D9D /* GcmRefreshTokenReceiver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GcmRefreshTokenReceiver.swift; sourceTree = "<group>"; };
+		A20956D41CCA7C2D00C67D9D /* AppDelegate+RxGcmLifeCycle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AppDelegate+RxGcmLifeCycle.swift"; sourceTree = "<group>"; };
+		A20956D51CCA7C2D00C67D9D /* Array+RemoveObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+RemoveObject.swift"; sourceTree = "<group>"; };
+		A20956D61CCA7C2D00C67D9D /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		A20956D71CCA7C2D00C67D9D /* GetGcmReceiversUIForeground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetGcmReceiversUIForeground.swift; sourceTree = "<group>"; };
+		A20956D81CCA7C2D00C67D9D /* Persistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		A20956D91CCA7C2D00C67D9D /* UIViewController+RegisterAsGcmReceiversUIForeground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+RegisterAsGcmReceiversUIForeground.swift"; sourceTree = "<group>"; };
+		A20956DA1CCA7C2D00C67D9D /* RxGcm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxGcm.swift; sourceTree = "<group>"; };
+		A20956DB1CCA7C2D00C67D9D /* RxMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxMessage.swift; sourceTree = "<group>"; };
+		A20956DC1CCA7C2D00C67D9D /* TokenUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenUpdate.swift; sourceTree = "<group>"; };
+		A20956DF1CCA7C2D00C67D9D /* DataModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataModule.swift; sourceTree = "<group>"; };
+		A20956E11CCA7C2D00C67D9D /* RestApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestApi.swift; sourceTree = "<group>"; };
+		A20956E21CCA7C2D00C67D9D /* RestApiMoya.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestApiMoya.swift; sourceTree = "<group>"; };
+		A20956E31CCA7C2D00C67D9D /* Repository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
+		A20956E61CCA7C2D00C67D9D /* UserMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserMapping.swift; sourceTree = "<group>"; };
+		A20956E71CCA7C2D00C67D9D /* UserRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
+		A20956E81CCA7C2D00C67D9D /* WireframeRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WireframeRepository.swift; sourceTree = "<group>"; };
+		A20957011CCA7F6B00C67D9D /* SyncScreens.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SyncScreens.swift; path = "base-app-ios/presentation/foundation/SyncScreens.swift"; sourceTree = SOURCE_ROOT; };
 		A20F565A1C6C823100029B9D /* base-app-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "base-app-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A20F565D1C6C823100029B9D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A20F56641C6C823100029B9D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -108,33 +131,11 @@
 		A20F56C21C6CBD9F00029B9D /* UIApplication+TopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+TopViewController.swift"; sourceTree = "<group>"; };
 		A20F56CE1C6CC06D00029B9D /* Wireframe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wireframe.swift; sourceTree = "<group>"; };
 		A20F570E1C6CCE4800029B9D /* ItemMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemMenu.swift; sourceTree = "<group>"; };
-		A247D5B51CC945BA000E4DC9 /* RxCacheProviders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxCacheProviders.swift; sourceTree = "<group>"; };
-		A247D5B91CC945BA000E4DC9 /* DataModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataModule.swift; sourceTree = "<group>"; };
-		A247D5BB1CC945BA000E4DC9 /* RestApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestApi.swift; sourceTree = "<group>"; };
-		A247D5BC1CC945BA000E4DC9 /* RestApiMoya.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestApiMoya.swift; sourceTree = "<group>"; };
-		A247D5C21CC945DC000E4DC9 /* GcmReceiverData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GcmReceiverData.swift; sourceTree = "<group>"; };
-		A247D5C31CC945DC000E4DC9 /* GcmReceiverUIBackground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GcmReceiverUIBackground.swift; sourceTree = "<group>"; };
-		A247D5C41CC945DC000E4DC9 /* GcmReceiverUIForeground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GcmReceiverUIForeground.swift; sourceTree = "<group>"; };
-		A247D5C51CC945DC000E4DC9 /* GcmRefreshTokenReceiver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GcmRefreshTokenReceiver.swift; sourceTree = "<group>"; };
-		A247D5C71CC945DC000E4DC9 /* AppDelegate+RxGcmLifeCycle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AppDelegate+RxGcmLifeCycle.swift"; sourceTree = "<group>"; };
-		A247D5C81CC945DC000E4DC9 /* Array+RemoveObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+RemoveObject.swift"; sourceTree = "<group>"; };
-		A247D5C91CC945DC000E4DC9 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		A247D5CA1CC945DC000E4DC9 /* GetGcmReceiversUIForeground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetGcmReceiversUIForeground.swift; sourceTree = "<group>"; };
-		A247D5CB1CC945DC000E4DC9 /* Persistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
-		A247D5CC1CC945DC000E4DC9 /* UIViewController+RegisterAsGcmReceiversUIForeground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+RegisterAsGcmReceiversUIForeground.swift"; sourceTree = "<group>"; };
-		A247D5CD1CC945DC000E4DC9 /* RxGcm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxGcm.swift; sourceTree = "<group>"; };
-		A247D5CE1CC945DC000E4DC9 /* RxMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxMessage.swift; sourceTree = "<group>"; };
-		A247D5CF1CC945DC000E4DC9 /* TokenUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenUpdate.swift; sourceTree = "<group>"; };
-		A247D5DD1CC945E8000E4DC9 /* GcmMessageReceiver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GcmMessageReceiver.swift; sourceTree = "<group>"; };
-		A247D5DE1CC945E8000E4DC9 /* GcmTokenReceiver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GcmTokenReceiver.swift; sourceTree = "<group>"; };
-		A247D5E31CC94920000E4DC9 /* GcmBackgroundReceiver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GcmBackgroundReceiver.swift; sourceTree = "<group>"; };
 		A247D5E61CC94CCF000E4DC9 /* GcmNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GcmNotification.swift; sourceTree = "<group>"; };
 		A264866C1C98147C003BFE21 /* ApplicationModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationModule.swift; sourceTree = "<group>"; };
 		A264866F1C98147C003BFE21 /* PresentationModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationModule.swift; sourceTree = "<group>"; };
 		A26486781C9814A7003BFE21 /* DomainModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DomainModule.swift; sourceTree = "<group>"; };
-		A29D5ADC1CBBD48200A6D1E3 /* BaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseView.swift; path = "base-app-ios/presentation/foundation/BaseView.swift"; sourceTree = SOURCE_ROOT; };
 		A29D5ADD1CBBD48200A6D1E3 /* Presenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Presenter.swift; path = "base-app-ios/presentation/foundation/Presenter.swift"; sourceTree = SOURCE_ROOT; };
-		A29D5AE41CBBE4DF00A6D1E3 /* WireframeRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WireframeRepository.swift; path = "base-app-ios/data/sections/WireframeRepository.swift"; sourceTree = SOURCE_ROOT; };
 		A29D5AEA1CBBE74700A6D1E3 /* DashboardPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DashboardPresenter.swift; path = "base-app-ios/presentation/sections/dashboard/DashboardPresenter.swift"; sourceTree = SOURCE_ROOT; };
 		A29D5AEC1CBBE88E00A6D1E3 /* LaunchPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LaunchPresenter.swift; path = "base-app-ios/presentation/sections/launch/LaunchPresenter.swift"; sourceTree = SOURCE_ROOT; };
 		A2A3182E1CBBF0FC008F04F8 /* UsersPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UsersPresenter.swift; path = "base-app-ios/presentation/sections/user_demo/list/UsersPresenter.swift"; sourceTree = SOURCE_ROOT; };
@@ -147,14 +148,9 @@
 		A2C189B31C75B4A6007A45F5 /* SearchUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchUserViewController.swift; sourceTree = "<group>"; };
 		A2C189B51C75B4BB007A45F5 /* User.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = User.storyboard; sourceTree = "<group>"; };
 		A2C189C71C75C8E4007A45F5 /* UsersTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersTableViewCell.swift; sourceTree = "<group>"; };
-		A2C189CA1C75CA59007A45F5 /* UserRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
-		A2C189CC1C75D0BF007A45F5 /* UserMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserMapping.swift; sourceTree = "<group>"; };
 		A2C189CE1C75D551007A45F5 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
 		A2C189D01C75DE82007A45F5 /* UIColor+BaseAppColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+BaseAppColors.swift"; sourceTree = "<group>"; };
 		A2C189D21C75DEE2007A45F5 /* UIImage+ImageWithColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+ImageWithColor.swift"; sourceTree = "<group>"; };
-		A2E025111CBC2F5300A0EECB /* Repository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
-		A2E025131CBC2F7B00A0EECB /* Disposing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Disposing.swift; path = "base-app-ios/presentation/foundation/Disposing.swift"; sourceTree = SOURCE_ROOT; };
-		A2E025151CBC2FCE00A0EECB /* Observable+ObserveOnBackgroundThread.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Observable+ObserveOnBackgroundThread.swift"; path = "base-app-ios/presentation/foundation/Observable+ObserveOnBackgroundThread.swift"; sourceTree = SOURCE_ROOT; };
 		A2E6AE2A1C6CE03F007ECCB5 /* LaunchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		A2E6AE2C1C6CE047007ECCB5 /* Launch.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Launch.storyboard; sourceTree = "<group>"; };
 		A2F276FC1C748C180020B4F9 /* SlideMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideMenuController.swift; sourceTree = "<group>"; };
@@ -193,6 +189,110 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A20956C71CCA7C2D00C67D9D /* foundation */ = {
+			isa = PBXGroup;
+			children = (
+				A20956C81CCA7C2D00C67D9D /* cache */,
+				A20956CA1CCA7C2D00C67D9D /* gcm */,
+				A20956DD1CCA7C2D00C67D9D /* internal */,
+				A20956E01CCA7C2D00C67D9D /* net */,
+				A20956E31CCA7C2D00C67D9D /* Repository.swift */,
+			);
+			name = foundation;
+			path = "base-app-ios/data/foundation";
+			sourceTree = SOURCE_ROOT;
+		};
+		A20956C81CCA7C2D00C67D9D /* cache */ = {
+			isa = PBXGroup;
+			children = (
+				A20956C91CCA7C2D00C67D9D /* RxCacheProviders.swift */,
+			);
+			path = cache;
+			sourceTree = "<group>";
+		};
+		A20956CA1CCA7C2D00C67D9D /* gcm */ = {
+			isa = PBXGroup;
+			children = (
+				A20956CB1CCA7C2D00C67D9D /* GcmBackgroundReceiver.swift */,
+				A20956CC1CCA7C2D00C67D9D /* GcmMessageReceiver.swift */,
+				A20956CD1CCA7C2D00C67D9D /* GcmTokenReceiver.swift */,
+				A20956CE1CCA7C2D00C67D9D /* rxgcm */,
+			);
+			path = gcm;
+			sourceTree = "<group>";
+		};
+		A20956CE1CCA7C2D00C67D9D /* rxgcm */ = {
+			isa = PBXGroup;
+			children = (
+				A20956CF1CCA7C2D00C67D9D /* GcmReceiverData.swift */,
+				A20956D01CCA7C2D00C67D9D /* GcmReceiverUIBackground.swift */,
+				A20956D11CCA7C2D00C67D9D /* GcmReceiverUIForeground.swift */,
+				A20956D21CCA7C2D00C67D9D /* GcmRefreshTokenReceiver.swift */,
+				A20956D31CCA7C2D00C67D9D /* internal */,
+				A20956DA1CCA7C2D00C67D9D /* RxGcm.swift */,
+				A20956DB1CCA7C2D00C67D9D /* RxMessage.swift */,
+				A20956DC1CCA7C2D00C67D9D /* TokenUpdate.swift */,
+			);
+			path = rxgcm;
+			sourceTree = "<group>";
+		};
+		A20956D31CCA7C2D00C67D9D /* internal */ = {
+			isa = PBXGroup;
+			children = (
+				A20956D41CCA7C2D00C67D9D /* AppDelegate+RxGcmLifeCycle.swift */,
+				A20956D51CCA7C2D00C67D9D /* Array+RemoveObject.swift */,
+				A20956D61CCA7C2D00C67D9D /* Constants.swift */,
+				A20956D71CCA7C2D00C67D9D /* GetGcmReceiversUIForeground.swift */,
+				A20956D81CCA7C2D00C67D9D /* Persistence.swift */,
+				A20956D91CCA7C2D00C67D9D /* UIViewController+RegisterAsGcmReceiversUIForeground.swift */,
+			);
+			path = internal;
+			sourceTree = "<group>";
+		};
+		A20956DD1CCA7C2D00C67D9D /* internal */ = {
+			isa = PBXGroup;
+			children = (
+				A20956DE1CCA7C2D00C67D9D /* di */,
+			);
+			path = internal;
+			sourceTree = "<group>";
+		};
+		A20956DE1CCA7C2D00C67D9D /* di */ = {
+			isa = PBXGroup;
+			children = (
+				A20956DF1CCA7C2D00C67D9D /* DataModule.swift */,
+			);
+			path = di;
+			sourceTree = "<group>";
+		};
+		A20956E01CCA7C2D00C67D9D /* net */ = {
+			isa = PBXGroup;
+			children = (
+				A20956E11CCA7C2D00C67D9D /* RestApi.swift */,
+				A20956E21CCA7C2D00C67D9D /* RestApiMoya.swift */,
+			);
+			path = net;
+			sourceTree = "<group>";
+		};
+		A20956E41CCA7C2D00C67D9D /* sections */ = {
+			isa = PBXGroup;
+			children = (
+				A20956E51CCA7C2D00C67D9D /* user_demo */,
+				A20956E81CCA7C2D00C67D9D /* WireframeRepository.swift */,
+			);
+			name = sections;
+			path = "base-app-ios/data/sections";
+			sourceTree = SOURCE_ROOT;
+		};
+		A20956E51CCA7C2D00C67D9D /* user_demo */ = {
+			isa = PBXGroup;
+			children = (
+				A20956E61CCA7C2D00C67D9D /* UserMapping.swift */,
+				A20956E71CCA7C2D00C67D9D /* UserRepository.swift */,
+			);
+			path = user_demo;
+			sourceTree = "<group>";
+		};
 		A20F56511C6C823100029B9D = {
 			isa = PBXGroup;
 			children = (
@@ -251,21 +351,11 @@
 		A20F568B1C6C849100029B9D /* data */ = {
 			isa = PBXGroup;
 			children = (
-				A247D5B31CC945BA000E4DC9 /* foundation */,
-				A20F568F1C6C849100029B9D /* sections */,
+				A20956C71CCA7C2D00C67D9D /* foundation */,
+				A20956E41CCA7C2D00C67D9D /* sections */,
 			);
 			name = data;
 			path = Data;
-			sourceTree = "<group>";
-		};
-		A20F568F1C6C849100029B9D /* sections */ = {
-			isa = PBXGroup;
-			children = (
-				A29D5AE01CBBD4FA00A6D1E3 /* foundation */,
-				A2C189C91C75CA45007A45F5 /* user_demo */,
-				A29D5AE41CBBE4DF00A6D1E3 /* WireframeRepository.swift */,
-			);
-			path = sections;
 			sourceTree = "<group>";
 		};
 		A20F56911C6C849100029B9D /* domain */ = {
@@ -303,12 +393,10 @@
 		A20F56971C6C849100029B9D /* foundation */ = {
 			isa = PBXGroup;
 			children = (
-				A2E025151CBC2FCE00A0EECB /* Observable+ObserveOnBackgroundThread.swift */,
-				A2E025131CBC2F7B00A0EECB /* Disposing.swift */,
-				A29D5ADC1CBBD48200A6D1E3 /* BaseView.swift */,
 				A29D5ADD1CBBD48200A6D1E3 /* Presenter.swift */,
 				A20F56C01C6CBBA200029B9D /* BaseViewController.swift */,
 				A20F56C21C6CBD9F00029B9D /* UIApplication+TopViewController.swift */,
+				A20957011CCA7F6B00C67D9D /* SyncScreens.swift */,
 			);
 			path = foundation;
 			sourceTree = "<group>";
@@ -377,90 +465,6 @@
 			path = search;
 			sourceTree = "<group>";
 		};
-		A247D5B31CC945BA000E4DC9 /* foundation */ = {
-			isa = PBXGroup;
-			children = (
-				A247D5B41CC945BA000E4DC9 /* cache */,
-				A247D5B61CC945BA000E4DC9 /* gcm */,
-				A247D5B71CC945BA000E4DC9 /* internal */,
-				A247D5BA1CC945BA000E4DC9 /* net */,
-			);
-			name = foundation;
-			path = "base-app-ios/data/foundation";
-			sourceTree = SOURCE_ROOT;
-		};
-		A247D5B41CC945BA000E4DC9 /* cache */ = {
-			isa = PBXGroup;
-			children = (
-				A247D5B51CC945BA000E4DC9 /* RxCacheProviders.swift */,
-			);
-			path = cache;
-			sourceTree = "<group>";
-		};
-		A247D5B61CC945BA000E4DC9 /* gcm */ = {
-			isa = PBXGroup;
-			children = (
-				A247D5C11CC945DC000E4DC9 /* rxgcm */,
-				A247D5DD1CC945E8000E4DC9 /* GcmMessageReceiver.swift */,
-				A247D5DE1CC945E8000E4DC9 /* GcmTokenReceiver.swift */,
-				A247D5E31CC94920000E4DC9 /* GcmBackgroundReceiver.swift */,
-			);
-			path = gcm;
-			sourceTree = "<group>";
-		};
-		A247D5B71CC945BA000E4DC9 /* internal */ = {
-			isa = PBXGroup;
-			children = (
-				A247D5B81CC945BA000E4DC9 /* di */,
-			);
-			path = internal;
-			sourceTree = "<group>";
-		};
-		A247D5B81CC945BA000E4DC9 /* di */ = {
-			isa = PBXGroup;
-			children = (
-				A247D5B91CC945BA000E4DC9 /* DataModule.swift */,
-			);
-			path = di;
-			sourceTree = "<group>";
-		};
-		A247D5BA1CC945BA000E4DC9 /* net */ = {
-			isa = PBXGroup;
-			children = (
-				A247D5BB1CC945BA000E4DC9 /* RestApi.swift */,
-				A247D5BC1CC945BA000E4DC9 /* RestApiMoya.swift */,
-			);
-			path = net;
-			sourceTree = "<group>";
-		};
-		A247D5C11CC945DC000E4DC9 /* rxgcm */ = {
-			isa = PBXGroup;
-			children = (
-				A247D5C21CC945DC000E4DC9 /* GcmReceiverData.swift */,
-				A247D5C31CC945DC000E4DC9 /* GcmReceiverUIBackground.swift */,
-				A247D5C41CC945DC000E4DC9 /* GcmReceiverUIForeground.swift */,
-				A247D5C51CC945DC000E4DC9 /* GcmRefreshTokenReceiver.swift */,
-				A247D5C61CC945DC000E4DC9 /* internal */,
-				A247D5CD1CC945DC000E4DC9 /* RxGcm.swift */,
-				A247D5CE1CC945DC000E4DC9 /* RxMessage.swift */,
-				A247D5CF1CC945DC000E4DC9 /* TokenUpdate.swift */,
-			);
-			path = rxgcm;
-			sourceTree = "<group>";
-		};
-		A247D5C61CC945DC000E4DC9 /* internal */ = {
-			isa = PBXGroup;
-			children = (
-				A247D5C71CC945DC000E4DC9 /* AppDelegate+RxGcmLifeCycle.swift */,
-				A247D5C81CC945DC000E4DC9 /* Array+RemoveObject.swift */,
-				A247D5C91CC945DC000E4DC9 /* Constants.swift */,
-				A247D5CA1CC945DC000E4DC9 /* GetGcmReceiversUIForeground.swift */,
-				A247D5CB1CC945DC000E4DC9 /* Persistence.swift */,
-				A247D5CC1CC945DC000E4DC9 /* UIViewController+RegisterAsGcmReceiversUIForeground.swift */,
-			);
-			path = internal;
-			sourceTree = "<group>";
-		};
 		A247D5E51CC94CB2000E4DC9 /* gcm */ = {
 			isa = PBXGroup;
 			children = (
@@ -505,15 +509,6 @@
 			path = di;
 			sourceTree = "<group>";
 		};
-		A29D5AE01CBBD4FA00A6D1E3 /* foundation */ = {
-			isa = PBXGroup;
-			children = (
-				A2E025111CBC2F5300A0EECB /* Repository.swift */,
-			);
-			name = foundation;
-			path = "base-app-ios/data/sections/foundation";
-			sourceTree = SOURCE_ROOT;
-		};
 		A2AB70E41C904B4200C62A51 /* data */ = {
 			isa = PBXGroup;
 			children = (
@@ -528,15 +523,6 @@
 				A2AB70F21C904BA400C62A51 /* RestApiTest.swift */,
 			);
 			path = net;
-			sourceTree = "<group>";
-		};
-		A2C189C91C75CA45007A45F5 /* user_demo */ = {
-			isa = PBXGroup;
-			children = (
-				A2C189CA1C75CA59007A45F5 /* UserRepository.swift */,
-				A2C189CC1C75D0BF007A45F5 /* UserMapping.swift */,
-			);
-			path = user_demo;
 			sourceTree = "<group>";
 		};
 		A2E6AE271C6CE035007ECCB5 /* dashboard */ = {
@@ -840,58 +826,56 @@
 			buildActionMask = 2147483647;
 			files = (
 				A2C189D11C75DE82007A45F5 /* UIColor+BaseAppColors.swift in Sources */,
+				A20956F61CCA7C2D00C67D9D /* UIViewController+RegisterAsGcmReceiversUIForeground.swift in Sources */,
+				A20956EE1CCA7C2D00C67D9D /* GcmReceiverUIBackground.swift in Sources */,
 				A2F276FF1C748C250020B4F9 /* DashboardViewController.swift in Sources */,
-				A247D5C01CC945BA000E4DC9 /* RestApiMoya.swift in Sources */,
+				A20956F51CCA7C2D00C67D9D /* Persistence.swift in Sources */,
 				A2C189CF1C75D551007A45F5 /* R.generated.swift in Sources */,
+				A20956EC1CCA7C2D00C67D9D /* GcmTokenReceiver.swift in Sources */,
+				A20956FD1CCA7C2D00C67D9D /* Repository.swift in Sources */,
 				A20F570F1C6CCE4800029B9D /* ItemMenu.swift in Sources */,
+				A20956EB1CCA7C2D00C67D9D /* GcmMessageReceiver.swift in Sources */,
 				A2C189B01C75B48D007A45F5 /* UsersViewController.swift in Sources */,
-				A29D5ADE1CBBD48200A6D1E3 /* BaseView.swift in Sources */,
 				A2A3182F1CBBF0FC008F04F8 /* UsersPresenter.swift in Sources */,
 				A264867A1C9814A7003BFE21 /* DomainModule.swift in Sources */,
-				A247D5DB1CC945DC000E4DC9 /* RxMessage.swift in Sources */,
-				A247D5BF1CC945BA000E4DC9 /* RestApi.swift in Sources */,
-				A2E025161CBC2FCE00A0EECB /* Observable+ObserveOnBackgroundThread.swift in Sources */,
 				A29D5AEB1CBBE74700A6D1E3 /* DashboardPresenter.swift in Sources */,
-				A247D5D71CC945DC000E4DC9 /* GetGcmReceiversUIForeground.swift in Sources */,
+				A20956F91CCA7C2D00C67D9D /* TokenUpdate.swift in Sources */,
 				A29D5AED1CBBE88E00A6D1E3 /* LaunchPresenter.swift in Sources */,
-				A247D5D01CC945DC000E4DC9 /* GcmReceiverData.swift in Sources */,
+				A20956FE1CCA7C2D00C67D9D /* UserMapping.swift in Sources */,
 				A2F277031C7497A60020B4F9 /* DashboardTableViewCell.swift in Sources */,
 				A29D5ADF1CBBD48200A6D1E3 /* Presenter.swift in Sources */,
-				A247D5BE1CC945BA000E4DC9 /* DataModule.swift in Sources */,
-				A2E025141CBC2F7B00A0EECB /* Disposing.swift in Sources */,
+				A20956F31CCA7C2D00C67D9D /* Constants.swift in Sources */,
 				A20F56CF1C6CC06D00029B9D /* Wireframe.swift in Sources */,
-				A247D5D21CC945DC000E4DC9 /* GcmReceiverUIForeground.swift in Sources */,
-				A247D5DF1CC945E8000E4DC9 /* GcmMessageReceiver.swift in Sources */,
-				A247D5D51CC945DC000E4DC9 /* Array+RemoveObject.swift in Sources */,
-				A2C189CD1C75D0BF007A45F5 /* UserMapping.swift in Sources */,
-				A247D5E01CC945E8000E4DC9 /* GcmTokenReceiver.swift in Sources */,
-				A247D5E41CC94920000E4DC9 /* GcmBackgroundReceiver.swift in Sources */,
+				A20956FA1CCA7C2D00C67D9D /* DataModule.swift in Sources */,
+				A20957001CCA7C2D00C67D9D /* WireframeRepository.swift in Sources */,
+				A20956F81CCA7C2D00C67D9D /* RxMessage.swift in Sources */,
+				A20956F21CCA7C2D00C67D9D /* Array+RemoveObject.swift in Sources */,
+				A20957021CCA7F6B00C67D9D /* SyncScreens.swift in Sources */,
+				A20956FF1CCA7C2D00C67D9D /* UserRepository.swift in Sources */,
+				A20956ED1CCA7C2D00C67D9D /* GcmReceiverData.swift in Sources */,
 				A2A318351CBBF143008F04F8 /* User.swift in Sources */,
 				A26486711C98147C003BFE21 /* ApplicationModule.swift in Sources */,
-				A247D5D61CC945DC000E4DC9 /* Constants.swift in Sources */,
-				A247D5D11CC945DC000E4DC9 /* GcmReceiverUIBackground.swift in Sources */,
 				A26486741C98147C003BFE21 /* PresentationModule.swift in Sources */,
-				A247D5D41CC945DC000E4DC9 /* AppDelegate+RxGcmLifeCycle.swift in Sources */,
+				A20956EF1CCA7C2D00C67D9D /* GcmReceiverUIForeground.swift in Sources */,
+				A20956F11CCA7C2D00C67D9D /* AppDelegate+RxGcmLifeCycle.swift in Sources */,
 				A20F565E1C6C823100029B9D /* AppDelegate.swift in Sources */,
 				A20F56C11C6CBBA200029B9D /* BaseViewController.swift in Sources */,
-				A247D5D81CC945DC000E4DC9 /* Persistence.swift in Sources */,
+				A20956FB1CCA7C2D00C67D9D /* RestApi.swift in Sources */,
+				A20956FC1CCA7C2D00C67D9D /* RestApiMoya.swift in Sources */,
 				A2C189C81C75C8E4007A45F5 /* UsersTableViewCell.swift in Sources */,
-				A29D5AE51CBBE4DF00A6D1E3 /* WireframeRepository.swift in Sources */,
-				A247D5DA1CC945DC000E4DC9 /* RxGcm.swift in Sources */,
-				A247D5BD1CC945BA000E4DC9 /* RxCacheProviders.swift in Sources */,
 				A2C189B41C75B4A6007A45F5 /* SearchUserViewController.swift in Sources */,
+				A20956F71CCA7C2D00C67D9D /* RxGcm.swift in Sources */,
 				A2C189D31C75DEE2007A45F5 /* UIImage+ImageWithColor.swift in Sources */,
+				A20956F01CCA7C2D00C67D9D /* GcmRefreshTokenReceiver.swift in Sources */,
 				A2A318331CBBF11B008F04F8 /* SearchUserPresenter.swift in Sources */,
-				A247D5D91CC945DC000E4DC9 /* UIViewController+RegisterAsGcmReceiversUIForeground.swift in Sources */,
-				A247D5DC1CC945DC000E4DC9 /* TokenUpdate.swift in Sources */,
-				A247D5D31CC945DC000E4DC9 /* GcmRefreshTokenReceiver.swift in Sources */,
 				A2C189B21C75B496007A45F5 /* UserViewController.swift in Sources */,
 				A2F276FD1C748C180020B4F9 /* SlideMenuController.swift in Sources */,
+				A20956E91CCA7C2D00C67D9D /* RxCacheProviders.swift in Sources */,
 				A247D5E71CC94CCF000E4DC9 /* GcmNotification.swift in Sources */,
-				A2E025121CBC2F5300A0EECB /* Repository.swift in Sources */,
+				A20956F41CCA7C2D00C67D9D /* GetGcmReceiversUIForeground.swift in Sources */,
 				A20F56C31C6CBD9F00029B9D /* UIApplication+TopViewController.swift in Sources */,
 				A2E6AE2B1C6CE03F007ECCB5 /* LaunchViewController.swift in Sources */,
-				A2C189CB1C75CA59007A45F5 /* UserRepository.swift in Sources */,
+				A20956EA1CCA7C2D00C67D9D /* GcmBackgroundReceiver.swift in Sources */,
 				A2A318311CBBF115008F04F8 /* UserPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

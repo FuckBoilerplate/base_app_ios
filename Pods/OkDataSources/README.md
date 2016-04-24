@@ -8,6 +8,13 @@ Add OkDataSources pod to the podfile
 pod 'OkDataSources'
 ```
 
+For RxSwift extension, this project will include it as a dependency.  So you can do this via CocoaPods subspecs.
+
+```swift
+pod 'OkDataSources'
+pod 'OkDataSources/RxSwift'
+```
+
 ## Usage
 
 OkDataSources provides several dataSources and delegates to deal with iOS TableViews and CollectionViews
@@ -47,7 +54,7 @@ In the **Storyboard** the cell needs to have an identifier like this **"\\(CLASS
 ![TableViewCell - 1](http://i.imgur.com/SAj4XMP.png)
 ![TableViewCell - 2](http://i.imgur.com/HNfk3GT.png)
 
-If you want to receive feedback about items selection, you need to add an `OkTableViewDelegate` to your `ViewController` and also it needs to conform [OkViewCellDelegate](https://github.com/FuckBoilerplate/OkDataSources/blob/master/Library/OkViewCellDelegate.swift) protocol.  
+If you want to receive feedback about items selection, you need to add an `OkTableViewDelegate` to your `ViewController`, so `onItemClicked` block its going to be called every time the user clicks an item.
 
 ```swift
 class TableViewController: UIViewController, OkViewCellDelegate {
@@ -59,14 +66,12 @@ class TableViewController: UIViewController, OkViewCellDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource = OkTableViewDataSource()
-        delegate = OkTableViewDelegate(dataSource: dataSource, presenter: self)
+        delegate = OkTableViewDelegate(dataSource: dataSource,
+            onItemClicked: { (item, position) in
+            self.showAlertMessage("\(item.value) clicked")
+        })
         tableView.dataSource = dataSource
         tableView.delegate = delegate
-    }
-    
-    // MARK: - OkViewCellDelegate
-    func onItemClick(item: Item, position: Int) {
-        showAlertMessage("\(item.value) clicked")
     }
 
 }
@@ -107,10 +112,10 @@ In the **Storyboard** the cells needs to have an identifier like this **"\\(CLAS
 ![CollectionViewCell - 1](http://i.imgur.com/BatGgD8.png)
 ![CollectionViewCell - 2](http://i.imgur.com/pYtw3Jr.png)
 
-If you want to receive feedback about items selection, you need to add an `OkCollectionViewDelegate` to your `ViewController` and also it needs to conform [OkViewCellDelegate](https://github.com/FuckBoilerplate/OkDataSources/blob/master/Library/OkViewCellDelegate.swift) protocol.  
+If you want to receive feedback about items selection, you need to add an `OkCollectionViewDelegate` to your `ViewController`, so `onItemClicked` block its going to be called every time the user clicks an item.
 
 ```swift
-class CollectionViewController: UIViewController, OkViewCellDelegate {
+class CollectionViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     var dataSource: OkCollectionViewDataSource<Item, CollectionViewCell>!
@@ -119,21 +124,19 @@ class CollectionViewController: UIViewController, OkViewCellDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource = OkCollectionViewDataSource()
-        delegate = OkCollectionViewDelegate(dataSource: dataSource, presenter: self)
+        delegate = OkCollectionViewDelegate(dataSource: dataSource,
+            onItemClicked: { (item, position) in
+                self.showAlertMessage("\(item.value) clicked")
+        })
         collectionView.dataSource = dataSource
         collectionView.delegate = delegate
     }
-    
-    // MARK: - OkViewCellDelegate
-    func onItemClick(item: Item, position: Int) {
-        showAlertMessage("\(item.value) clicked")
-    }
-    
+       
 }
 
 ```
 
-##Also they has PullToRefresh and Pagination functinalities in their OkDelegates
+##Also they have PullToRefresh and Pagination functionalities in their OkDelegates
 
 ### PullToRefresh
 
@@ -190,6 +193,38 @@ class ExampleTableViewDataSource: OkTableViewDataSource<Item, TableViewCell> {
 }
 ```
 
+##RxSwift
 
+There are 2 delegates OkRxTableViewDelegate and OkRxCollectionViewDelegate, use them instead of the regular ones
+
+RxSwift provides extra flavor to the Pagination and PullToRequest functionalities
+
+TableView
+``` swift
+delegate = OkRxTableViewDelegate(dataSource: dataSource,
+            onItemClicked: { (item, position) in
+                self.showAlertMessage("\(item.value) clicked")
+        })
+        delegate.setOnPullToRefresh(tableView) {
+            return Observable.just(self.getMockItems())
+        }
+        delegate.setOnPagination { (item) -> Observable<[Item]> in
+            return Observable.just(self.getMockItems(self.dataSource.items.count))
+        }
+```
+
+CollectionView
+```swift
+delegate = OkRxCollectionViewDelegate(dataSource: dataSource,
+            onItemClicked: { (item, position) in
+                self.showAlertMessage("\(item.value) clicked")
+        })
+        delegate.setOnPullToRefresh(collectionView) {
+            return Observable.just(self.getMockItems())
+        }
+        delegate.setOnPagination { (item) -> Observable<[Item]> in
+            return Observable.just(self.getMockItems(self.dataSource.items.count))
+        }   
+```
 ##Credits
 This approach is based on https://github.com/Karumi/BothamUI

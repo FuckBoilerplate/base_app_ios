@@ -8,26 +8,20 @@
 
 import UIKit
 
-public class OkCollectionViewDelegate<T: OkViewDataSource, U: OkViewCellDelegate where T.ItemType == U.ItemType>: OkViewDelegate<T.ItemType>, UICollectionViewDelegate {
+public class OkCollectionViewDelegate<T: OkViewDataSource>: OkViewDelegate<T>, UICollectionViewDelegate {
     
-    public let dataSource: T
-    public let presenter: U
-    
-    private var collectionView: UICollectionView!
-    
-    public init(dataSource: T, presenter: U) {
-        self.dataSource = dataSource
-        self.presenter = presenter
+    public override init(dataSource: T, onItemClicked: (item: T.ItemType, position: Int) -> Void) {
+        super.init(dataSource: dataSource, onItemClicked: onItemClicked)
     }
     
     // MARK: - Public methods
     // MARK: Pull to refresh
-    public func setOnPullToRefresh(collectionView: UICollectionView, onRefreshedBlock: (refreshControl: UIRefreshControl) -> Void) {
-        setOnPullToRefresh(collectionView, onRefreshedBlock: onRefreshedBlock, refreshControl: nil)
+    public func setOnPullToRefresh(collectionView: UICollectionView, onRefreshed: (refreshControl: UIRefreshControl) -> Void) {
+        setOnPullToRefresh(collectionView, onRefreshed: onRefreshed, refreshControl: nil)
     }
     
-    public func setOnPullToRefresh(collectionView: UICollectionView, onRefreshedBlock: (refreshControl: UIRefreshControl) -> Void, var refreshControl: UIRefreshControl?) {
-        configureRefreshControl(&refreshControl, onRefreshedBlock: onRefreshedBlock)
+    public func setOnPullToRefresh(collectionView: UICollectionView, onRefreshed: (refreshControl: UIRefreshControl) -> Void, var refreshControl: UIRefreshControl?) {
+        configureRefreshControl(&refreshControl, onRefreshed: onRefreshed)
         collectionView.addSubview(refreshControl!)
         collectionView.alwaysBounceVertical = true
     }
@@ -36,12 +30,12 @@ public class OkCollectionViewDelegate<T: OkViewDataSource, U: OkViewCellDelegate
     public func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
         // Ask for nextPage every time the user is getting close to the trigger treshold
         if (dataSource.items.count - triggerTreshold) == indexPath.row && indexPath.row > triggerTreshold {
-            onPaginationBlock(item: dataSource.items[indexPath.row])
+            onPagination(item: dataSource.items[indexPath.row])
         }
     }
     
     public func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let item = dataSource.itemAtIndexPath(indexPath)
-        presenter.onItemClick(item, position: indexPath.row)
+        onItemClicked(item: item, position: indexPath.row)
     }
 }

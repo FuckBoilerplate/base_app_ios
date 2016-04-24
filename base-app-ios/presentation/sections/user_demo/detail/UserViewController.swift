@@ -21,9 +21,20 @@ class UserViewController: BaseViewController<UserPresenter> {
             let menuButton = UIBarButtonItem(title: "Menu", style: UIBarButtonItemStyle.Plain, target: self, action: "menuButtonPressed:")
             navigationItem.leftBarButtonItem = menuButton
         }
+        
+        presenter.getCurrentUser()
+            .safelyReport(self)
+            .subscribeNext { user in self.showUser(user) }
     }
     
     // MARK: - Private methods
+    private func showUser(user: User) {
+        userNameLabel.text = user.login
+        if let imageURL = NSURL(string: user.getAvatarUrl()) {
+            userImageView.sd_setImageWithURL(imageURL)
+        }
+    }
+    
     func menuButtonPressed(sender: UIButton) {
         slideMenuController()?.openLeft()
     }
@@ -31,15 +42,7 @@ class UserViewController: BaseViewController<UserPresenter> {
     // MARK: - Actions
     @IBAction func findUserButtonPressed(sender: UIButton) {
         presenter?.goToSearchScreen()
-    }
-    
-    // MARK: - Public methods
-    func showUser(oUser: Observable<User>) -> Disposable {
-        return oUser.subscribeNext({ (user) -> Void in
-            self.userNameLabel.text = user.login
-            if let imageURL = NSURL(string: user.getAvatarUrl()) {
-                self.userImageView.sd_setImageWithURL(imageURL)
-            }
-        })
+            .safely()
+            .subscribe()
     }
 }

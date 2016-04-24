@@ -4,8 +4,7 @@
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![Build Status](https://travis-ci.org/VictorAlbertos/RxSCache.svg?branch=master)](https://travis-ci.org/VictorAlbertos/RxSCache)
 
-RxCache
-========
+# RxCache
 
 _Swift adaptation from the original [RxCache Java version](https://github.com/VictorAlbertos/RxCache)_.
 
@@ -15,43 +14,86 @@ Every Swift application is a client application, which means it does not make se
 
 Plus, the fact that you have some sort of legendary database for persisting your data does not solves by itself the real challenge: to be able to configure your caching needs in a flexible and simple way. 
 
-Inspired by [Moya](https://github.com/Moya/Moya) api, **RxCache is a reactive caching library for Swift which relies on [RxSwift](https://github.com/ReactiveX/RxSwift) for turning your caching needs into an enum.** 
+Inspired by [Moya](https://github.com/Moya/Moya) api, **RxCache is a reactive caching library for Swift which relies on [RxSwift](https://github.com/ReactiveX/RxSwift) for turning your caching needs into an `enum`.** 
 
-Every enum value acts as a provider for RxCache, and all of them are managed through observables; they are the fundamental contract 
-between the library and its clients. 
+Every `enum` value acts as a provider for RxCache, and all of them are managed through observables; they are the fundamental contract between the library and its clients. 
 
-When supplying an observable which contains the data provided by an expensive task -probably a http connection, RxCache determines if it is needed 
+When supplying an `observable` which contains the data provided by an expensive task -probably a http connection, RxCache determines if it is needed 
 to subscribe to it or instead fetch the data previously cached. This decision is made based on the providers configuration.
 
-So, when supplying an observable you get your observable cached back, and next time you will retrieve it without the time cost associated with its underlying task. 
+So, when supplying an `observable` you get your observable cached back, and next time you will retrieve it without the time cost associated with its underlying task. 
 
 
-Installation
-============
+## Installation
+
 
 RxCache is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod 'RxCache', '~> 0.1.1'
+pod 'RxCache', '~> 0.1.2'
 ```
 
 RxCache also is available using [Carthage](https://github.com/Carthage/Carthage). To install it add the following dependency to your `Cartfile`:
 
 ```
-github "VictorAlbertos/RxSCache" ~> 0.1.1
+github "VictorAlbertos/RxSCache" ~> 0.1.2
 ```
 
-Usage
-=====
+## Usage
 
-Prepare yor data model
-----------------------
-The data model which will be used for RxCache requires to conform with [GlossCacheable](https://github.com/VictorAlbertos/RxSCache/blob/master/Sources/GlossCacheable.swift) or [OMCacheable](https://github.com/VictorAlbertos/RxSCache/blob/master/Sources/OMCacheable.swift) protocol.
 
-Create the enum providers 
--------------------------
-After your model conforms with RxObject protocol, you can now create an enum which conforms with the Provider protocol with as much values as needed to create the caching providers:
+### Prepare yor data model
+
+The data model which will be used for RxCache requires to conform with [GlossCacheable](https://github.com/VictorAlbertos/RxSCache/blob/master/Sources/GlossCacheable.swift) or [OMCacheable](https://github.com/VictorAlbertos/RxSCache/blob/master/Sources/OMCacheable.swift) `protocol`.
+
+**Using [Gloss](https://github.com/hkellaway/Gloss)**
+
+```swift
+import Gloss
+import RxCache
+
+struct Person: Glossy, GlossCacheable {
+    let name: String
+    
+    init?(json: JSON) {
+        guard let name: String = "name" <~~ json else { return nil }
+        self.name = name
+    }
+    
+    func toJSON() -> JSON? {
+        return jsonify([
+            "name" ~~> self.name]
+        )
+    }
+}
+```
+
+**Using [ObjectMapper](https://github.com/Hearst-DD/ObjectMapper)**
+```swift
+import ObjectMapper
+import RxCache
+
+class Person: Mappable, OMCacheable {
+    var name: String?
+    
+    required init?(JSON: [String : AnyObject]) {
+        mapping(Map(mappingType: .FromJSON, JSONDictionary: JSON))
+    }
+    
+    func mapping(map: Map) {
+        name    <- map["name"]
+    }
+    
+    required init?(_ map: Map) { }
+}
+```
+
+If you would like to add another mapping library that converts to and from JSON ask for it or [make a PR](https://github.com/FuckBoilerplate/RxCache/pulls)  :-)
+
+### Create the `enum` providers 
+
+After your model conforms with `GlossCacheable` `OMCacheable` or  `protocol`, you can now create an `enum` which conforms with the Provider protocol with as much values as needed to create the caching providers:
 
 ```swift
 enum CacheProviders : Provider {
@@ -118,13 +160,13 @@ RxCache provides a set of classes to indicate how the Provider needs to handle t
 * [DynamicKeyGroup](https://github.com/VictorAlbertos/RxSCache/blob/master/Pod/Classes/DynamicKeyGroup.swift) is a wrapper around the key and the group for those providers which need to handle multiple records grouped, so they need to provide multiple keys organized in groups, such us endpoints with filtering AND pagination requirements. To evict the data associated with the key of one particular group, use EvictDynamicKeyGroup. 
 
 
-Using CacheProviders enum
--------------------------
-Now you can use your enum providers calling RxCache.Providers.cache() static method.
+### Using CacheProviders `enum`
+
+Now you can use your `enum` providers calling `RxCache.Providers.cache()` static method.
 
 It's a really good practice to organize your data providers in a set of Repository classes where RxCache and Moya work together. Indeed, RxCache is the perfect match for [Moya](https://github.com/Moya/Moya) to create a repository of auto-managed-caching data pointing to endpoints. 
 
-This would be the MockRepository:
+This would be the `MockRepository`:
 
 ```swift
 class MockRepository {
@@ -158,12 +200,12 @@ class MockRepository {
 ```
 
 
-Use cases
-=========
-Following use cases illustrate some common scenarios which will help to understand the usage of DynamicKey and DynamicKeyGroup classes along with evicting scopes. 
+## Use cases
 
-Enum providers example
-----------------------
+Following use cases illustrate some common scenarios which will help to understand the usage of `DynamicKey` and `DynamicKeyGroup` classes along with evicting scopes. 
+
+### Enum providers example
+
 ```swift
 enum CacheProviders : Provider {
     // Mock List
@@ -218,8 +260,8 @@ enum CacheProviders : Provider {
 }
 ```
 
-Mock List
----------
+#### List
+
 ```swift
 //Hit observable evicting all mocks 
 let provider : Provider = CacheProviders.GetMocksEvictProvider(evictProvider: EvictProvider(evict: true))
@@ -230,8 +272,8 @@ let provider : Provider = CacheProviders.GetMocksEvictProvider(evictProvider: Ev
 providers.cache(getExpensiveMocks(), provider: provider)
 ```
 
-Mock List Filtering
--------------------
+#### List Filtering
+
 ```swift
 //Hit observable evicting all mocks using EvictProvider
 let provider : Provider = CacheProviders.GetMocksFilteredEvict(filter: "actives", evictProvider: EvictProvider(evict: true))
@@ -246,8 +288,8 @@ let provider : Provider = CacheProviders.GetMocksFilteredEvict(filter: "actives"
 providers.cache(getExpensiveMocks(), provider: provider)
 ```		
 		
-Mock List Paginated with filters
---------------------------------
+#### List Paginated with filters
+
 ```swift
 //Hit observable evicting all mocks using EvictProvider
 let provider : Provider = CacheProviders.GetMocksFilteredPaginateEvict(filter: "actives", page: 1, evictProvider: EvictProvider(evict: true))
@@ -262,21 +304,20 @@ let provider : Provider = CacheProviders.GetMocksFilteredPaginateEvict(filter: "
 providers.cache(getExpensiveMocks(), provider: provider)
 ```		
 
-As you may already notice, the whole point of using DynamicKey or DynamicKeyGroup along with Evict classes is to play with several scopes when evicting objects.
+As you may already notice, the whole point of using `DynamicKey` or `DynamicKeyGroup` along with `Evict` classes is to play with several scopes when evicting objects.
 
-The enum provider example declare type which their associated value accepts EvictProvider in order to be able to concrete more specifics types of EvictProvider at runtime.
+The `enum` provider example declare a type which its associated value accepts `EvictProvider` in order to be able to concrete more specifics types of `EvictProvider` at runtime.
 
-But I have done that for demonstration purposes, you always should narrow the evicting classes to the type which you really need -indeed, you should not expose the Evict classes as an associated value, instead require a Bool and hide the implementation detail in your enum provider. 
+But I have done that for demonstration purposes, you always should narrow the evicting classes to the type which you really need -indeed, you should not expose the `Evict` classes as an associated value, instead require a `Bool` and hide the implementation detail in your `enum` provider. 
 
-For the last example, Mock List Paginated with filters, I would narrow the scope to EvictDynamicKey in production code, because this way I would be able to paginate the filtered mocks and evict them per its filter, triggered by a pull to refresh for instance.
+For the last example, List Paginated with filters, I would narrow the scope to `EvictDynamicKey` in production code, because this way I would be able to paginate the filtered mocks and evict them per its filter, triggered by a pull to refresh for instance.
 
 
-Configure general behaviour
-===========================
+## Configure general behaviour
 
-Configure the limit in megabytes for the data to be persisted 
--------------------------------------------------------------
-By default, RxCache sets the limit in 300 megabytes, but you can change this value by calling maxMBPersistenceCache property in RxCache.Providers single instance:
+### Configure the limit in megabytes for the data to be persisted 
+
+By default, RxCache sets the limit in 300 megabytes, but you can change this value by calling `RxCache.Providers.maxMBPersistenceCache` property:
 
 ```swift
 RxCache.Providers.maxMBPersistenceCache = 100
@@ -284,24 +325,38 @@ RxCache.Providers.maxMBPersistenceCache = 100
 
 This limit ensure that the disk will no grow up limitless in case you have providers with dynamic keys which values changes dynamically, like filters based on gps location or dynamic filters supplied by your back-end solution.
 
-When this limit is reached, RxCache will not be able to persisted in disk new data. That's why RxCache has an automated process which allows to evict 'expirable' records. And by 'expirable' I mean any object which has been saved using a provider whose LifeCache wouldn't be nil.
+When this limit is reached, RxCache will not be able to persist in disk new data. That's why RxCache has an automated process to evict any record when the threshold memory assigned to the persistence layer is close to be reached, even if the record life time has not been fulfilled.
 
-So any record persisted with LifeCache is a candidate to be evicted when new data is requested but there is no more available disk space, even it its life time has not been fulfilled.
+But implementing `expirable()` method from `Provider` protocol and returning false as value, the objects persisted with this provider will be exclude from the process.
 
-Use expired data if loader not available
-----------------------------------------
-By default, RxCache will return an observable error if the cached data has expired and the data returned by the observable loader is null, 
-preventing this way serving data which has been marked as evicted.
+```swift
+enum CacheProviders : Provider {
+    case GetNotExpirableMocks() 
 
-You can modify this behaviour, allowing RxCache serving evicted data when the loader has returned nil values, by setting as true the value of useExpiredDataIfLoaderNotAvailable
+    public func expirable() -> Bool {
+        switch self {
+        case GetNotExpirableMocks():
+            return false
+        default:
+            return true
+        }
+    }
+
+}
+```
+
+### Use expired data if loader not available
+
+By default, RxCache will return an `observable` error if the cached data has expired and the data returned by the `observable` loader is null, preventing this way serving data which has been marked as evicted.
+
+You can modify this behaviour, allowing RxCache serving evicted data when the loader has returned nil values, by setting as true the value of `useExpiredDataIfLoaderNotAvailable`
 
 ```swift
 RxCache.Providers.useExpiredDataIfLoaderNotAvailable = true
 ```
 
+## Internals
 
-Internals
-=========
 RxCache serves the data from one of its three layers:
 
 * A memory layer -> Powered by [NSCache](https://developer.apple.com/library/prerelease/mac/documentation/Cocoa/Reference/NSCache_Class/index.html).

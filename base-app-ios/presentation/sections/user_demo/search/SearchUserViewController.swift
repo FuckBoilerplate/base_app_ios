@@ -29,18 +29,17 @@ class SearchUserViewController: BaseViewController<SearchUserPresenter> {
         slideMenuController()?.openLeft()
     }
 
+    private func showUser(user: User) {
+        userNameLabel.text = user.login
+        if let imageURL = NSURL(string: user.getAvatarUrl()) {
+            userImageView.sd_setImageWithURL(imageURL)
+        }
+    }
+    
     // MARK: - Actions
     @IBAction func findUserButtonPressed(sender: UIButton) {
-        presenter?.getUserByName(userNameTextField.text!)
-    }
-
-    // MARK: - Public methods
-    func showUser(oUser: Observable<User>) -> Disposable {
-        return oUser.subscribeNext({ (user) -> Void in
-            self.userNameLabel.text = user.login
-            if let imageURL = NSURL(string: user.getAvatarUrl()) {
-                self.userImageView.sd_setImageWithURL(imageURL)
-            }
-        })
+        presenter.getUserByName(userNameTextField.text!)
+            .safelyReport(self)
+            .subscribeNext { user in self.showUser(user) }
     }
 }

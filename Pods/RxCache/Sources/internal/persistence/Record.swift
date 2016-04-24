@@ -30,12 +30,15 @@ class Record<T> : NSObject, NSCoding {
     var sizeOnMb : Double!
     var cacheables : [T]!
     private var JSONs = [JSON]()
+    var isExpirable : Bool
+
     
-    init(cacheables : [T], lifeTimeInSeconds: Double) {
+    init(cacheables : [T], lifeTimeInSeconds: Double, isExpirable: Bool) {
         self.source = Source.Memory
         self.cacheables = cacheables
         self.timeAtWhichWasPersisted = NSDate().timeIntervalSince1970
         self.lifeTimeInSeconds = lifeTimeInSeconds
+        self.isExpirable = isExpirable
     }
     
     //for testing purpose only
@@ -44,12 +47,15 @@ class Record<T> : NSObject, NSCoding {
         self.cacheables = cacheables
         self.timeAtWhichWasPersisted = timeAtWhichWasPersisted
         self.lifeTimeInSeconds = lifeTimeInSeconds
+        self.isExpirable = true
     }
     
     @objc required init(coder aDecoder: NSCoder) {
         source = Source(rawValue: aDecoder.decodeObjectForKey("source") as! String)
         timeAtWhichWasPersisted = aDecoder.decodeObjectForKey("timeAtWhichWasPersisted") as! Double
         lifeTimeInSeconds = aDecoder.decodeObjectForKey("lifeTimeInSeconds") as! Double
+        isExpirable = aDecoder.decodeObjectForKey("isExpirable") as! Bool
+
         JSONs = aDecoder.decodeObjectForKey("JSONs") as! [[String: AnyObject]]
         cacheables = [T]()
         
@@ -72,7 +78,8 @@ class Record<T> : NSObject, NSCoding {
         aCoder.encodeObject(source.rawValue, forKey: "source")
         aCoder.encodeObject(timeAtWhichWasPersisted, forKey: "timeAtWhichWasPersisted")
         aCoder.encodeObject(lifeTimeInSeconds, forKey: "lifeTimeInSeconds")
-        
+        aCoder.encodeObject(isExpirable, forKey: "isExpirable")
+
         for cacheable in cacheables {
             if let gloss = cacheable as? GlossCacheable {
                 JSONs.append(gloss.toJSON()!)

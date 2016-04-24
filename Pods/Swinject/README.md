@@ -1,11 +1,12 @@
-# Swinject
+<img src="https://avatars0.githubusercontent.com/u/13637225?v=3&s=100" width="50" height="50"> Swinject
+========
 
 [![Travis CI](https://travis-ci.org/Swinject/Swinject.svg?branch=master)](https://travis-ci.org/Swinject/Swinject)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![CocoaPods Version](https://img.shields.io/cocoapods/v/Swinject.svg?style=flat)](http://cocoapods.org/pods/Swinject)
 [![License](https://img.shields.io/cocoapods/l/Swinject.svg?style=flat)](http://cocoapods.org/pods/Swinject)
 [![Platform](https://img.shields.io/cocoapods/p/Swinject.svg?style=flat)](http://cocoapods.org/pods/Swinject)
-[![Swift Version](https://img.shields.io/badge/Swift-2.1-F16D39.svg?style=flat)](https://developer.apple.com/swift)
+[![Swift Version](https://img.shields.io/badge/Swift-2.2-F16D39.svg?style=flat)](https://developer.apple.com/swift)
 
 Swinject is a lightweight [dependency injection](https://en.wikipedia.org/wiki/Dependency_injection) framework for Swift.
 
@@ -50,11 +51,13 @@ Then run `carthage update --no-use-binaries` command or just `carthage update`. 
 
 To install Swinject with CocoaPods, add the following lines to your `Podfile`.
 
-    source 'https://github.com/CocoaPods/Specs.git'
-    platform :ios, '8.0'
-    use_frameworks!
+```ruby
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '8.0' # or platform :osx, '10.10' if your target is OS X.
+use_frameworks!
 
-    pod 'Swinject', '~> 1.1.0'
+pod 'Swinject', '~> 1.1.0'
+```
 
 Then run `pod install` command. For details of the installation and usage of CocoaPods, visit [its official website](https://cocoapods.org).
 

@@ -8,11 +8,17 @@
 
 class ItemMenu {
     
-    let id: Int
+    enum Type {
+        case Users
+        case User
+        case Search
+    }
+    
+    let type: Type
     var title: String!
     
-    init(id: Int, title: String) {
-        self.id = id
+    init(type: Type, title: String) {
+        self.type = type
         self.title = title
     }
 }

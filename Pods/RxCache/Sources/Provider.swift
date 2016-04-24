@@ -32,6 +32,15 @@ public protocol Provider {
     var dynamicKeyGroup : DynamicKeyGroup? {get}
     
     var evict : EvictProvider? {get}
+    
+    func expirable() -> Bool
+}
+
+public extension Provider {
+    
+    func expirable() -> Bool {
+        return true
+    }
 }
 
 internal extension Provider {
@@ -47,6 +56,7 @@ internal extension Provider {
         }
         return target
     }
+
 }
 
 

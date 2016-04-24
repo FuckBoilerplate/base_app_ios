@@ -34,11 +34,11 @@ class SaveRecord : Action {
         self.persistence = persistence
     }
     
-    func save<T>(providerKey: String, dynamicKey : DynamicKey?, dynamicKeyGroup : DynamicKeyGroup?, cacheables: [T], lifeCache: LifeCache?, maxMBPersistenceCache: Int) {
+    func save<T>(providerKey: String, dynamicKey : DynamicKey?, dynamicKeyGroup : DynamicKeyGroup?, cacheables: [T], lifeCache: LifeCache?, maxMBPersistenceCache: Int, isExpirable: Bool) {
         let composedKey = composeKey(providerKey, dynamicKey: dynamicKey, dynamicKeyGroup: dynamicKeyGroup);
         
         let lifeTimeInSeconds = lifeCache != nil ? lifeCache!.getLifeTimeInSeconds() : 0
-        let record : Record<T> = Record(cacheables: cacheables, lifeTimeInSeconds: lifeTimeInSeconds)
+        let record : Record<T> = Record(cacheables: cacheables, lifeTimeInSeconds: lifeTimeInSeconds, isExpirable: isExpirable)
         memory.put(composedKey, record: record)
         
         if let storedMB = persistence.storedMB() where storedMB >= maxMBPersistenceCache {

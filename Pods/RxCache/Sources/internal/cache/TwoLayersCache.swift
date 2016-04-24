@@ -43,8 +43,8 @@ class TwoLayersCache {
         return retrieveRecord.retrieve(providerKey, dynamicKey: dynamicKey, dynamicKeyGroup: dynamicKeyGroup, useExpiredDataIfLoaderNotAvailable: useExpiredDataIfLoaderNotAvailable, lifeCache: lifeCache)
     }
     
-    func save<T>(providerKey: String, dynamicKey : DynamicKey?, dynamicKeyGroup : DynamicKeyGroup?, cacheables: [T], lifeCache: LifeCache?, maxMBPersistenceCache: Int) {
-        saveRecord.save(providerKey, dynamicKey: dynamicKey, dynamicKeyGroup: dynamicKeyGroup, cacheables: cacheables, lifeCache: lifeCache, maxMBPersistenceCache: maxMBPersistenceCache)
+    func save<T>(providerKey: String, dynamicKey : DynamicKey?, dynamicKeyGroup : DynamicKeyGroup?, cacheables: [T], lifeCache: LifeCache?, maxMBPersistenceCache: Int, isExpirable: Bool) {
+        saveRecord.save(providerKey, dynamicKey: dynamicKey, dynamicKeyGroup: dynamicKeyGroup, cacheables: cacheables, lifeCache: lifeCache, maxMBPersistenceCache: maxMBPersistenceCache, isExpirable: isExpirable)
     }
 
     func evictProviderKey(providerKey : String) {

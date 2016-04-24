@@ -14,13 +14,14 @@ class UserPresenter: Presenter {
         super.init(wireframe: wireframe)
     }
     
-    override func attachView(view: BaseView) {
-        super.attachView(view)
-        let oUser: Observable<User> = wireframe.getWireframeCurrentObject().safetyReportError(view)
-        (view as! UserViewController).showUser(oUser)
+    func getCurrentUser() -> Observable<User> {
+        return wireframe.getWireframeCurrentObject()
     }
     
-    func goToSearchScreen() {
-        wireframe.searchUserScreen()
+    func goToSearchScreen() -> Observable<Void> {
+        return Observable.deferred {
+            self.wireframe.searchUserScreen()
+            return Observable.just()
+        }
     }
 }

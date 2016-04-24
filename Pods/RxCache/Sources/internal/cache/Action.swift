@@ -93,7 +93,7 @@ extension Action {
             let endPositionKey = composedKeyMemory.characters.count - indexPrefixDynamicKey
             let finalIndex = composedKeyMemory.endIndex.advancedBy(-endPositionKey)
             
-            return composedKeyMemory.substringWithRange(Range<String.Index>(start: composedKeyMemory.startIndex, end: finalIndex))
+            return composedKeyMemory.substringWithRange(Range<String.Index>(composedKeyMemory.startIndex..<finalIndex))
         } else {
             return nil
         }

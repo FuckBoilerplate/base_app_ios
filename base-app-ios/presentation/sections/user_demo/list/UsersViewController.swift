@@ -15,19 +15,28 @@ class UsersViewController: BaseViewController<UsersPresenter> {
     @IBOutlet weak var loadingView: UIActivityIndicatorView!
     @IBOutlet weak var tableView: UITableView!
     var dataSource: OkTableViewDataSource<User, UsersTableViewCell>!
-    var delegate: OkTableViewDelegate<OkTableViewDataSource<User, UsersTableViewCell>, UsersPresenter>!
+    var delegate: OkRxTableViewDelegate<OkTableViewDataSource<User, UsersTableViewCell>>!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource = OkTableViewDataSource()
-        delegate = OkTableViewDelegate(dataSource: dataSource, presenter: presenter)
-        delegate.setOnPullToRefresh(tableView) { (refreshControl) -> Void in
-            refreshControl.endRefreshing()
-            self.presenter.refreshList()
-        }
-        delegate.setOnPagination { item in self.presenter.nextPage(item) }
+        delegate = OkRxTableViewDelegate(dataSource: dataSource,
+            onItemClicked: { (item, position) in
+                self.presenter.goToDetail(item)
+                    .safely()
+                    .subscribe()
+        })
+        delegate.setOnPullToRefresh(tableView) { self.presenter.refreshList() }
+        delegate.setOnPagination { user in self.presenter.nextPage(user) }
         tableView.dataSource = dataSource
         tableView.delegate = delegate
+        
+        presenter.nextPage(nil)
+            .safelyReportLoading(self)
+            .subscribeNext { users in
+                self.dataSource.items = users
+                self.tableView.reloadData()
+        }
     }
     
     override func showLoading() {
@@ -44,26 +53,4 @@ class UsersViewController: BaseViewController<UsersPresenter> {
     @IBAction func menuButtonPressed(sender: UIButton) {
         slideMenuController()?.openLeft()
     }
-    
-    // MARK: - Public methods
-    func showUsers(oUsers: Observable<[User]>) {
-        showLoading()
-        oUsers.subscribe(onNext: { (users) -> Void in
-            self.dataSource.items = users
-            self.tableView.reloadData()
-            }, onCompleted: { () -> Void in
-                self.hideLoading()
-        })
-    }
-    
-    func showMoreUsers(oUsers: Observable<[User]>) {
-        showLoading()
-        oUsers.subscribe(onNext: { (users) -> Void in
-            self.dataSource.items.appendContentsOf(users)
-            self.tableView.reloadData()
-            }, onCompleted: { () -> Void in
-                self.hideLoading()
-        })
-    }
-    
 }

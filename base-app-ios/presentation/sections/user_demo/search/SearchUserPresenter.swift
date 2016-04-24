@@ -17,9 +17,8 @@ class SearchUserPresenter: Presenter {
         super.init(wireframe: wireframe)
     }
     
-    func getUserByName(username: String) {
-        let oUser: Observable<User> = userRepository.searchByUserName(username).safetyReportError(view)
-        (view as! SearchUserViewController).showUser(oUser)
+    func getUserByName(username: String) -> Observable<User> {
+        return userRepository.searchByUserName(username)
     }
     
 }

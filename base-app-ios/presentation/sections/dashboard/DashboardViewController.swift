@@ -15,14 +15,33 @@ class DashboardViewController: BaseViewController<DashboardPresenter> {
     
     @IBOutlet weak var tableView: UITableView!
     var dataSource: OkTableViewDataSource<ItemMenu, DashboardTableViewCell>!
-    var delegate: OkTableViewDelegate<OkTableViewDataSource<ItemMenu, DashboardTableViewCell>, DashboardPresenter>!
+    var delegate: OkRxTableViewDelegate<OkTableViewDataSource<ItemMenu, DashboardTableViewCell>>!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        presenter.getItemsMenu()
+            .safely()
+            .subscribeNext { items in
+                self.dataSource.items = items
+                self.tableView.reloadData()
+        }
+        
         dataSource = OkTableViewDataSource()
-        delegate = OkTableViewDelegate(dataSource: dataSource, presenter: presenter)
+        delegate = OkRxTableViewDelegate(dataSource: dataSource, onItemClicked: { (item, position) in
+            switch(item.type) {
+            case .User:
+                self.showUser()
+            case .Users:
+                self.showUsers()
+            case .Search:
+                self.showUserSearch()
+            }
+        })
         tableView.dataSource = dataSource
         tableView.delegate = delegate
+        
+        showUsers()
     }
     
     // MARK: - Private methods
@@ -31,25 +50,15 @@ class DashboardViewController: BaseViewController<DashboardPresenter> {
         self.slideMenuController()?.changeMainViewController(nvc, close: true)
     }
     
-    // MARK: - Public methods
-    func showItemsMenu(oItems: Observable<[ItemMenu]>) -> Disposable {
-        showLoading()
-        return oItems.subscribe(onNext: { (items) -> Void in
-            self.dataSource.items = items
-            self.tableView.reloadData()
-            self.showUsers()
-            },onCompleted: { self.hideLoading() })
-    }
-    
-    func showUsers() {
+    private func showUsers() {
         changeMainViewController(R.storyboard.user.usersViewController()!)
     }
     
-    func showUser() {
+    private func showUser() {
         changeMainViewController(R.storyboard.user.userViewController()!)
     }
     
-    func showUserSearch() {
+    private func showUserSearch() {
         changeMainViewController(R.storyboard.user.searchUserViewController()!)
     }
 }

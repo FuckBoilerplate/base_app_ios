@@ -10,7 +10,7 @@ import Foundation
 
 /**
 A type-erased `ObservableType`. 
-j
+
 It represents a push style sequence.
 */
 public class Observable<Element> : ObservableType {
