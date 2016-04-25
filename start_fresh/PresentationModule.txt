@@ -12,7 +12,11 @@ class PresentationModule {
     
     static func setup(defaultContainer: Container) {
         
-        defaultContainer.register(Wireframe.self) { r in Wireframe(wireframeRepository: r.resolve(WireframeRepository.self)!) }
+        defaultContainer.register(Wireframe.self) { r in Wireframe() }
+            .inObjectScope(.Container)
+        
+        defaultContainer.register(SyncScreens.self) { _ in SyncScreens() }
+            .inObjectScope(.Container)
         
         resolvePresenters(defaultContainer)
         resolveViewControllers(defaultContainer)
@@ -22,6 +26,8 @@ class PresentationModule {
         
         defaultContainer.registerForStoryboard(LaunchViewController.self) { r, c in
             c.presenter = r.resolve(LaunchPresenter.self)!
+            c.syncScreens = r.resolve(SyncScreens.self)!
+            c.wireframe = r.resolve(Wireframe.self)!
         }
     }
     
@@ -29,7 +35,7 @@ class PresentationModule {
         
         // MARK: - Launch
         defaultContainer.register(LaunchPresenter.self) { r in
-            LaunchPresenter(wireframe: r.resolve(Wireframe.self)!)
+            LaunchPresenter(wireframeRepository: r.resolve(WireframeRepository.self)!)
         }
         
     }

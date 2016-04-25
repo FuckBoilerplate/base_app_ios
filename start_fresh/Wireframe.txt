@@ -12,22 +12,6 @@ import RxSwift
 
 class Wireframe {
     
-    private let wireframeRepository: WireframeRepository
-    
-    init(wireframeRepository: WireframeRepository) {
-        self.wireframeRepository = wireframeRepository
-    }
-    
-    // MARK: - WireframeRepository
-    
-    func getWireframeCurrentObject<T>() -> Observable<T> {
-        return wireframeRepository.getWireframeCurrentObject()
-    }
-    
-    func setWireframeCurrentObject<T>(object: T) -> Observable<Void> {
-        return wireframeRepository.setWireframeCurrentObject(object)
-    }
-    
     // MARK: - ViewControllers
     
     func popCurrentScreen() {
