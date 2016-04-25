@@ -23,16 +23,13 @@ import RxSwift
 
 class Presenter {
     
-    internal let wireframe: Wireframe
+    internal let wireframeRepository: WireframeRepository
     
-    init(wireframe: Wireframe) {
-        self.wireframe = wireframe
+    init(wireframeRepository: WireframeRepository) {
+        self.wireframeRepository = wireframeRepository
     }
     
-    func back() -> Observable<Void> {
-        return Observable.deferred { () -> Observable<Void> in
-            self.wireframe.popCurrentScreen()
-            return Observable.just()
-        }
+    func dataForNextScreen<T>(object: T) -> Observable<Void> {
+        return wireframeRepository.setWireframeCurrentObject(object)
     }
 }

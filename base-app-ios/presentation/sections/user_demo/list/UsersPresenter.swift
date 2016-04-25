@@ -13,16 +13,11 @@ class UsersPresenter: Presenter {
 
     private let userRepository: UserRepository
 
-    init(wireframe: Wireframe, userRepository: UserRepository) {
+    init(wireframeRepository: WireframeRepository, userRepository: UserRepository) {
         self.userRepository = userRepository
-        super.init(wireframe: wireframe)
+        super.init(wireframeRepository: wireframeRepository)
     }
-    
-    func goToDetail(user: User) -> Observable<Void> {
-        return wireframe.setWireframeCurrentObject(user)
-            .doOn(onNext: { self.wireframe.userScreen() } )
-    }
-    
+
     func nextPage(user: User?) -> Observable<[User]> {
         return userRepository.getUsers(user?.id, refresh: false)
     }

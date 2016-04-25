@@ -10,8 +10,8 @@ import RxSwift
 
 class LaunchPresenter: Presenter {
 
-    override init(wireframe: Wireframe) {
-        super.init(wireframe: wireframe)
+    override init(wireframeRepository: WireframeRepository) {
+        super.init(wireframeRepository: wireframeRepository)
     }
     
 }

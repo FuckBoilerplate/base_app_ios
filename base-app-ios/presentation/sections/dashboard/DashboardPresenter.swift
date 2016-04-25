@@ -11,8 +11,8 @@ import OkDataSources
 
 class DashboardPresenter: Presenter {
 
-    override init(wireframe: Wireframe) {
-        super.init(wireframe: wireframe)
+    override init(wireframeRepository: WireframeRepository) {
+        super.init(wireframeRepository: wireframeRepository)
     }
     
     func getItemsMenu() -> Observable<[ItemMenu]> {

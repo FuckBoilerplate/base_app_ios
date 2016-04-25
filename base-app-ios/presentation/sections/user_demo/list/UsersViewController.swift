@@ -22,9 +22,9 @@ class UsersViewController: BaseViewController<UsersPresenter> {
         dataSource = OkTableViewDataSource()
         delegate = OkRxTableViewDelegate(dataSource: dataSource,
             onItemClicked: { (item, position) in
-                self.presenter.goToDetail(item)
+                self.presenter.dataForNextScreen(item)
                     .safely()
-                    .subscribe()
+                    .subscribeNext { self.wireframe.userScreen() }
         })
         delegate.setOnPullToRefresh(tableView) { self.presenter.refreshList() }
         delegate.setOnPagination { user in self.presenter.nextPage(user) }

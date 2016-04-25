@@ -7,12 +7,12 @@
 //
 
 import UIKit
+import SystemConfiguration
 
 class LaunchViewController: BaseViewController<LaunchPresenter> {
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        presenter.wireframe.dashboard()
+        wireframe.dashboard()
     }
 }
-

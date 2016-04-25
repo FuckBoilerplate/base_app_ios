@@ -14,6 +14,7 @@ class BaseViewController<P: Presenter>: UIViewController, GcmReceiverUIForegroun
     
     var presenter: P!
     var syncScreens: SyncScreens!
+    var wireframe: Wireframe!
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -21,7 +22,11 @@ class BaseViewController<P: Presenter>: UIViewController, GcmReceiverUIForegroun
             onSyncScreen()
         }
     }
-    
+
+    func back() {
+        wireframe.popCurrentScreen()
+    }
+
     /**
     * Override this method and do not call super to add functionality when sync screen is called
     */

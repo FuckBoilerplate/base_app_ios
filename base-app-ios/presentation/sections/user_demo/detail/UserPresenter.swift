@@ -10,18 +10,11 @@ import RxSwift
 
 class UserPresenter: Presenter {
     
-    override init(wireframe: Wireframe) {
-        super.init(wireframe: wireframe)
+    override init(wireframeRepository: WireframeRepository) {
+        super.init(wireframeRepository: wireframeRepository)
     }
     
     func getCurrentUser() -> Observable<User> {
-        return wireframe.getWireframeCurrentObject()
-    }
-    
-    func goToSearchScreen() -> Observable<Void> {
-        return Observable.deferred {
-            self.wireframe.searchUserScreen()
-            return Observable.just()
-        }
+        return wireframeRepository.getWireframeCurrentObject()
     }
 }

@@ -41,8 +41,6 @@ class UserViewController: BaseViewController<UserPresenter> {
 
     // MARK: - Actions
     @IBAction func findUserButtonPressed(sender: UIButton) {
-        presenter?.goToSearchScreen()
-            .safely()
-            .subscribe()
+        wireframe.searchUserScreen()
     }
 }

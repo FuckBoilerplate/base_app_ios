@@ -12,9 +12,9 @@ class SearchUserPresenter: Presenter {
 
     private let userRepository: UserRepository
     
-    init(wireframe: Wireframe, userRepository: UserRepository) {
+    init(wireframeRepository: WireframeRepository, userRepository: UserRepository) {
         self.userRepository = userRepository
-        super.init(wireframe: wireframe)
+        super.init(wireframeRepository: wireframeRepository)
     }
     
     func getUserByName(username: String) -> Observable<User> {
