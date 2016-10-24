@@ -8,19 +8,19 @@
 
 class SyncScreens {
 
-    private var pendingScreens: [String]!
+    fileprivate var pendingScreens: [String]!
     
     init() {
         pendingScreens = []
     }
     
-    func addScreen(screen: String) {
+    func addScreen(_ screen: String) {
         if !pendingScreens.contains(screen) {
             pendingScreens.append(screen)
         }
     }
     
-    func needToSync(candidate: String) -> Bool {
+    func needToSync(_ candidate: String) -> Bool {
         var needToSync = false
         
         for screen in pendingScreens {
@@ -34,5 +34,20 @@ class SyncScreens {
             pendingScreens.removeObject(candidate)
         }
         return needToSync
+    }
+}
+
+
+extension Array {
+    mutating func removeObject<U: Equatable>(_ object: U) -> Bool {
+        for (idx, objectToCompare) in self.enumerated() {  //in old swift use enumerate(self)
+            if let to = objectToCompare as? U {
+                if object == to {
+                    self.remove(at: idx)
+                    return true
+                }
+            }
+        }
+        return false
     }
 }

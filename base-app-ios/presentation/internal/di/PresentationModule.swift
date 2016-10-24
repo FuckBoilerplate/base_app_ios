@@ -10,19 +10,19 @@ import Swinject
 
 class PresentationModule {
     
-    static func setup(defaultContainer: Container) {
+    static func setup(_ defaultContainer: Container) {
         
         defaultContainer.register(Wireframe.self) { r in Wireframe() }
-            .inObjectScope(.Container)
+            .inObjectScope(.container)
         
         defaultContainer.register(SyncScreens.self) { _ in SyncScreens() }
-            .inObjectScope(.Container)
+            .inObjectScope(.container)
         
         resolvePresenters(defaultContainer)
         resolveViewControllers(defaultContainer)
     }
     
-    static func resolveViewControllers(defaultContainer: Container) {
+    static func resolveViewControllers(_ defaultContainer: Container) {
         
         defaultContainer.registerForStoryboard(LaunchViewController.self) { r, c in
             c.presenter = r.resolve(LaunchPresenter.self)!
@@ -55,7 +55,7 @@ class PresentationModule {
         }
     }
     
-    static func resolvePresenters(defaultContainer: Container) {
+    static func resolvePresenters(_ defaultContainer: Container) {
         
         // MARK: - Launch
         defaultContainer.register(LaunchPresenter.self) { r in

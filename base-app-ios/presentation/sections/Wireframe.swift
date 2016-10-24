@@ -8,6 +8,7 @@
 
 import UIKit
 import Swinject
+import SwinjectStoryboard
 import RxSwift
 
 class Wireframe {
@@ -21,7 +22,7 @@ class Wireframe {
         // Use an empty ViewController, because the dashboard is going to show the good one
         let slideMenuController = SlideMenuController(mainViewController: UIViewController(), leftMenuViewController: dashboard)
         
-        UIApplication.topViewController()!.presentViewController(slideMenuController, animated: true, completion: nil)
+        UIApplication.topViewController()!.present(slideMenuController, animated: true, completion: nil)
     }
     
     func searchUserScreen() {
@@ -39,9 +40,9 @@ class Wireframe {
     func popCurrentScreen() {
         // Pop if there is a Navigation Controller
         if let navigationController = UIApplication.topViewController()! as? UINavigationController {
-            navigationController.popViewControllerAnimated(true)
+            navigationController.popViewController(animated: true)
         } else { // If not, dismiss
-            UIApplication.topViewController()?.dismissViewControllerAnimated(true, completion: nil)
+            UIApplication.topViewController()?.dismiss(animated: true, completion: nil)
         }
     }
     
@@ -50,31 +51,31 @@ class Wireframe {
 // MARK: - Private Methods
 extension Wireframe {
     
-    private func getViewController<T: UIViewController>(storyboardName: String, viewControllerClass t: T.Type) -> T {
+    fileprivate func getViewController<T: UIViewController>(_ storyboardName: String, viewControllerClass t: T.Type) -> T {
         let storyboard = SwinjectStoryboard.create(name: storyboardName, bundle: nil, container: SwinjectStoryboard.defaultContainer)
         
-        return storyboard.instantiateViewControllerWithIdentifier(String(T)) as! T
+        return storyboard.instantiateViewController(withIdentifier: NSStringFromClass(T)) as! T
     }
     
     // MARK: - Present Methods
-    private func presentViewController<T: UIViewController>(storyboardName: String, viewControllerClass t: T.Type) {
+    fileprivate func presentViewController<T: UIViewController>(_ storyboardName: String, viewControllerClass t: T.Type) {
         let storyboard = SwinjectStoryboard.create(name: storyboardName, bundle: nil, container: SwinjectStoryboard.defaultContainer)
         
-        let viewController = storyboard.instantiateViewControllerWithIdentifier(String(T)) as! T
+        let viewController = storyboard.instantiateViewController(withIdentifier: NSStringFromClass(T)) as! T
         
-        UIApplication.topViewController()!.presentViewController(viewController, animated: true, completion: nil)
+        UIApplication.topViewController()!.present(viewController, animated: true, completion: nil)
     }
     
-    private func presentViewController(viewController: UIViewController) {
+    fileprivate func presentViewController(_ viewController: UIViewController) {
         
-        UIApplication.topViewController()!.presentViewController(viewController, animated: true, completion: nil)
+        UIApplication.topViewController()!.present(viewController, animated: true, completion: nil)
     }
     
     // MARK: - Push Methods
-    private func pushViewController<T: UIViewController>(storyboardName: String, viewControllerClass t: T.Type) {
+    fileprivate func pushViewController<T: UIViewController>(_ storyboardName: String, viewControllerClass t: T.Type) {
         let storyboard = SwinjectStoryboard.create(name: storyboardName, bundle: nil, container: SwinjectStoryboard.defaultContainer)
         
-        let viewController = storyboard.instantiateViewControllerWithIdentifier(String(T)) as! T
+        let viewController = storyboard.instantiateViewController(withIdentifier: NSStringFromClass(T)) as! T
         
         // Push if there is a Navigation Controller
         if let navigationController = UIApplication.topViewController()!.slideMenuController()?.mainViewController as? UINavigationController {
@@ -84,12 +85,12 @@ extension Wireframe {
         }
     }
     
-    private func pushViewController(viewController: UIViewController) {
+    fileprivate func pushViewController(_ viewController: UIViewController) {
         
         // Push if there is a Navigation Controller
         if let navigationController = UIApplication.topViewController()!.slideMenuController()?.mainViewController as? UINavigationController {
             navigationController.pushViewController(viewController, animated: true)
-        } else if let navigationController = UIApplication.topViewController()?.parentViewController as? UINavigationController {
+        } else if let navigationController = UIApplication.topViewController()?.parent as? UINavigationController {
             navigationController.pushViewController(viewController, animated: true)
         } else { // If not, Present
             presentViewController(viewController)

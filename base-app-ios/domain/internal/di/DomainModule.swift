@@ -10,7 +10,7 @@ import Swinject
 
 class DomainModule {
     
-    static func setup(defaultContainer: Container) {
+    static func setup(_ defaultContainer: Container) {
         
     }
 }

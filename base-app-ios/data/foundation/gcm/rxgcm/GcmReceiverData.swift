@@ -15,5 +15,5 @@ public protocol GcmReceiverData: NSObjectProtocol {
     /**
     * @return return the new instance observable after applying doOn operator.
     */
-    func onNotification(oMessage: Observable<RxMessage>) -> Observable<RxMessage>
+    func onNotification(_ oMessage: Observable<RxMessage>) -> Observable<RxMessage>
 }

@@ -17,8 +17,8 @@ import Google
 
 class RestApiTest: XCTestCase {
     
-    private let VALID_USERNAME = "RefineriaWeb"
-    private let INVALID_USERNAME = ""
+    fileprivate let VALID_USERNAME = "RefineriaWeb"
+    fileprivate let INVALID_USERNAME = ""
     
     var restApiUT: RestApi!
     

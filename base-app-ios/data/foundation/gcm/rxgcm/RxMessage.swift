@@ -8,26 +8,27 @@
 
 import Foundation
 
-public class RxMessage {
-    private let from: String!
-    private let payload: [NSObject : AnyObject]!
-    private let target: String!
+open class RxMessage {
+    fileprivate let from: String!
+    fileprivate let payload: [AnyHashable: Any]!
+    fileprivate let target: String!
     
-    init(from: String, payload: [NSObject : AnyObject], target: String){
+    init(from: String, payload: [AnyHashable: Any], target: String){
         self.from = from
         self.payload = payload
         self.target = target
     }
     
-    public func getFrom() -> String {
+    open func getFrom() -> String {
         return from
     }
     
-    public func getTarget() -> String {
+    open func getTarget() -> String {
         return target
     }
     
-    public func getPayload() -> [NSObject : AnyObject] {
-        return payload
+    open func getPayload() -> [String: Any] {
+//        return payload
+        return ["":""]
     }
 }

@@ -1,28 +1,46 @@
 source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '8.0'
+platform :ios, '9.0'
 use_frameworks!
 
-pod 'TPKeyboardAvoiding'
-pod 'SDWebImage', '~> 3.7'
-pod 'SnapKit', '~> 0.15.0'
-pod 'R.swift'
-pod 'RxCache', '~> 0.1.2'
-pod 'OkDataSources'
-pod 'OkDataSources/RxSwift'
-pod 'SwiftGen'
-pod 'Alamofire', '~> 3.1.0'
-pod 'Google/CloudMessaging'
-pod 'PKHUD'
-pod 'Swinject', '~> 1.0'
-pod 'RxSwift', '~> 2.0'
-pod 'ObjectMapper', '~> 1.1.0'
-pod 'Moya'
-pod 'Moya/RxSwift'
+target 'base-app-ios' do
+    
+    pod 'TPKeyboardAvoiding'
+    
+    pod 'SDWebImage', '~> 3.8'
+    pod 'SnapKit', '~> 3.0.2'
+    pod 'R.swift', '~> 3.1.0'
+    
+    pod 'OkDataSources'
+    pod 'OkDataSources/RxSwift'
+    
+    pod 'SwiftGen'
+    
+    pod 'Alamofire', '~> 4.0'
+    
+    pod 'Google/CloudMessaging'
+    
+    pod 'PKHUD_Swift_3'
+    
+    pod 'Swinject', '2.0.0-beta.2'
+    pod 'SwinjectStoryboard', '1.0.0-beta.2'
+    
+    pod 'RxSwift', '>= 3.0.0-beta.1'
+    
+    pod 'ObjectMapper', '~> 2.0'
+    
+    pod 'RxCache', '~> 1.0.2'
+    pod 'RxCache/ObjectMapper', '~> 1.0.2'
 
-pod 'Moya-ObjectMapper', '1.1.2'
-pod 'Moya-ObjectMapper/RxSwift', '1.1.2'
+    pod 'Moya', '~> 8.0.0-beta.2'
+    pod 'Moya/RxSwift'
+    
+    pod 'Moya-ObjectMapper', :git => 'https://github.com/ivanbruel/Moya-ObjectMapper'
+    pod 'Moya-ObjectMapper/RxSwift', :git => 'https://github.com/ivanbruel/Moya-ObjectMapper'
+    
+end
 
-target 'base-app-iosTests', :exclusive => true do
-    pod 'Nimble', '~> 3.0.0'
-    pod 'RxTests', '~> 2.0.0'
+
+target 'base-app-iosTests' do
+    pod 'Nimble', '~> 5.0.0'
+    pod 'RxTests', '>= 3.0.0-beta.1'
 end

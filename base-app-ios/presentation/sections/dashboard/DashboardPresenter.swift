@@ -17,9 +17,9 @@ class DashboardPresenter: Presenter {
     
     func getItemsMenu() -> Observable<[ItemMenu]> {
         var itemsMenu = [ItemMenu]()
-        itemsMenu.append(ItemMenu(type: .Users, title: "Users"))
-        itemsMenu.append(ItemMenu(type: .User, title: "User"))
-        itemsMenu.append(ItemMenu(type: .Search, title: "Find user"))
+        itemsMenu.append(ItemMenu(type: .users, title: "Users"))
+        itemsMenu.append(ItemMenu(type: .user, title: "User"))
+        itemsMenu.append(ItemMenu(type: .search, title: "Find user"))
         return Observable.just(itemsMenu)
     }
 

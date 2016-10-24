@@ -3,7 +3,8 @@
 //  R.swift Library
 //
 //  Created by Mathijs Kadijk on 06-12-15.
-//  Copyright © 2015 Mathijs Kadijk. All rights reserved.
+//  From: https://github.com/mac-cain13/R.swift.Library
+//  License: MIT License
 //
 
 import Foundation
@@ -18,8 +19,10 @@ public extension UICollectionView {
    
    - returns: A subclass of UICollectionReusableView or nil if the cast fails.
   */
-  public func dequeueReusableCellWithReuseIdentifier<Identifier: ReuseIdentifierType where Identifier.ReusableType: UICollectionReusableView>(identifier: Identifier, forIndexPath indexPath: NSIndexPath) -> Identifier.ReusableType? {
-    return dequeueReusableCellWithReuseIdentifier(identifier.identifier, forIndexPath: indexPath) as? Identifier.ReusableType
+  public func dequeueReusableCell<Identifier: ReuseIdentifierType>(withReuseIdentifier identifier: Identifier, for indexPath: IndexPath) -> Identifier.ReusableType?
+    where Identifier.ReusableType: UICollectionReusableView
+  {
+    return dequeueReusableCell(withReuseIdentifier: identifier.identifier, for: indexPath) as? Identifier.ReusableType
   }
 
   /**
@@ -31,17 +34,10 @@ public extension UICollectionView {
    
    - returns: A subclass of UICollectionReusableView or nil if the cast fails.
   */
-  public func dequeueReusableSupplementaryViewOfKind<Identifier: ReuseIdentifierType where Identifier.ReusableType: UICollectionReusableView>(elementKind: String, withReuseIdentifier identifier: Identifier, forIndexPath indexPath: NSIndexPath) -> Identifier.ReusableType? {
-    return dequeueReusableSupplementaryViewOfKind(elementKind, withReuseIdentifier: identifier.identifier, forIndexPath: indexPath) as? Identifier.ReusableType
-  }
-
-  /**
-   Register a serie of R.nib.* for use in creating new collection view cells.
-
-   - parameter nibResources: An array of nib resources (R.nib.*) each containing a object of type UICollectionViewCell that has a reuse identifier
-   */
-  public func registerNibs<Resource: NibResourceType where Resource: ReuseIdentifierType, Resource.ReusableType: UICollectionViewCell>(nibResources: [Resource]) {
-    nibResources.forEach(registerNib)
+  public func dequeueReusableSupplementaryView<Identifier: ReuseIdentifierType>(ofKind elementKind: String, withReuseIdentifier identifier: Identifier, for indexPath: IndexPath) -> Identifier.ReusableType?
+    where Identifier.ReusableType: UICollectionReusableView
+  {
+    return dequeueReusableSupplementaryView(ofKind: elementKind, withReuseIdentifier: identifier.identifier, for: indexPath) as? Identifier.ReusableType
   }
 
   /**
@@ -49,17 +45,10 @@ public extension UICollectionView {
 
    - parameter nibResource: A nib resource (R.nib.*) containing a object of type UICollectionViewCell that has a reuse identifier
    */
-  public func registerNib<Resource: NibResourceType where Resource: ReuseIdentifierType, Resource.ReusableType: UICollectionViewCell>(nibResource: Resource) {
-    registerNib(UINib(resource: nibResource), forCellWithReuseIdentifier: nibResource.identifier)
-  }
-
-  /**
-   Register a serie of R.nib.* for use in creating supplementary views for the collection view.
-
-   - parameter nibResources: An array of nib resources (R.nib.*) each containing a object of type UICollectionReusableView. that has a reuse identifier
-   */
-  public func registerNibs<Resource: NibResourceType where Resource: ReuseIdentifierType, Resource.ReusableType: UICollectionReusableView>(nibResources: [Resource], forSupplementaryViewOfKind kind: String) {
-    nibResources.forEach { self.registerNib($0, forSupplementaryViewOfKind: kind) }
+  public func register<Resource: NibResourceType & ReuseIdentifierType>(_ nibResource: Resource)
+    where Resource.ReusableType: UICollectionViewCell
+  {
+    register(UINib(resource: nibResource), forCellWithReuseIdentifier: nibResource.identifier)
   }
 
   /**
@@ -67,7 +56,9 @@ public extension UICollectionView {
 
    - parameter nibResource: A nib resource (R.nib.*) containing a object of type UICollectionReusableView. that has a reuse identifier
    */
-  public func registerNib<Resource: NibResourceType where Resource: ReuseIdentifierType, Resource.ReusableType: UICollectionReusableView>(nibResource: Resource, forSupplementaryViewOfKind kind: String) {
-    registerNib(UINib(resource: nibResource), forSupplementaryViewOfKind: kind, withReuseIdentifier: nibResource.identifier)
+  public func register<Resource: NibResourceType & ReuseIdentifierType>(_ nibResource: Resource, forSupplementaryViewOfKind kind: String)
+    where Resource.ReusableType: UICollectionReusableView
+  {
+    register(UINib(resource: nibResource), forSupplementaryViewOfKind: kind, withReuseIdentifier: nibResource.identifier)
   }
 }

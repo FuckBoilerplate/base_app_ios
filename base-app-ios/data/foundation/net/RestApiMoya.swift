@@ -17,12 +17,12 @@ class RestApiMoya: RestApi {
     // MARK: - Provider setup
     let provider = RxMoyaProvider<Endpoints>(endpointClosure: endpointClosure)
     
-    func getUserByName(username: String) -> Observable<Response> {
-        return provider.requestBackground(Endpoints.GetUser(username: username))
+    func getUserByName(_ username: String) -> Observable<Response> {
+        return provider.requestBackground(Endpoints.getUser(username: username))
     }
     
-    func getUsers(lastIdQueried: Int?, perPage: Int) -> Observable<Response> {
-        return provider.requestBackground(Endpoints.GetUsers(lastIdQueried: lastIdQueried, perPage: perPage))
+    func getUsers(_ lastIdQueried: Int?, perPage: Int) -> Observable<Response> {
+        return provider.requestBackground(Endpoints.getUsers(lastIdQueried: lastIdQueried, perPage: perPage))
     }
 }
 
@@ -33,23 +33,28 @@ class RestApiMoya: RestApi {
 
 // MARK: - Endpoints
 public enum Endpoints {
-    case GetUser(username: String)
-    case GetUsers(lastIdQueried: Int?, perPage: Int)
+    case getUser(username: String)
+    case getUsers(lastIdQueried: Int?, perPage: Int)
 }
 
 extension Endpoints: TargetType {
     
+    public var task: Task {
+        return Task.request
+    }
+
+    
     // MARK: - Endpoint -> Base URL
-    public var baseURL: NSURL {
-        return NSURL(string: "https://api.github.com")!
+    public var baseURL: URL {
+        return URL(string: "https://api.github.com")!
     }
     
     // MARK: - Endpoint -> Path
     public var path: String {
         switch self {
-        case .GetUser(let username):
+        case .getUser(let username):
             return "/users/\(username.URLEscapedString)"
-        case .GetUsers:
+        case .getUsers:
             return "/users"
         }
     }
@@ -57,36 +62,36 @@ extension Endpoints: TargetType {
     // MARK: - Endpoint -> Method
     public var method: Moya.Method {
         switch self {
-        case .GetUser:
-            return .GET
-        case .GetUsers:
-            return .GET
+        case .getUser:
+            return .get
+        case .getUsers:
+            return .get
         }
     }
     
     // : - Endpoint -> Parameters
-    public var parameters: [String: AnyObject]? {
+    public var parameters: [String: Any]? {
         switch self {
-        case.GetUsers(let lastIdQueried, let perPage):
+        case.getUsers(let lastIdQueried, let perPage):
             var values = ["per_page": perPage]
             if let lastIdQueried = lastIdQueried {
                  values.updateValue(lastIdQueried, forKey: "since")
             }
-            return values
+            return values as [String : AnyObject]?
         default:
             return nil
         }
     }
     
     // MARK: - Endpoint -> Parameters Encoding
-    public var parameterEncoding: Moya.ParameterEncoding {
-        switch self {
-        case .GetUser:
-            return .URL
-        case .GetUsers:
-            return .URL
-        }
-    }
+//    public var parameterEncoding: Moya.ParameterEncoding {
+//        switch self {
+//        case .getUser:
+//            return
+//        case .getUsers:
+//            return .url
+//        }
+//    }
     
     // MARK: - Endpoint -> Headers
     public var headers: [String: String] {
@@ -95,33 +100,34 @@ extension Endpoints: TargetType {
     }
     
     // MARK: - Endpoint -> Sample Data
-    public var sampleData: NSData {
+    public var sampleData: Data {
         switch self {
-        case .GetUser(let username):
-            return "{\"login\": \"\(username)\", \"id\": 100}".dataUsingEncoding(NSUTF8StringEncoding)!
-        case .GetUsers:
-            return "Half measures are as bad as nothing at all.".dataUsingEncoding(NSUTF8StringEncoding)!
+        case .getUser(let username):
+            return "{\"login\": \"\(username)\", \"id\": 100}".data(using: String.Encoding.utf8)!
+        case .getUsers:
+            return "Half measures are as bad as nothing at all.".data(using: String.Encoding.utf8)!
         default:
-            return "[{\"name\": \"Repo Name\"}]".dataUsingEncoding(NSUTF8StringEncoding)!
+            return "[{\"name\": \"Repo Name\"}]".data(using: String.Encoding.utf8)!
         }
     }
 }
 
 // MARK: - Endpoint Closure
 let endpointClosure = { (target: Endpoints) -> Endpoint<Endpoints> in
-    let endpoint: Endpoint<Endpoints> = Endpoint<Endpoints>(URL: url(target), sampleResponseClosure: {.NetworkResponse(200, target.sampleData)}, method: target.method, parameters: target.parameters, parameterEncoding: target.parameterEncoding)
+    let endpoint: Endpoint<Endpoints> = Endpoint<Endpoints>(URL: url(target), sampleResponseClosure: {.networkResponse(200, target.sampleData)}, method: target.method, parameters: target.parameters)
     // Sign all non-authenticating requests
     
     // Headers
-    return endpoint.endpointByAddingHTTPHeaderFields(target.headers)
+    return endpoint.adding(newHttpHeaderFields: target.headers)
 }
 
-public func url(route: TargetType) -> String {
-    return route.baseURL.URLByAppendingPathComponent(route.path).absoluteString
+public func url(_ route: TargetType) -> String {
+    return route.baseURL.absoluteString + route.path
+//    return route.baseURL.URLByAppendingPathComponent(route.path).absoluteString
 }
 
 public extension String {
     var URLEscapedString: String {
-        return self.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLHostAllowedCharacterSet())!
+        return self.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlHostAllowed)!
     }
 }

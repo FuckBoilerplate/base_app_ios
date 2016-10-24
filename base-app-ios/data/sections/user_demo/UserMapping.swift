@@ -10,7 +10,7 @@
 import ObjectMapper
 import RxCache
 
-extension User: Mappable, OMCacheable {
+extension User: OMCacheable {
     
     mutating func mapping(map: Map) {
         id <- map["id"]

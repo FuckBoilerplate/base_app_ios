@@ -10,15 +10,15 @@ import ObjectMapper
 
 struct GcmNotification<T>: Mappable {
     
-    static func getMessageFromGcmNotification(message: RxMessage) -> GcmNotification {
-        return Mapper().map(message.getPayload())!
-    }
+//    static func getMessageFromGcmNotification(_ message: RxMessage) -> GcmNotification {
+//        return Mapper().map(JSON: message.getPayload())!
+//    }
+//    
+//    static func getDataFromGcmNofitication(_ message: RxMessage) -> T {
+//        return getMessageFromGcmNotification(message).data
+//    }
     
-    static func getDataFromGcmNofitication(message: RxMessage) -> T {
-        return getMessageFromGcmNotification(message).data
-    }
-    
-    init?(_ map: Map) {}
+    init?(map: Map) {}
     
     var data: T!
     var title: String!

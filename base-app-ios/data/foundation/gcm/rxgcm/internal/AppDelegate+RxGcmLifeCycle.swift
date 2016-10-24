@@ -12,13 +12,13 @@ var appDelegate: UIApplicationDelegate.Type?
 
 extension UIResponder {
     
-    override public class func initialize() {
+    override open class func initialize() {
         
         if !(self is UIApplication.Type) {
             return
         }
         
-        guard let bundle = NSBundle.mainBundle().infoDictionary?["CFBundleExecutable"] as? String else {
+        guard let bundle = Bundle.main.infoDictionary?["CFBundleExecutable"] as? String else {
             return
         }
         
@@ -74,7 +74,7 @@ extension UIResponder {
         )
     }
     
-    class func changeMethodImplementation<T: NSObject>(appDelegateClass: T.Type, originalSelector: String, rxgcmSelector: String) {
+    class func changeMethodImplementation<T: NSObject>(_ appDelegateClass: T.Type, originalSelector: String, rxgcmSelector: String) {
         
         let originalSelector = Selector(originalSelector)
         let rxgcmSelector = Selector(rxgcmSelector)
@@ -94,48 +94,48 @@ extension UIResponder {
     
     // MARK: - New Methods Implementations
     
-    internal func rxgcm_application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    internal func rxgcm_application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [AnyHashable: Any]?) -> Bool {
         print("rxgcm_applicationdidFinishLaunchingWithOptions")
         self.rxgcm_application(application, didFinishLaunchingWithOptions: launchOptions)
         RxGcm.Notifications.didFinishLaunchingWithOptions(application, launchOptions: launchOptions)
         return true
     }
-    internal func rxgcm_application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+    internal func rxgcm_application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         print(deviceToken)
         print("rxgcm_applicationdidRegisterForRemoteNotificationsWithDeviceToken")
         self.rxgcm_application(application, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken)
         RxGcm.Notifications.didRegisterForRemoteNotificationsWithDeviceToken(application, deviceToken: deviceToken)
     }
     
-    internal func rxgcm_application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError
+    internal func rxgcm_application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError
         error: NSError ) {
             print("rxgcm_applicationdidFailToRegisterForRemoteNotificationsWithError")
             self.rxgcm_application(application, didFailToRegisterForRemoteNotificationsWithError: error)
             RxGcm.Notifications.didFailToRegisterForRemoteNotificationsWithError(application, error: error)
     }
     
-    internal func rxgcm_application(application: UIApplication,
-        didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+    internal func rxgcm_application(_ application: UIApplication,
+        didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
             print("rxgcm_applicationdidReceiveRemoteNotification")
             self.rxgcm_application(application, didReceiveRemoteNotification: userInfo)
             RxGcm.Notifications.didReceiveRemoteNotification(application, userInfo: userInfo)
     }
     
-    internal func rxgcm_application(application: UIApplication,
-        didReceiveRemoteNotification userInfo: [NSObject : AnyObject],
+    internal func rxgcm_application(_ application: UIApplication,
+        didReceiveRemoteNotification userInfo: [AnyHashable: Any],
         fetchCompletionHandler handler: (UIBackgroundFetchResult) -> Void) {
             print("rxgcm_applicationdidReceiveRemoteNotificationfetchCompletionHandler")
             self.rxgcm_application(application, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: handler)
             RxGcm.Notifications.didReceiveRemoteNotification(application, userInfo: userInfo, fetchCompletionHandler: handler)
     }
     
-    internal func rxgcm_applicationDidEnterBackground(application: UIApplication) {
+    internal func rxgcm_applicationDidEnterBackground(_ application: UIApplication) {
         print("rxgcm_applicationDidEnterBackground")
         self.rxgcm_applicationDidEnterBackground(application)
         RxGcm.Notifications.applicationDidEnterBackground(application)
     }
     
-    internal func rxgcm_applicationDidBecomeActive(application: UIApplication) {
+    internal func rxgcm_applicationDidBecomeActive(_ application: UIApplication) {
         print("rxgcm_applicationDidBecomeActive")
         self.rxgcm_applicationDidBecomeActive(application)
         RxGcm.Notifications.applicationDidBecomeActive(application)
@@ -146,26 +146,26 @@ extension UIResponder {
 // MARK: - Defaults methods implementations
 extension UIResponder {
     
-    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
     }
     
-    func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError
         error: NSError ) {
     }
     
-    func application(application: UIApplication,
-        didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+    func application(_ application: UIApplication,
+        didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
     }
     
-    func application(application: UIApplication,
-        didReceiveRemoteNotification userInfo: [NSObject : AnyObject],
+    func application(_ application: UIApplication,
+        didReceiveRemoteNotification userInfo: [AnyHashable: Any],
         fetchCompletionHandler handler: (UIBackgroundFetchResult) -> Void) {
     }
     
-    func applicationDidEnterBackground(application: UIApplication) {
+    func applicationDidEnterBackground(_ application: UIApplication) {
     }
     
-    func applicationDidBecomeActive(application: UIApplication) {
+    func applicationDidBecomeActive(_ application: UIApplication) {
     }
     
 }

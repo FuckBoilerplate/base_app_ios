@@ -9,8 +9,8 @@
 import RxCache
 
 enum RxCacheProviders {
-    case GetUsers(evict : Bool)
-    case GetWireframeCurrentObject(evict: Bool)
+    case getUsers(evict : Bool)
+    case getWireframeCurrentObject(evict: Bool)
 }
 
 extension RxCacheProviders: Provider {
@@ -37,8 +37,8 @@ extension RxCacheProviders: Provider {
     
     var evict: EvictProvider? {
         switch self {
-        case let GetUsers(evict): return EvictProvider(evict: evict)
-        case let GetWireframeCurrentObject(evict): return EvictProvider(evict: evict)
+        case let .getUsers(evict): return EvictProvider(evict: evict)
+        case let .getWireframeCurrentObject(evict): return EvictProvider(evict: evict)
         default:
             return nil
         }

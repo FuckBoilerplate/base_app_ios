@@ -1,9 +1,9 @@
 //
 //  UIViewController+RegisterAsGcmReceiversUIForeground.swift
-//  RxGcm_swift
+//  RxGcm
 //
 //  Created by Roberto Frontado on 4/7/16.
-//  Copyright © 2016 Jaime Vidal. All rights reserved.
+//  Copyright © 2016 Roberto Frontado. All rights reserved.
 //
 
 import UIKit
@@ -11,32 +11,31 @@ import Foundation
 
 extension UIViewController {
     
-    override public class func initialize() {
+    private static var once: Void = {
+        // Do this once
+        // Change methods implementations
+        changeMethodImplementation(
+            "viewWillAppear:",
+            rxgcmSelector: "rxgcm_viewWillAppear:"
+        )
+        changeMethodImplementation(
+            "viewWillDisappear:",
+            rxgcmSelector: "rxgcm_viewWillDisappear:"
+        )
+    }()
+    
+    override open class func initialize() {
         
         // make sure this isn't a subclass
         if self !== UIViewController.self {
             return
         }
         
-        struct Static {
-            static var token: dispatch_once_t = 0
-        }
-        
-         dispatch_once(&Static.token) {
-            // Change methods implementations
-            changeMethodImplementation(
-                "viewWillAppear:",
-                rxgcmSelector: "rxgcm_viewWillAppear:"
-            )
-            changeMethodImplementation(
-                "viewWillDisappear:",
-                rxgcmSelector: "rxgcm_viewWillDisappear:"
-            )
-        }
+        _ = once
         
     }
     
-    class func changeMethodImplementation(originalSelector: String, rxgcmSelector: String) {
+    class func changeMethodImplementation(_ originalSelector: String, rxgcmSelector: String) {
         
         let originalSelector = Selector(originalSelector)
         let rxgcmSelector = Selector(rxgcmSelector)
@@ -55,14 +54,14 @@ extension UIViewController {
     }
     
     // MARK: - New Methods Implementations
-    func rxgcm_viewWillAppear(animated: Bool) {
+    func rxgcm_viewWillAppear(_ animated: Bool) {
         self.rxgcm_viewWillAppear(animated)
         if self is GcmReceiverUIForeground {
             GetGcmReceiversUIForeground.presentedViewControllers.append(self)
         }
     }
     
-    func rxgcm_viewWillDisappear(animated: Bool) {
+    func rxgcm_viewWillDisappear(_ animated: Bool) {
         self.rxgcm_viewWillDisappear(animated)
         if self is GcmReceiverUIForeground {
             GetGcmReceiversUIForeground.presentedViewControllers.removeObject(self)

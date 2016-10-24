@@ -22,7 +22,7 @@ class Repository {
         self.rxProviders = rxProviders
     }
     
-    internal func handleError<T>(response: Response) -> Observable<T>? {
+    internal func handleError<T>(_ response: Response) -> Observable<T>? {
         
         do {
             try response.filterSuccessfulStatusCodes()
@@ -30,7 +30,7 @@ class Repository {
         } catch {
             do {
                 let responseString: ResponseError
-                responseString = try response.mapObject()
+                responseString = try response.mapObject(ResponseError.self)
                 return Observable.error(NSError(domain: responseString.message, code: 0, userInfo: nil))
             } catch {
                 
@@ -39,10 +39,10 @@ class Repository {
         }
     }
     
-    private class ResponseError: Mappable {
+    fileprivate class ResponseError: Mappable {
         var message: String = ""
         
-        required init?(_ map: Map) {}
+        required init?(map: Map) {}
         
         func mapping(map: Map) {
             message <- map["message"]
@@ -50,7 +50,7 @@ class Repository {
 
     }
     
-    func buildObservableError<T>(message: String) -> Observable<T> {
+    func buildObservableError<T>(_ message: String) -> Observable<T> {
         return Observable.error(NSError(domain: message, code: 0, userInfo: nil))
     }
 }

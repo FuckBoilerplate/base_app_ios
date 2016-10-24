@@ -8,15 +8,15 @@
 
 import Foundation
 
-public class TokenUpdate {
+open class TokenUpdate {
     
-    private let token: String!
+    fileprivate let token: String!
 
     init(token: String){
         self.token = token
     }
     
-    public func getToken() -> String {
+    open func getToken() -> String {
         return token
     }
 }

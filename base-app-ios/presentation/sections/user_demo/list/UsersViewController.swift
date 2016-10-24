@@ -24,7 +24,7 @@ class UsersViewController: BaseViewController<UsersPresenter> {
             onItemClicked: { (item, position) in
                 self.presenter.dataForNextScreen(item)
                     .safely()
-                    .subscribeNext { self.wireframe.userScreen() }
+                    .subscribe(onNext: { self.wireframe.userScreen() })
         })
         delegate.setOnPullToRefresh(tableView) { self.presenter.refreshList() }
         delegate.setOnPagination { user in self.presenter.nextPage(user) }
@@ -33,24 +33,24 @@ class UsersViewController: BaseViewController<UsersPresenter> {
         
         presenter.nextPage(nil)
             .safelyReportLoading(self)
-            .subscribeNext { users in
+            .subscribe(onNext: { users in
                 self.dataSource.items = users
                 self.tableView.reloadData()
-        }
+        })
     }
     
     override func showLoading() {
-        loadingView.hidden = false
-        tableView.hidden = true
+        loadingView.isHidden = false
+        tableView.isHidden = true
     }
     
     override func hideLoading() {
-        loadingView.hidden = true
-        tableView.hidden = false
+        loadingView.isHidden = true
+        tableView.isHidden = false
     }
     
     // MARK: - Actions
-    @IBAction func menuButtonPressed(sender: UIButton) {
+    @IBAction func menuButtonPressed(_ sender: UIButton) {
         slideMenuController()?.openLeft()
     }
 }

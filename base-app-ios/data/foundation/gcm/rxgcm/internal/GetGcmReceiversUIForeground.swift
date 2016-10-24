@@ -13,7 +13,7 @@ class GetGcmReceiversUIForeground {
     
     static var presentedViewControllers = [UIViewController]()
     
-    func retrieve(screenName: String) -> (gcmReceiverUIForeground: GcmReceiverUIForeground, targetScreen: Bool)? {
+    func retrieve(_ screenName: String) -> (gcmReceiverUIForeground: GcmReceiverUIForeground, targetScreen: Bool)? {
         
         var receiverCandidate: (gcmReceiverUIForeground: GcmReceiverUIForeground, targetScreen: Bool)? = nil
     

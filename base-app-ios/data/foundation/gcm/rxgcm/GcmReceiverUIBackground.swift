@@ -14,5 +14,5 @@ import RxSwift
 * @see GcmReceiverData
 */
 public protocol GcmReceiverUIBackground: NSObjectProtocol {
-    func onNotification(oMessage: Observable<RxMessage>)
+    func onNotification(_ oMessage: Observable<RxMessage>)
 }

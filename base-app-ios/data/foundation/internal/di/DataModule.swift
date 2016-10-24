@@ -11,21 +11,21 @@ import RxCache
 
 class DataModule {
     
-    static func setup(defaultContainer: Container) {
+    static func setup(_ defaultContainer: Container) {
         
         defaultContainer.register(RxCache.self) { _ in RxCache.Providers }
         
         defaultContainer.register(RestApi.self) { _ in RestApiMoya() }
-            .inObjectScope(.Container)
+            .inObjectScope(.container)
         
         // Repositories
         
         defaultContainer.register(WireframeRepository.self) { r in
             WireframeRepository(restApi: r.resolve(RestApi.self)!, rxProviders: r.resolve(RxCache.self)!) }
-            .inObjectScope(.Container)
+            .inObjectScope(.container)
         
         defaultContainer.register(UserRepository.self) { r in
             UserRepository(restApi: r.resolve(RestApi.self)!, rxProviders: r.resolve(RxCache.self)!) }
-            .inObjectScope(.Container)
+            .inObjectScope(.container)
     }
 }

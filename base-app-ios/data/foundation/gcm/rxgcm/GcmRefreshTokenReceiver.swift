@@ -12,5 +12,5 @@ import RxSwift
 * The class which implements this interface will receive updates when token is refreshed.
 */
 public protocol GcmRefreshTokenReceiver: NSObjectProtocol {
-    func onTokenReceive(oTokenUpdate: Observable<TokenUpdate>)
+    func onTokenReceive(_ oTokenUpdate: Observable<TokenUpdate>)
 }

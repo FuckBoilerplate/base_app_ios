@@ -2,8 +2,7 @@
 [![License](https://img.shields.io/cocoapods/l/RxCache.svg?style=flat)](http://cocoapods.org/pods/RxCache)
 [![Platform](https://img.shields.io/cocoapods/p/RxCache.svg?style=flat)](http://cocoapods.org/pods/RxCache)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
-[![Build Status](https://travis-ci.org/VictorAlbertos/RxSCache.svg?branch=master)](https://travis-ci.org/VictorAlbertos/RxSCache)
-
+[![Build Status](https://travis-ci.org/VictorAlbertos/RxCache.svg?branch=master)](https://travis-ci.org/VictorAlbertos/RxCache)
 # RxCache
 
 _Swift adaptation from the original [RxCache Java version](https://github.com/VictorAlbertos/RxCache)_.
@@ -30,14 +29,23 @@ So, when supplying an `observable` you get your observable cached back, and next
 RxCache is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
+Core:
+
 ```ruby
-pod 'RxCache', '~> 0.1.2'
+pod 'RxCache', '~> 1.0.1'
+```
+
+And also if you use some of the mapping libraries that are in [Cacheables](https://github.com/FuckBoilerplate/RxCache/tree/master/Sources/Cacheables) you would need to add its module:
+
+```ruby
+pod 'RxCache/ObjectMapper', '~> 1.0.1'
+pod 'RxCache/Gloss', '~> 1.0.1'
 ```
 
 RxCache also is available using [Carthage](https://github.com/Carthage/Carthage). To install it add the following dependency to your `Cartfile`:
 
 ```
-github "VictorAlbertos/RxSCache" ~> 0.1.2
+github "FuckBoilerplate/RxCache" ~> 1.0.1
 ```
 
 ## Usage
@@ -77,15 +85,13 @@ import RxCache
 class Person: Mappable, OMCacheable {
     var name: String?
     
-    required init?(JSON: [String : AnyObject]) {
-        mapping(Map(mappingType: .FromJSON, JSONDictionary: JSON))
-    }
-    
     func mapping(map: Map) {
-        name    <- map["name"]
+        name <- map["name"]
     }
     
-    required init?(_ map: Map) { }
+    required init?(map: Map) {
+        
+    }
 }
 ```
 
@@ -152,12 +158,12 @@ enum CacheProviders : Provider {
 
 RxCache provides a set of classes to indicate how the Provider needs to handle the cached data:
 
-* [LifeCache](https://github.com/VictorAlbertos/RxSCache/blob/master/Pod/Classes/LifeCache.swift) sets the amount of time before the data would be evicted. If LifeCache is not supplied, the data will be never evicted unless it is required explicitly using [EvictProvider](https://github.com/VictorAlbertos/RxSCache/blob/master/Pod/Classes/EvictProvider.swift), [EvictDynamicKey](https://github.com/VictorAlbertos/RxSCache/blob/master/Pod/Classes/EvictDynamicKey.swift) or [EvictDynamicKeyGroup](https://github.com/VictorAlbertos/RxSCache/blob/master/Pod/Classes/EvictDynamicKeyGroup.swift).
-* [EvictProvider](https://github.com/VictorAlbertos/RxSCache/blob/master/Pod/Classes/EvictProvider.swift) allows to explicitly evict all the data associated with the provider. 
-* [EvictDynamicKey](https://github.com/VictorAlbertos/RxSCache/blob/master/Pod/Classes/EvictDynamicKey.swift) allows to explicitly evict the data of an specific [DynamicKey](https://github.com/VictorAlbertos/RxSCache/blob/master/Pod/Classes/DynamicKey.swift).
-* [EvictDynamicKeyGroup](https://github.com/VictorAlbertos/RxSCache/blob/master/Pod/Classes/EvictDynamicKeyGroup.swift) allows to explicitly evict the data of an specific [DynamicKeyGroup](https://github.com/VictorAlbertos/RxSCache/blob/master/Pod/Classes/DynamicKeyGroup.swift).
-* [DynamicKey](https://github.com/VictorAlbertos/RxSCache/blob/master/Pod/Classes/DynamicKey.swift) is a wrapper around the key object for those providers which need to handle multiple records, so they need to provide multiple keys, such us endpoints with pagination, ordering or filtering requirements. To evict the data associated with one particular key use EvictDynamicKey.  
-* [DynamicKeyGroup](https://github.com/VictorAlbertos/RxSCache/blob/master/Pod/Classes/DynamicKeyGroup.swift) is a wrapper around the key and the group for those providers which need to handle multiple records grouped, so they need to provide multiple keys organized in groups, such us endpoints with filtering AND pagination requirements. To evict the data associated with the key of one particular group, use EvictDynamicKeyGroup. 
+* [LifeCache](https://github.com/FuckBoilerplate/RxCache/blob/master/Sources/LifeCache.swift) sets the amount of time before the data would be evicted. If LifeCache is not supplied, the data will be never evicted unless it is required explicitly using [EvictProvider](https://github.com/FuckBoilerplate/RxCache/blob/master/Sources/EvictProvider.swift), [EvictDynamicKey](https://github.com/FuckBoilerplate/RxCache/blob/master/Sources/EvictDynamicKey.swift) or [EvictDynamicKeyGroup](https://github.com/FuckBoilerplate/RxCache/blob/master/Sources/EvictDynamicKeyGroup.swift).
+* [EvictProvider](https://github.com/FuckBoilerplate/RxCache/blob/master/Sources/EvictProvider.swift) allows to explicitly evict all the data associated with the provider. 
+* [EvictDynamicKey](https://github.com/FuckBoilerplate/RxCache/blob/master/Sources/EvictDynamicKey.swift) allows to explicitly evict the data of an specific [DynamicKey](https://github.com/FuckBoilerplate/RxCache/blob/master/Sources/DynamicKey.swift).
+* [EvictDynamicKeyGroup](https://github.com/FuckBoilerplate/RxCache/blob/master/Sources/EvictDynamicKeyGroup.swift) allows to explicitly evict the data of an specific [DynamicKeyGroup](https://github.com/FuckBoilerplate/RxCache/blob/master/Sources/DynamicKeyGroup.swift).
+* [DynamicKey](https://github.com/FuckBoilerplate/RxCache/blob/master/Sources/DynamicKey.swift) is a wrapper around the key object for those providers which need to handle multiple records, so they need to provide multiple keys, such us endpoints with pagination, ordering or filtering requirements. To evict the data associated with one particular key use EvictDynamicKey.  
+* [DynamicKeyGroup](https://github.com/FuckBoilerplate/RxCache/blob/master/Sources/DynamicKeyGroup.swift) is a wrapper around the key and the group for those providers which need to handle multiple records grouped, so they need to provide multiple keys organized in groups, such us endpoints with filtering AND pagination requirements. To evict the data associated with the key of one particular group, use EvictDynamicKeyGroup. 
 
 
 ### Using CacheProviders `enum`
@@ -202,6 +208,11 @@ class MockRepository {
 
 ## Use cases
 
+* Using classic API RxCache for read actions with little write needs.
+* Using actionable API RxCache, exclusive for write actions.
+
+
+## Classic API RxCache:
 Following use cases illustrate some common scenarios which will help to understand the usage of `DynamicKey` and `DynamicKeyGroup` classes along with evicting scopes. 
 
 ### Enum providers example
@@ -209,16 +220,16 @@ Following use cases illustrate some common scenarios which will help to understa
 ```swift
 enum CacheProviders : Provider {
     // Mock List
-    case GetMocks() // Mock List without evicting
-    case GetMocksEvictProvider(evictProvider : EvictProvider) // Mock List evicting
+    case getMocks() // Mock List without evicting
+    case getMocksEvictProvider(evictProvider : EvictProvider) // Mock List evicting
     
     // Mock List Filtering
-    case GetMocksFiltered(filter: String) // Mock List filtering without evicting
-    case GetMocksFilteredEvict(filter: String, evictProvider : EvictProvider) // Mock List filtering evicting
+    case getMocksFiltered(filter: String) // Mock List filtering without evicting
+    case getMocksFilteredEvict(filter: String, evictProvider : EvictProvider) // Mock List filtering evicting
     
     // Mock List Paginated with filters
-    case GetMocksFilteredPaginate(filterAndPage: String) // Mock List paginated with filters without evicting
-    case GetMocksFilteredPaginateEvict(filter: String, page: Int, evictProvider : EvictProvider) // Mock List paginated with filters evicting
+    case getMocksFilteredPaginate(filterAndPage: String) // Mock List paginated with filters without evicting
+    case getMocksFilteredPaginateEvict(filter: String, page: Int, evictProvider : EvictProvider) // Mock List paginated with filters evicting
 
     var lifeCache: LifeCache? {
         return nil
@@ -226,11 +237,11 @@ enum CacheProviders : Provider {
     
     var dynamicKey: DynamicKey? {
         switch self {
-        case let GetMocksFiltered(filter):
+        case let .getMocksFiltered(filter):
             return DynamicKey(dynamicKey: filter)
-        case let GetMocksFilteredEvict(filter, _):
+        case let .getMocksFilteredEvict(filter, _):
             return DynamicKey(dynamicKey: filter)
-        case let GetMocksFilteredPaginate(filterAndPage):
+        case let .getMocksFilteredPaginate(filterAndPage):
             return DynamicKey(dynamicKey: filterAndPage)
         default:
             return nil
@@ -239,7 +250,7 @@ enum CacheProviders : Provider {
     
     var dynamicKeyGroup: DynamicKeyGroup? {
         switch self {
-        case let GetMocksFilteredPaginateEvict(filter, page, _):
+        case let .getMocksFilteredPaginateEvict(filter, page, _):
             return DynamicKeyGroup(dynamicKey: filter, group: String(page))
         default:
             return nil
@@ -248,9 +259,9 @@ enum CacheProviders : Provider {
     
     var evict: EvictProvider? {
         switch self {
-        case let GetMocksFilteredEvict(_, evictProvider):
+        case let .getMocksFilteredEvict(_, evictProvider):
             return evictProvider
-        case let GetMocksFilteredPaginateEvict(_, _, evictProvider):
+        case let .getMocksFilteredPaginateEvict(_, _, evictProvider):
             return evictProvider
         default:
             return nil
@@ -264,11 +275,11 @@ enum CacheProviders : Provider {
 
 ```swift
 //Hit observable evicting all mocks 
-let provider : Provider = CacheProviders.GetMocksEvictProvider(evictProvider: EvictProvider(evict: true))
+let provider : Provider = CacheProviders.getMocksEvictProvider(evictProvider: EvictProvider(evict: true))
 providers.cache(getExpensiveMocks(), provider: provider)
 
 //This lines return an error observable: "EvictDynamicKey was provided but not was provided any DynamicKey"
-let provider : Provider = CacheProviders.GetMocksEvictProvider(evictProvider: EvictDynamicKey(evict: true))
+let provider : Provider = CacheProviders.getMocksEvictProvider(evictProvider: EvictDynamicKey(evict: true))
 providers.cache(getExpensiveMocks(), provider: provider)
 ```
 
@@ -276,18 +287,18 @@ providers.cache(getExpensiveMocks(), provider: provider)
 
 ```swift
 //Hit observable evicting all mocks using EvictProvider
-let provider : Provider = CacheProviders.GetMocksFilteredEvict(filter: "actives", evictProvider: EvictProvider(evict: true))
+let provider : Provider = CacheProviders.getMocksFilteredEvict(filter: "actives", evictProvider: EvictProvider(evict: true))
 providers.cache(getExpensiveMocks(), provider: provider)
 
 //Hit observable evicting mocks of one filter using EvictDynamicKey
-let provider : Provider = CacheProviders.GetMocksFilteredEvict(filter: "actives", evictProvider: EvictDynamicKey(evict: true))
+let provider : Provider = CacheProviders.getMocksFilteredEvict(filter: "actives", evictProvider: EvictDynamicKey(evict: true))
 providers.cache(getExpensiveMocks(), provider: provider)
 
 //This lines return an error observable: "EvictDynamicKeyGroup was provided but not was provided any Group"
 let provider : Provider = CacheProviders.GetMocksFilteredEvict(filter: "actives", evictProvider: EvictDynamicKeyGroup(evict: true))
 providers.cache(getExpensiveMocks(), provider: provider)
-```		
-		
+```     
+        
 #### List Paginated with filters
 
 ```swift
@@ -302,7 +313,7 @@ providers.cache(getExpensiveMocks(), provider: provider)
 //Hit observable evicting one page mocks of one filter using EvictDynamicKeyGroup
 let provider : Provider = CacheProviders.GetMocksFilteredPaginateEvict(filter: "actives", page: 1, evictProvider: EvictDynamicKeyGroup(evict: true))
 providers.cache(getExpensiveMocks(), provider: provider)
-```		
+```     
 
 As you may already notice, the whole point of using `DynamicKey` or `DynamicKeyGroup` along with `Evict` classes is to play with several scopes when evicting objects.
 
@@ -312,6 +323,46 @@ But I have done that for demonstration purposes, you always should narrow the ev
 
 For the last example, List Paginated with filters, I would narrow the scope to `EvictDynamicKey` in production code, because this way I would be able to paginate the filtered mocks and evict them per its filter, triggered by a pull to refresh for instance.
 
+## Actionable API RxCache:
+
+This actionable api offers an easy way to perform write operations using providers. Although write operations could be achieved using the classic api too, it's much complex and error-prone. Indeed, the Actions class it's a wrapper around the classic api which play with evicting scopes and lists.
+
+Some actions examples:
+```swift
+let provider = RxProvidersMock.GetMocksEvictCache(evict: false)
+Actions<Mock>.with(provider)
+    .addFirst(Mock())
+    .addLast(Mock())
+    // Add a new mock at 5th position
+    .add({ (position, count) -> Bool in position == 5 }, candidate: Mock())
+    
+    .evictFirst()
+    //Evict first element if the cache has already 300 records
+    .evictFirst { (count) -> Bool in count > 300 }
+    .evictLast()
+    //Evict last element if the cache has already 300 records
+    .evictLast { (count) -> Bool in count > 300 }
+    //Evict all inactive elements
+    .evictIterable { (position, count, mock) -> Bool in mock.active == false }
+    .evictAll()
+        
+    //Update the mock with id 5
+    .update({ mock -> Bool in mock.id == 5 },
+    replace: { mock in
+        mock.active = true
+        return mock
+    })
+        
+    //Update all inactive mocks
+    .update({ mock -> Bool in mock.active == false },
+    replace: { mock in
+        mock.active = true
+        return mock
+    })
+    .toObservable()
+    .subscribe()
+```
+Every one of the previous actions will be execute only after the composed observable receives a subscription. This way, the underliyng provider cache will be modified its elements without effort at all.
 
 ## Configure general behaviour
 

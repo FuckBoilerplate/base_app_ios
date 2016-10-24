@@ -15,7 +15,7 @@ class DashboardTableViewCell: UITableViewCell, OkViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var iconImageView: UIImageView!
 
-    func configureItem(item: ItemMenu) {
+    func configureItem(_ item: ItemMenu) {
         titleLabel.text = item.title
     }
 }

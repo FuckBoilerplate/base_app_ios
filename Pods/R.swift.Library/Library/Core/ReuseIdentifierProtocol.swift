@@ -3,7 +3,8 @@
 //  R.swift Library
 //
 //  Created by Mathijs Kadijk on 06-12-15.
-//  Copyright © 2015 Mathijs Kadijk. All rights reserved.
+//  From: https://github.com/mac-cain13/R.swift.Library
+//  License: MIT License
 //
 
 import Foundation
@@ -11,7 +12,7 @@ import Foundation
 /// Reuse identifier protocol
 public protocol ReuseIdentifierType: IdentifierType {
   /// Type of this reuseable
-  typealias ReusableType
+  associatedtype ReusableType
 }
 
 /// Reuse identifier
