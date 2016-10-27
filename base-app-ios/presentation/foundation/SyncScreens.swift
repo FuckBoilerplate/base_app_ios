@@ -36,18 +36,3 @@ class SyncScreens {
         return needToSync
     }
 }
-
-
-extension Array {
-    mutating func removeObject<U: Equatable>(_ object: U) -> Bool {
-        for (idx, objectToCompare) in self.enumerated() {  //in old swift use enumerate(self)
-            if let to = objectToCompare as? U {
-                if object == to {
-                    self.remove(at: idx)
-                    return true
-                }
-            }
-        }
-        return false
-    }
-}

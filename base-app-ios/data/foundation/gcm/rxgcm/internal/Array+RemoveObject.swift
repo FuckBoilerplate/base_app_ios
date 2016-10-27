@@ -1,9 +1,9 @@
 //
 //  Array+RemoveObject.swift
-//  RxGcm_swift
+//  RxGcm
 //
 //  Created by Roberto Frontado on 4/7/16.
-//  Copyright © 2016 Jaime Vidal. All rights reserved.
+//  Copyright © 2016 Roberto Frontado. All rights reserved.
 //
 
 import Foundation

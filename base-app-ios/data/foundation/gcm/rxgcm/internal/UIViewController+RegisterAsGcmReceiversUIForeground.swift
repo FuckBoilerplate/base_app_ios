@@ -11,7 +11,7 @@ import Foundation
 
 extension UIViewController {
     
-    private static var once: Void = {
+    static var once: Void = {
         // Do this once
         // Change methods implementations
         changeMethodImplementation(
@@ -31,6 +31,7 @@ extension UIViewController {
             return
         }
         
+        print("\(self) + once")
         _ = once
         
     }
@@ -54,14 +55,14 @@ extension UIViewController {
     }
     
     // MARK: - New Methods Implementations
-    func rxgcm_viewWillAppear(_ animated: Bool) {
+    internal func rxgcm_viewWillAppear(_ animated: Bool) {
         self.rxgcm_viewWillAppear(animated)
         if self is GcmReceiverUIForeground {
             GetGcmReceiversUIForeground.presentedViewControllers.append(self)
         }
     }
     
-    func rxgcm_viewWillDisappear(_ animated: Bool) {
+    internal func rxgcm_viewWillDisappear(_ animated: Bool) {
         self.rxgcm_viewWillDisappear(animated)
         if self is GcmReceiverUIForeground {
             GetGcmReceiversUIForeground.presentedViewControllers.removeObject(self)

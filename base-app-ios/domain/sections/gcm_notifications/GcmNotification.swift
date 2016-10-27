@@ -10,13 +10,14 @@ import ObjectMapper
 
 struct GcmNotification<T>: Mappable {
     
-//    static func getMessageFromGcmNotification(_ message: RxMessage) -> GcmNotification {
-//        return Mapper().map(JSON: message.getPayload())!
-//    }
-//    
-//    static func getDataFromGcmNofitication(_ message: RxMessage) -> T {
-//        return getMessageFromGcmNotification(message).data
-//    }
+    static func getMessageFromGcmNotification(_ message: RxMessage) -> GcmNotification {
+        // Ugly casting
+        return Mapper().map(JSON: message.getPayload() as NSDictionary as! [String: Any])!
+    }
+    
+    static func getDataFromGcmNofitication(_ message: RxMessage) -> T {
+        return getMessageFromGcmNotification(message).data
+    }
     
     init?(map: Map) {}
     

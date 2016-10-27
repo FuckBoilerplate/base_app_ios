@@ -1,6 +1,6 @@
 //
 //  Recorded.swift
-//  Rx
+//  RxTest
 //
 //  Created by Krunoslav Zaher on 2/14/15.
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
@@ -10,32 +10,24 @@ import Foundation
 import RxSwift
 import Swift
 
-/**
-Record of a value including the virtual time it was produced on.
-*/
-public struct Recorded<Element>
+/// Record of a value including the virtual time it was produced on.
+public struct Recorded<Value>
     : CustomDebugStringConvertible {
 
-    /**
-    Gets the virtual time the value was produced on.
-    */
+    /// Gets the virtual time the value was produced on.
     public let time: TestTime
 
-    /**
-    Gets the recorded value.
-    */
-    public let value: Element
+    /// Gets the recorded value.
+    public let value: Value
     
-    public init(time: TestTime, event: Element) {
+    public init(time: TestTime, value: Value) {
         self.time = time
-        self.value = event
+        self.value = value
     }
 }
 
 extension Recorded {
-    /**
-    A textual representation of `self`, suitable for debugging.
-    */
+    /// A textual representation of `self`, suitable for debugging.
     public var debugDescription: String {
         return "\(value) @ \(time)"
     }

@@ -18,21 +18,17 @@ extension UIResponder {
             return
         }
         
-        guard let bundle = Bundle.main.infoDictionary?["CFBundleExecutable"] as? String else {
+        guard var bundle = Bundle.main.infoDictionary?["CFBundleExecutable"] as? String else {
             return
         }
-        
-        var appDelegateClass: NSObject.Type!
-        
-        if let delegateClass = NSClassFromString("\(bundle).AppDelegate") as? NSObject.Type {
-            appDelegateClass = delegateClass
-        }
+        bundle = bundle.replacingOccurrences(of: " ", with: "_").replacingOccurrences(of: "-", with: "_")
+        var delegateClass = NSClassFromString("\(bundle).AppDelegate") as? NSObject.Type
         
         if let userAppDelegateClass = appDelegate as? NSObject.Type {
-            appDelegateClass = userAppDelegateClass
+            delegateClass = userAppDelegateClass
         }
         
-        if appDelegateClass == nil {
+        guard let appDelegateClass = delegateClass else {
             return
         }
         
@@ -109,24 +105,24 @@ extension UIResponder {
     
     internal func rxgcm_application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError
         error: NSError ) {
-            print("rxgcm_applicationdidFailToRegisterForRemoteNotificationsWithError")
-            self.rxgcm_application(application, didFailToRegisterForRemoteNotificationsWithError: error)
-            RxGcm.Notifications.didFailToRegisterForRemoteNotificationsWithError(application, error: error)
+        print("rxgcm_applicationdidFailToRegisterForRemoteNotificationsWithError")
+        self.rxgcm_application(application, didFailToRegisterForRemoteNotificationsWithError: error)
+        RxGcm.Notifications.didFailToRegisterForRemoteNotificationsWithError(application, error: error)
     }
     
     internal func rxgcm_application(_ application: UIApplication,
-        didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
-            print("rxgcm_applicationdidReceiveRemoteNotification")
-            self.rxgcm_application(application, didReceiveRemoteNotification: userInfo)
-            RxGcm.Notifications.didReceiveRemoteNotification(application, userInfo: userInfo)
+                                    didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
+        print("rxgcm_applicationdidReceiveRemoteNotification")
+        self.rxgcm_application(application, didReceiveRemoteNotification: userInfo)
+        RxGcm.Notifications.didReceiveRemoteNotification(application, userInfo: userInfo)
     }
     
     internal func rxgcm_application(_ application: UIApplication,
-        didReceiveRemoteNotification userInfo: [AnyHashable: Any],
-        fetchCompletionHandler handler: (UIBackgroundFetchResult) -> Void) {
-            print("rxgcm_applicationdidReceiveRemoteNotificationfetchCompletionHandler")
-            self.rxgcm_application(application, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: handler)
-            RxGcm.Notifications.didReceiveRemoteNotification(application, userInfo: userInfo, fetchCompletionHandler: handler)
+                                    didReceiveRemoteNotification userInfo: [AnyHashable: Any],
+                                    fetchCompletionHandler handler: (UIBackgroundFetchResult) -> Void) {
+        print("rxgcm_applicationdidReceiveRemoteNotificationfetchCompletionHandler")
+        self.rxgcm_application(application, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: handler)
+        RxGcm.Notifications.didReceiveRemoteNotification(application, userInfo: userInfo, fetchCompletionHandler: handler)
     }
     
     internal func rxgcm_applicationDidEnterBackground(_ application: UIApplication) {
@@ -154,12 +150,12 @@ extension UIResponder {
     }
     
     func application(_ application: UIApplication,
-        didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
+                     didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
     }
     
     func application(_ application: UIApplication,
-        didReceiveRemoteNotification userInfo: [AnyHashable: Any],
-        fetchCompletionHandler handler: (UIBackgroundFetchResult) -> Void) {
+                     didReceiveRemoteNotification userInfo: [AnyHashable: Any],
+                     fetchCompletionHandler handler: (UIBackgroundFetchResult) -> Void) {
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {

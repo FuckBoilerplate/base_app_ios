@@ -30,13 +30,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setupAppBar()
         
         // RxGcm setup
-//        RxGcm.Notifications.register(GcmMessageReceiver.self, gcmReceiverUIBackgroundClass: GcmBackgroundReceiver.self)
-//            .subscribe(
-//                onNext: { token in GcmTokenReceiver().onTokenReceive(Observable.just(TokenUpdate(token: token))) },
-//                onError: { error in  print("RxGcm configuration failed") }
-//        )
-//        
-//        RxGcm.Notifications.onRefreshToken(GcmTokenReceiver.self)
+        RxGcm.Notifications.register(GcmMessageReceiver.self, gcmReceiverUIBackgroundClass: GcmBackgroundReceiver.self)
+            .subscribe(
+                onNext: { token in GcmTokenReceiver().onTokenReceive(Observable.just(TokenUpdate(token: token))) },
+                onError: { error in  print("RxGcm configuration failed") }
+        )
+        
+        RxGcm.Notifications.onRefreshToken(GcmTokenReceiver.self)
         
         return true
     }

@@ -1,9 +1,9 @@
 //
 //  TokenUpdate.swift
-//  RxGcm_swift
+//  RxGcm
 //
-//  Created by Jaime Vidal on 4/4/16.
-//  Copyright © 2016 Jaime Vidal. All rights reserved.
+//  Created by Roberto Frontado on 4/4/16.
+//  Copyright © 2016 Roberto Frontado. All rights reserved.
 //
 
 import Foundation
@@ -11,7 +11,7 @@ import Foundation
 open class TokenUpdate {
     
     fileprivate let token: String!
-
+    
     init(token: String){
         self.token = token
     }

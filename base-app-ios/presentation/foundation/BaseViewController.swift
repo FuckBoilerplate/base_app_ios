@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import PKHUD
 
-class BaseViewController<P: Presenter>: UIViewController {//, GcmReceiverUIForeground {
+class BaseViewController<P: Presenter>: UIViewController, GcmReceiverUIForeground {
     
     var presenter: P!
     var syncScreens: SyncScreens!
@@ -48,16 +48,20 @@ class BaseViewController<P: Presenter>: UIViewController {//, GcmReceiverUIForeg
     }
     
     // MARK: - GcmReceiverUIForeground
-//    func onTargetNotification(_ ignore: Observable<RxMessage>) {}
-//    
-//    func onMismatchTargetNotification(_ oMessage: Observable<RxMessage>) {
-//        let oGcmNotification = oMessage
-//            .map { message in GcmNotification<AnyObject>.getMessageFromGcmNotification(message) }
-//            .map { gcmNotification in "\(gcmNotification.title) \n \(gcmNotification.body)" }
-//        
-//        showAlert(oGcmNotification)
-//    }
-//    
+    func onTargetNotification(_ ignore: Observable<RxMessage>) {}
+    
+    func onMismatchTargetNotification(_ oMessage: Observable<RxMessage>) {
+        let oGcmNotification = oMessage
+            .map { message in GcmNotification<AnyObject>.getMessageFromGcmNotification(message) }
+            .map { gcmNotification in "\(gcmNotification.title!) \n \(gcmNotification.body!)" }
+        
+        showAlert(oGcmNotification)
+    }
+    
+    func matchesTarget(_ key: String) -> Bool {
+        return false
+    }
+    
     func target() -> String {
         return ""
     }

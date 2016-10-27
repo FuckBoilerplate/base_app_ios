@@ -1,9 +1,9 @@
- //
+//
 //  RxGcm.swift
-//  base_ios_app
+//  RxGcm
 //
 //  Created by Roberto Frontado on 2/16/16.
-//  Copyright © 2016 jaime. All rights reserved.
+//  Copyright © 2016 Roberto Frontado. All rights reserved.
 //
 
 import RxSwift
@@ -28,8 +28,8 @@ open class RxGcm: NSObject, GGLInstanceIDDelegate {
     
     fileprivate var persistence: Persistence!
     fileprivate var getGcmReceiversUIForeground: GetGcmReceiversUIForeground!
-    fileprivate var mainThreadScheduler: ImmediateSchedulerType!
-    fileprivate var backgroundThreadScheduler: ImmediateSchedulerType!
+    fileprivate var mainThreadScheduler: SchedulerType!
+    fileprivate var backgroundThreadScheduler: SchedulerType!
     fileprivate var testing: Bool = false
     
     func initForTesting(_ onBackground: Bool, registrationToken: String?, persistence: Persistence, getGcmReceiversUIForeground: GetGcmReceiversUIForeground) {
@@ -53,8 +53,9 @@ open class RxGcm: NSObject, GGLInstanceIDDelegate {
     }
     
     open func register<T: GcmReceiverData, U: GcmReceiverUIBackground>(_ gcmReceiverClass: T.Type, gcmReceiverUIBackgroundClass: U.Type) -> Observable<String> {
+        
         return Observable<String>.create { (observable) -> Disposable in
-            self.persistence.saveClassNameGcmReceiverAndGcmReceiverUIBackground(NSStringFromClass(gcmReceiverClass), gcmReceiverUIBackgroundClassName: NSStringFromClass(gcmReceiverUIBackgroundClass))
+            self.persistence.saveClassNameGcmReceiverAndGcmReceiverUIBackground(String(describing:gcmReceiverClass), gcmReceiverUIBackgroundClassName: String(describing:gcmReceiverUIBackgroundClass))
             
             if let _ = self.persistence.getToken() {
                 observable.onCompleted()
@@ -72,8 +73,9 @@ open class RxGcm: NSObject, GGLInstanceIDDelegate {
             observable.onCompleted()
             return Disposables.create()
             }.subscribeOn(backgroundThreadScheduler)
-        .observeOn(mainThreadScheduler)
-        // TODO: - Add retryWhen
+            .delaySubscription(3, scheduler: backgroundThreadScheduler)
+            .retry(3)
+            .observeOn(mainThreadScheduler)
     }
     
     /**
@@ -89,15 +91,14 @@ open class RxGcm: NSObject, GGLInstanceIDDelegate {
             observable.onCompleted()
             return Disposables.create()
         }).subscribeOn(backgroundThreadScheduler)
-        .observeOn(mainThreadScheduler)
-            // TODO: - Add retryWhen
+            .observeOn(mainThreadScheduler)
     }
     /**
     * @param aClass The class which implements GcmRefreshTokenReceiver and so the class which will be notified when a token refresh happens.
     * @see GcmRefreshTokenReceiver
     */
      
-    open  func onRefreshToken<T: GcmRefreshTokenReceiver>(_ gcmRefreshTokenReceiverClass: T.Type) {
+    open func onRefreshToken<T: GcmRefreshTokenReceiver>(_ gcmRefreshTokenReceiverClass: T.Type) {
         persistence.saveClassNameGcmRefreshTokenReceiver(String(describing: gcmRefreshTokenReceiverClass))
     }
     
@@ -123,14 +124,15 @@ open class RxGcm: NSObject, GGLInstanceIDDelegate {
         let oMessage = Observable.just(RxMessage(from: from, payload: data, target: target))
         if let className = persistence.getClassNameGcmReceiver() {
             let gcmReceiverData: GcmReceiverData = getInstanceClassByName(className)
+            
             gcmReceiverData.onNotification(oMessage)
-                .do(onNext: { (message) -> Void in
+                .subscribe(onNext:  { message in
                     if self.isAppOnBackground() {
                         self.notifyGcmReceiverBackgroundMessage(message)
                     } else {
                         self.notifyGcmReceiverForegroundMessage(message)
                     }
-                }).subscribe()
+            })
         }
     }
 
@@ -139,29 +141,23 @@ open class RxGcm: NSObject, GGLInstanceIDDelegate {
         if let className = persistence.getClassNameGcmReceiverUIBackground() {
             let gcmReceiverUIBackground: GcmReceiverUIBackground = getInstanceClassByName(className)
             
-            Observable.just(message).observeOn(mainThreadScheduler)
-                .subscribe(onNext: { (message) -> Void in
-                    let oNotification = Observable.just(message)
-                    gcmReceiverUIBackground.onNotification(oNotification)
-                })
+            let oNotification = Observable.just(message).observeOn(mainThreadScheduler)
+            gcmReceiverUIBackground.onNotification(oNotification)
         }
     }
     
     fileprivate func notifyGcmReceiverForegroundMessage(_ message: RxMessage) {
         
         if let wrapperGcmReceiverUIForeground = getGcmReceiversUIForeground.retrieve(message.getTarget()) {
+            
+            let oNotification = Observable.just(message).observeOn(mainThreadScheduler)
+            
             if wrapperGcmReceiverUIForeground.targetScreen {
-                Observable.just(message).observeOn(mainThreadScheduler)
-                    .subscribe(onNext: ({ (message) -> Void in
-                        wrapperGcmReceiverUIForeground.gcmReceiverUIForeground
-                            .onTargetNotification(Observable.just(message))
-                    }))
+                wrapperGcmReceiverUIForeground.gcmReceiverUIForeground
+                    .onTargetNotification(oNotification)
             } else {
-                Observable.just(message).observeOn(mainThreadScheduler)
-                    .subscribe(onNext: ({ (message) -> Void in
-                        wrapperGcmReceiverUIForeground.gcmReceiverUIForeground
-                            .onMismatchTargetNotification(Observable.just(message))
-                    }))
+                wrapperGcmReceiverUIForeground.gcmReceiverUIForeground
+                    .onMismatchTargetNotification(oNotification)
             }
         }
     }
@@ -177,49 +173,48 @@ open class RxGcm: NSObject, GGLInstanceIDDelegate {
             // Limitation
             bundle = "\(bundle)Tests"
         }
+        bundle = bundle.replacingOccurrences(of: " ", with: "_").replacingOccurrences(of: "-", with: "_")
         let classInst = getClassByName("\(bundle).\(className)") as! NSObject.Type
         instance = classInst.init()
         return instance as! T
     }
     
     // MARK: - GCM Methods
-    fileprivate func registrationHandler(_ registrationToken: String!, error: NSError!) {
-        if (registrationToken != nil) {
-            self.registrationToken = registrationToken
+    fileprivate func registrationHandler(_ registrationToken: String?, error: Error?) {
+        if let registrationToken = registrationToken {
             print("Registration Token: \(registrationToken)")
-            self.subscribeToTopic()
-            self.onTokenRefreshed()
+            self.registrationToken = registrationToken
+            persistence.saveToken(registrationToken)
+            subscribeToTopic()
+            onTokenRefreshed()
         } else {
-            print("Registration to GCM failed with error: \(error.localizedDescription)")
+            print("Registration to GCM failed with error: \(error?.localizedDescription)")
         }
     }
     
     fileprivate func subscribeToTopic() {
-//        if(registrationToken != nil && connectedToGCM) {
-//            GCMPubSub.sharedInstance().subscribe(withToken: self.registrationToken, topic: subscriptionTopic,
-//                options: nil, handler: {(error) -> Void in
-//                    if (error != nil) {
-//                        if error.code == 3001 {
-//                            print("Already subscribed to \(self.subscriptionTopic)")
-//                        } else {
-//                            print("Subscription failed: \(error?.localizedDescription)")
-//                        }
-//                    } else {
-//                        self.subscribedToTopic = true
-//                        print("Subscribed to \(self.subscriptionTopic)")
-//                    }
-//            })
-//        }
+        if(registrationToken != nil && connectedToGCM) {
+            GCMPubSub.sharedInstance().subscribe(withToken: self.registrationToken, topic: subscriptionTopic,
+                options: nil, handler: {(error) -> Void in
+                    if let error = error {
+                        print("Subscription failed: \(error.localizedDescription)")
+                    } else {
+                        self.subscribedToTopic = true
+                        print("Subscribed to \(self.subscriptionTopic)")
+                    }
+            })
+        }
     }
     
     @objc open  func onTokenRefresh() {
         print("The GCM registration token needs to be changed.")
-//        GGLInstanceID.sharedInstance().token(withAuthorizedEntity: gcmSenderID!,
-//            scope: kGGLInstanceIDScopeGCM, options: registrationOptions, handler: registrationHandler)
+        GGLInstanceID.sharedInstance().token(withAuthorizedEntity: gcmSenderID!,
+            scope: kGGLInstanceIDScopeGCM, options: registrationOptions, handler: registrationHandler)
     }
     
     // MARK: - AppDelegate Methods
     open func didFinishLaunchingWithOptions(_ application: UIApplication, launchOptions: [AnyHashable: Any]?) {
+        
         var configureError:NSError?
         GGLContext.sharedInstance().configureWithError(&configureError)
         assert(configureError == nil, "Error configuring Google services: \(configureError)")
@@ -232,17 +227,20 @@ open class RxGcm: NSObject, GGLInstanceIDDelegate {
         // TODO: - Implement receiver delegate!!!
 //        gcmConfig.receiverDelegate = appGCMReceiverDelegate
         GCMService.sharedInstance().start(with: gcmConfig)
+        
+        
     }
+    
     
     open func didRegisterForRemoteNotificationsWithDeviceToken(_ application: UIApplication, deviceToken: Data) {
         print("Did register for remote notification with device toke: \(deviceToken)")
         let instanceIDConfig = GGLInstanceIDConfig.default()
-//        instanceIDConfig?.delegate = self
-//        GGLInstanceID.sharedInstance().start(with: instanceIDConfig)
-//        registrationOptions = [kGGLInstanceIDRegisterAPNSOption:deviceToken as AnyObject,
-//            kGGLInstanceIDAPNSServerTypeSandboxOption:true as AnyObject]
-//        GGLInstanceID.sharedInstance().token(withAuthorizedEntity: gcmSenderID,
-//            scope: kGGLInstanceIDScopeGCM, options: registrationOptions, handler: registrationHandler)
+        instanceIDConfig?.delegate = self
+        GGLInstanceID.sharedInstance().start(with: instanceIDConfig)
+        registrationOptions = [kGGLInstanceIDRegisterAPNSOption:deviceToken as AnyObject,
+                               kGGLInstanceIDAPNSServerTypeSandboxOption:true as AnyObject]
+        GGLInstanceID.sharedInstance().token(withAuthorizedEntity: gcmSenderID,
+                                                                 scope: kGGLInstanceIDScopeGCM, options: registrationOptions, handler: registrationHandler)
     }
     
     open func didFailToRegisterForRemoteNotificationsWithError(_ application: UIApplication, error: NSError ) {
@@ -255,18 +253,37 @@ open class RxGcm: NSObject, GGLInstanceIDDelegate {
     }
     
     open func didReceiveRemoteNotification(_ application: UIApplication,
-        userInfo: [AnyHashable: Any],
-        fetchCompletionHandler handler: (UIBackgroundFetchResult) -> Void) {
-            GCMService.sharedInstance().appDidReceiveMessage(userInfo)
-            onNotificationReceived(userInfo)
+                                             userInfo: [AnyHashable: Any],
+                                             fetchCompletionHandler handler: (UIBackgroundFetchResult) -> Void) {
+        GCMService.sharedInstance().appDidReceiveMessage(userInfo)
+        onNotificationReceived(userInfo)
+        handler(UIBackgroundFetchResult.noData)
     }
     
     open func applicationDidEnterBackground(_ application: UIApplication) {
         onBackground = true
+        
+        GCMService.sharedInstance().disconnect()
+        connectedToGCM = false
     }
     
     open func applicationDidBecomeActive(_ application: UIApplication) {
+        application.applicationIconBadgeNumber = 0
+        
         onBackground = false
+        
+        // Connect to the GCM server to receive non-APNS notifications
+        GCMService.sharedInstance().connect(handler: { error -> Void in
+            if let error = error {
+                print("Could not connect to GCM: \(error.localizedDescription)")
+            } else {
+                self.connectedToGCM = true
+                print("Connected to GCM")
+                // [START_EXCLUDE]
+                self.subscribeToTopic()
+                // [END_EXCLUDE]
+            }
+        })
     }
 }
 

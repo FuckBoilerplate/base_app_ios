@@ -54,14 +54,14 @@ extension Wireframe {
     fileprivate func getViewController<T: UIViewController>(_ storyboardName: String, viewControllerClass t: T.Type) -> T {
         let storyboard = SwinjectStoryboard.create(name: storyboardName, bundle: nil, container: SwinjectStoryboard.defaultContainer)
         
-        return storyboard.instantiateViewController(withIdentifier: NSStringFromClass(T)) as! T
+        return storyboard.instantiateViewController(withIdentifier: String(describing: T.self)) as! T
     }
     
     // MARK: - Present Methods
     fileprivate func presentViewController<T: UIViewController>(_ storyboardName: String, viewControllerClass t: T.Type) {
         let storyboard = SwinjectStoryboard.create(name: storyboardName, bundle: nil, container: SwinjectStoryboard.defaultContainer)
         
-        let viewController = storyboard.instantiateViewController(withIdentifier: NSStringFromClass(T)) as! T
+        let viewController = storyboard.instantiateViewController(withIdentifier: String(describing: T.self)) as! T
         
         UIApplication.topViewController()!.present(viewController, animated: true, completion: nil)
     }
@@ -75,7 +75,7 @@ extension Wireframe {
     fileprivate func pushViewController<T: UIViewController>(_ storyboardName: String, viewControllerClass t: T.Type) {
         let storyboard = SwinjectStoryboard.create(name: storyboardName, bundle: nil, container: SwinjectStoryboard.defaultContainer)
         
-        let viewController = storyboard.instantiateViewController(withIdentifier: NSStringFromClass(T)) as! T
+        let viewController = storyboard.instantiateViewController(withIdentifier: String(describing: T.self)) as! T
         
         // Push if there is a Navigation Controller
         if let navigationController = UIApplication.topViewController()!.slideMenuController()?.mainViewController as? UINavigationController {

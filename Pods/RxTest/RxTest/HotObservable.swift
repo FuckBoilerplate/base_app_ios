@@ -1,6 +1,6 @@
 //
 //  HotObservable.swift
-//  Rx
+//  RxTest
 //
 //  Created by Krunoslav Zaher on 2/14/15.
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
@@ -9,20 +9,16 @@
 import Foundation
 import RxSwift
 
-/**
- A representation of hot observable sequence.
-
- Recorded events are replayed at absolute times no matter is there any subscriber.
-
- Event times represent absolute `TestScheduler` time.
- */
+/// A representation of hot observable sequence.
+///
+/// Recorded events are replayed at absolute times no matter is there any subscriber.
+///
+/// Event times represent absolute `TestScheduler` time.
 class HotObservable<Element>
     : TestableObservable<Element> {
     typealias Observer = AnyObserver<Element>
 
-    /**
-     Current subscribed observers.
-    */
+    /// Current subscribed observers.
     private var _observers: Bag<AnyObserver<Element>>
 
     override init(testScheduler: TestScheduler, recordedEvents: [Recorded<Event<Element>>]) {
@@ -32,14 +28,14 @@ class HotObservable<Element>
 
         for recordedEvent in recordedEvents {
             testScheduler.scheduleAt(recordedEvent.time) { t in
-                self._observers.on(recordedEvent.value)
+                self._observers.forEach {
+                    $0.on(recordedEvent.value)
+                }
             }
         }
     }
 
-    /**
-     Subscribes `observer` to receive events for this sequence.
-     */
+    /// Subscribes `observer` to receive events for this sequence.
     override func subscribe<O : ObserverType>(_ observer: O) -> Disposable where O.E == Element {
         let key = _observers.insert(AnyObserver(observer))
         subscriptions.append(Subscription(self.testScheduler.clock))

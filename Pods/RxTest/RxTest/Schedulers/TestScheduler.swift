@@ -1,6 +1,6 @@
 //
 //  TestScheduler.swift
-//  Rx
+//  RxTest
 //
 //  Created by Krunoslav Zaher on 2/8/15.
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
@@ -9,25 +9,15 @@
 import Foundation
 import RxSwift
 
-/**
-Virtual time scheduler used for testing applications and libraries built using RxSwift.
-*/
+/// Virtual time scheduler used for testing applications and libraries built using RxSwift.
 public class TestScheduler : VirtualTimeScheduler<TestSchedulerVirtualTimeConverter> {
-    /**
-     Default values of scheduler times.
-    */
+    /// Default values of scheduler times.
     public struct Defaults {
-        /**
-         Default absolute time when to create tested observable sequence.
-        */
+        /// Default absolute time when to create tested observable sequence.
         public static let created = 100
-        /**
-         Default absolute time when to subscribe to tested observable sequence.
-        */
+        /// Default absolute time when to subscribe to tested observable sequence.
         public static let subscribed = 200
-        /**
-         Default absolute time when to dispose subscription to tested observable sequence.
-        */
+        /// Default absolute time when to dispose subscription to tested observable sequence.
         public static let disposed = 1000
     }
 

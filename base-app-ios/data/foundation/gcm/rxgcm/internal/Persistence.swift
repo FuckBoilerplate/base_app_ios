@@ -1,6 +1,6 @@
 //
 //  Persistence.swift
-//  Example
+//  RxGcm
 //
 //  Created by Roberto Frontado on 4/4/16.
 //  Copyright © 2016 Roberto Frontado. All rights reserved.
@@ -41,6 +41,7 @@ class Persistence {
     func saveToken(_ token: String) {
         let userDefaults = UserDefaults.standard
         userDefaults.setValue(token, forKey: Constants.KEY_USER_DEFAULTS_TOKEN)
+        userDefaults.synchronize()
     }
     
     func getToken() -> String? {

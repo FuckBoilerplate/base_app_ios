@@ -26,6 +26,22 @@
 		A20F56C31C6CBD9F00029B9D /* UIApplication+TopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20F56C21C6CBD9F00029B9D /* UIApplication+TopViewController.swift */; };
 		A20F56CF1C6CC06D00029B9D /* Wireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20F56CE1C6CC06D00029B9D /* Wireframe.swift */; };
 		A20F570F1C6CCE4800029B9D /* ItemMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20F570E1C6CCE4800029B9D /* ItemMenu.swift */; };
+		A24681621DC2B6ED0051EC73 /* GcmBackgroundReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24681501DC2B6ED0051EC73 /* GcmBackgroundReceiver.swift */; };
+		A24681631DC2B6ED0051EC73 /* GcmMessageReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24681511DC2B6ED0051EC73 /* GcmMessageReceiver.swift */; };
+		A24681641DC2B6ED0051EC73 /* GcmTokenReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24681521DC2B6ED0051EC73 /* GcmTokenReceiver.swift */; };
+		A24681651DC2B6ED0051EC73 /* GcmReceiverData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24681541DC2B6ED0051EC73 /* GcmReceiverData.swift */; };
+		A24681661DC2B6ED0051EC73 /* GcmReceiverUIBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24681551DC2B6ED0051EC73 /* GcmReceiverUIBackground.swift */; };
+		A24681671DC2B6ED0051EC73 /* GcmReceiverUIForeground.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24681561DC2B6ED0051EC73 /* GcmReceiverUIForeground.swift */; };
+		A24681681DC2B6ED0051EC73 /* GcmRefreshTokenReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24681571DC2B6ED0051EC73 /* GcmRefreshTokenReceiver.swift */; };
+		A24681691DC2B6ED0051EC73 /* AppDelegate+RxGcmLifeCycle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24681591DC2B6ED0051EC73 /* AppDelegate+RxGcmLifeCycle.swift */; };
+		A246816A1DC2B6ED0051EC73 /* Array+RemoveObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = A246815A1DC2B6ED0051EC73 /* Array+RemoveObject.swift */; };
+		A246816B1DC2B6ED0051EC73 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A246815B1DC2B6ED0051EC73 /* Constants.swift */; };
+		A246816C1DC2B6ED0051EC73 /* GetGcmReceiversUIForeground.swift in Sources */ = {isa = PBXBuildFile; fileRef = A246815C1DC2B6ED0051EC73 /* GetGcmReceiversUIForeground.swift */; };
+		A246816D1DC2B6ED0051EC73 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = A246815D1DC2B6ED0051EC73 /* Persistence.swift */; };
+		A246816E1DC2B6ED0051EC73 /* UIViewController+RegisterAsGcmReceiversUIForeground.swift in Sources */ = {isa = PBXBuildFile; fileRef = A246815E1DC2B6ED0051EC73 /* UIViewController+RegisterAsGcmReceiversUIForeground.swift */; };
+		A246816F1DC2B6ED0051EC73 /* RxGcm.swift in Sources */ = {isa = PBXBuildFile; fileRef = A246815F1DC2B6ED0051EC73 /* RxGcm.swift */; };
+		A24681701DC2B6ED0051EC73 /* RxMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24681601DC2B6ED0051EC73 /* RxMessage.swift */; };
+		A24681711DC2B6ED0051EC73 /* TokenUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24681611DC2B6ED0051EC73 /* TokenUpdate.swift */; };
 		A247D5E71CC94CCF000E4DC9 /* GcmNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = A247D5E61CC94CCF000E4DC9 /* GcmNotification.swift */; };
 		A26486711C98147C003BFE21 /* ApplicationModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = A264866C1C98147C003BFE21 /* ApplicationModule.swift */; };
 		A26486741C98147C003BFE21 /* PresentationModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = A264866F1C98147C003BFE21 /* PresentationModule.swift */; };
@@ -100,6 +116,22 @@
 		A20F56C21C6CBD9F00029B9D /* UIApplication+TopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+TopViewController.swift"; sourceTree = "<group>"; };
 		A20F56CE1C6CC06D00029B9D /* Wireframe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wireframe.swift; sourceTree = "<group>"; };
 		A20F570E1C6CCE4800029B9D /* ItemMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemMenu.swift; sourceTree = "<group>"; };
+		A24681501DC2B6ED0051EC73 /* GcmBackgroundReceiver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GcmBackgroundReceiver.swift; sourceTree = "<group>"; };
+		A24681511DC2B6ED0051EC73 /* GcmMessageReceiver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GcmMessageReceiver.swift; sourceTree = "<group>"; };
+		A24681521DC2B6ED0051EC73 /* GcmTokenReceiver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GcmTokenReceiver.swift; sourceTree = "<group>"; };
+		A24681541DC2B6ED0051EC73 /* GcmReceiverData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GcmReceiverData.swift; sourceTree = "<group>"; };
+		A24681551DC2B6ED0051EC73 /* GcmReceiverUIBackground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GcmReceiverUIBackground.swift; sourceTree = "<group>"; };
+		A24681561DC2B6ED0051EC73 /* GcmReceiverUIForeground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GcmReceiverUIForeground.swift; sourceTree = "<group>"; };
+		A24681571DC2B6ED0051EC73 /* GcmRefreshTokenReceiver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GcmRefreshTokenReceiver.swift; sourceTree = "<group>"; };
+		A24681591DC2B6ED0051EC73 /* AppDelegate+RxGcmLifeCycle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AppDelegate+RxGcmLifeCycle.swift"; sourceTree = "<group>"; };
+		A246815A1DC2B6ED0051EC73 /* Array+RemoveObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+RemoveObject.swift"; sourceTree = "<group>"; };
+		A246815B1DC2B6ED0051EC73 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		A246815C1DC2B6ED0051EC73 /* GetGcmReceiversUIForeground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetGcmReceiversUIForeground.swift; sourceTree = "<group>"; };
+		A246815D1DC2B6ED0051EC73 /* Persistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		A246815E1DC2B6ED0051EC73 /* UIViewController+RegisterAsGcmReceiversUIForeground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+RegisterAsGcmReceiversUIForeground.swift"; sourceTree = "<group>"; };
+		A246815F1DC2B6ED0051EC73 /* RxGcm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxGcm.swift; sourceTree = "<group>"; };
+		A24681601DC2B6ED0051EC73 /* RxMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxMessage.swift; sourceTree = "<group>"; };
+		A24681611DC2B6ED0051EC73 /* TokenUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenUpdate.swift; sourceTree = "<group>"; };
 		A247D5E61CC94CCF000E4DC9 /* GcmNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GcmNotification.swift; sourceTree = "<group>"; };
 		A264866C1C98147C003BFE21 /* ApplicationModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationModule.swift; sourceTree = "<group>"; };
 		A264866F1C98147C003BFE21 /* PresentationModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationModule.swift; sourceTree = "<group>"; };
@@ -159,6 +191,7 @@
 		A20956C71CCA7C2D00C67D9D /* foundation */ = {
 			isa = PBXGroup;
 			children = (
+				A246814F1DC2B6ED0051EC73 /* gcm */,
 				A20956C81CCA7C2D00C67D9D /* cache */,
 				A20956DD1CCA7C2D00C67D9D /* internal */,
 				A20956E01CCA7C2D00C67D9D /* net */,
@@ -390,6 +423,46 @@
 				A2C189B31C75B4A6007A45F5 /* SearchUserViewController.swift */,
 			);
 			path = search;
+			sourceTree = "<group>";
+		};
+		A246814F1DC2B6ED0051EC73 /* gcm */ = {
+			isa = PBXGroup;
+			children = (
+				A24681501DC2B6ED0051EC73 /* GcmBackgroundReceiver.swift */,
+				A24681511DC2B6ED0051EC73 /* GcmMessageReceiver.swift */,
+				A24681521DC2B6ED0051EC73 /* GcmTokenReceiver.swift */,
+				A24681531DC2B6ED0051EC73 /* rxgcm */,
+			);
+			name = gcm;
+			path = "base-app-ios/Data/foundation/gcm";
+			sourceTree = SOURCE_ROOT;
+		};
+		A24681531DC2B6ED0051EC73 /* rxgcm */ = {
+			isa = PBXGroup;
+			children = (
+				A24681541DC2B6ED0051EC73 /* GcmReceiverData.swift */,
+				A24681551DC2B6ED0051EC73 /* GcmReceiverUIBackground.swift */,
+				A24681561DC2B6ED0051EC73 /* GcmReceiverUIForeground.swift */,
+				A24681571DC2B6ED0051EC73 /* GcmRefreshTokenReceiver.swift */,
+				A24681581DC2B6ED0051EC73 /* internal */,
+				A246815F1DC2B6ED0051EC73 /* RxGcm.swift */,
+				A24681601DC2B6ED0051EC73 /* RxMessage.swift */,
+				A24681611DC2B6ED0051EC73 /* TokenUpdate.swift */,
+			);
+			path = rxgcm;
+			sourceTree = "<group>";
+		};
+		A24681581DC2B6ED0051EC73 /* internal */ = {
+			isa = PBXGroup;
+			children = (
+				A24681591DC2B6ED0051EC73 /* AppDelegate+RxGcmLifeCycle.swift */,
+				A246815A1DC2B6ED0051EC73 /* Array+RemoveObject.swift */,
+				A246815B1DC2B6ED0051EC73 /* Constants.swift */,
+				A246815C1DC2B6ED0051EC73 /* GetGcmReceiversUIForeground.swift */,
+				A246815D1DC2B6ED0051EC73 /* Persistence.swift */,
+				A246815E1DC2B6ED0051EC73 /* UIViewController+RegisterAsGcmReceiversUIForeground.swift */,
+			);
+			path = internal;
 			sourceTree = "<group>";
 		};
 		A247D5E51CC94CB2000E4DC9 /* gcm */ = {
@@ -754,42 +827,58 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A24681711DC2B6ED0051EC73 /* TokenUpdate.swift in Sources */,
 				A2C189D11C75DE82007A45F5 /* UIColor+BaseAppColors.swift in Sources */,
 				A2F276FF1C748C250020B4F9 /* DashboardViewController.swift in Sources */,
+				A24681661DC2B6ED0051EC73 /* GcmReceiverUIBackground.swift in Sources */,
 				A2C189CF1C75D551007A45F5 /* R.generated.swift in Sources */,
 				A20956FD1CCA7C2D00C67D9D /* Repository.swift in Sources */,
 				A20F570F1C6CCE4800029B9D /* ItemMenu.swift in Sources */,
 				A2C189B01C75B48D007A45F5 /* UsersViewController.swift in Sources */,
+				A24681651DC2B6ED0051EC73 /* GcmReceiverData.swift in Sources */,
 				A2A3182F1CBBF0FC008F04F8 /* UsersPresenter.swift in Sources */,
 				A264867A1C9814A7003BFE21 /* DomainModule.swift in Sources */,
 				A29D5AEB1CBBE74700A6D1E3 /* DashboardPresenter.swift in Sources */,
 				A29D5AED1CBBE88E00A6D1E3 /* LaunchPresenter.swift in Sources */,
+				A24681631DC2B6ED0051EC73 /* GcmMessageReceiver.swift in Sources */,
 				A20956FE1CCA7C2D00C67D9D /* UserMapping.swift in Sources */,
 				A2F277031C7497A60020B4F9 /* DashboardTableViewCell.swift in Sources */,
 				A29D5ADF1CBBD48200A6D1E3 /* Presenter.swift in Sources */,
 				A20F56CF1C6CC06D00029B9D /* Wireframe.swift in Sources */,
+				A24681701DC2B6ED0051EC73 /* RxMessage.swift in Sources */,
 				A20956FA1CCA7C2D00C67D9D /* DataModule.swift in Sources */,
 				A20957001CCA7C2D00C67D9D /* WireframeRepository.swift in Sources */,
 				A20957021CCA7F6B00C67D9D /* SyncScreens.swift in Sources */,
 				A20956FF1CCA7C2D00C67D9D /* UserRepository.swift in Sources */,
+				A24681671DC2B6ED0051EC73 /* GcmReceiverUIForeground.swift in Sources */,
 				A2A318351CBBF143008F04F8 /* User.swift in Sources */,
 				A26486711C98147C003BFE21 /* ApplicationModule.swift in Sources */,
 				A26486741C98147C003BFE21 /* PresentationModule.swift in Sources */,
 				A20F565E1C6C823100029B9D /* AppDelegate.swift in Sources */,
 				A20F56C11C6CBBA200029B9D /* BaseViewController.swift in Sources */,
+				A24681681DC2B6ED0051EC73 /* GcmRefreshTokenReceiver.swift in Sources */,
 				A20956FB1CCA7C2D00C67D9D /* RestApi.swift in Sources */,
+				A246816B1DC2B6ED0051EC73 /* Constants.swift in Sources */,
 				A20956FC1CCA7C2D00C67D9D /* RestApiMoya.swift in Sources */,
 				A2C189C81C75C8E4007A45F5 /* UsersTableViewCell.swift in Sources */,
 				A2C189B41C75B4A6007A45F5 /* SearchUserViewController.swift in Sources */,
+				A246816D1DC2B6ED0051EC73 /* Persistence.swift in Sources */,
+				A246816E1DC2B6ED0051EC73 /* UIViewController+RegisterAsGcmReceiversUIForeground.swift in Sources */,
+				A246816F1DC2B6ED0051EC73 /* RxGcm.swift in Sources */,
 				A2C189D31C75DEE2007A45F5 /* UIImage+ImageWithColor.swift in Sources */,
 				A2A318331CBBF11B008F04F8 /* SearchUserPresenter.swift in Sources */,
 				A2C189B21C75B496007A45F5 /* UserViewController.swift in Sources */,
 				A2F276FD1C748C180020B4F9 /* SlideMenuController.swift in Sources */,
 				A20956E91CCA7C2D00C67D9D /* RxCacheProviders.swift in Sources */,
+				A24681621DC2B6ED0051EC73 /* GcmBackgroundReceiver.swift in Sources */,
+				A24681691DC2B6ED0051EC73 /* AppDelegate+RxGcmLifeCycle.swift in Sources */,
 				A247D5E71CC94CCF000E4DC9 /* GcmNotification.swift in Sources */,
 				A20F56C31C6CBD9F00029B9D /* UIApplication+TopViewController.swift in Sources */,
+				A246816A1DC2B6ED0051EC73 /* Array+RemoveObject.swift in Sources */,
+				A24681641DC2B6ED0051EC73 /* GcmTokenReceiver.swift in Sources */,
 				A2E6AE2B1C6CE03F007ECCB5 /* LaunchViewController.swift in Sources */,
 				A2A318311CBBF115008F04F8 /* UserPresenter.swift in Sources */,
+				A246816C1DC2B6ED0051EC73 /* GetGcmReceiversUIForeground.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
