@@ -46,6 +46,7 @@
 		A26486711C98147C003BFE21 /* ApplicationModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = A264866C1C98147C003BFE21 /* ApplicationModule.swift */; };
 		A26486741C98147C003BFE21 /* PresentationModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = A264866F1C98147C003BFE21 /* PresentationModule.swift */; };
 		A264867A1C9814A7003BFE21 /* DomainModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26486781C9814A7003BFE21 /* DomainModule.swift */; };
+		A27F9C261DC3DCFF0013C628 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A27F9C251DC3DCFF0013C628 /* GoogleService-Info.plist */; };
 		A28CCE561DC3C23600850E4A /* MoyaEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28CCE551DC3C23600850E4A /* MoyaEndpoints.swift */; };
 		A29D5ADF1CBBD48200A6D1E3 /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29D5ADD1CBBD48200A6D1E3 /* Presenter.swift */; };
 		A29D5AEB1CBBE74700A6D1E3 /* DashboardPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29D5AEA1CBBE74700A6D1E3 /* DashboardPresenter.swift */; };
@@ -137,6 +138,7 @@
 		A264866C1C98147C003BFE21 /* ApplicationModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationModule.swift; sourceTree = "<group>"; };
 		A264866F1C98147C003BFE21 /* PresentationModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationModule.swift; sourceTree = "<group>"; };
 		A26486781C9814A7003BFE21 /* DomainModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DomainModule.swift; sourceTree = "<group>"; };
+		A27F9C251DC3DCFF0013C628 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A28CCE551DC3C23600850E4A /* MoyaEndpoints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MoyaEndpoints.swift; path = "base-app-ios/Data/foundation/net/MoyaEndpoints.swift"; sourceTree = SOURCE_ROOT; };
 		A29D5ADD1CBBD48200A6D1E3 /* Presenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Presenter.swift; path = "base-app-ios/presentation/foundation/Presenter.swift"; sourceTree = SOURCE_ROOT; };
 		A29D5AEA1CBBE74700A6D1E3 /* DashboardPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DashboardPresenter.swift; path = "base-app-ios/presentation/sections/dashboard/DashboardPresenter.swift"; sourceTree = SOURCE_ROOT; };
@@ -286,6 +288,7 @@
 				A20F56961C6C849100029B9D /* presentation */,
 				A20F565D1C6C823100029B9D /* AppDelegate.swift */,
 				A2C189CE1C75D551007A45F5 /* R.generated.swift */,
+				A27F9C251DC3DCFF0013C628 /* GoogleService-Info.plist */,
 				A20F56641C6C823100029B9D /* Assets.xcassets */,
 				A20F56661C6C823100029B9D /* LaunchScreen.storyboard */,
 				A20F56691C6C823100029B9D /* Info.plist */,
@@ -700,6 +703,7 @@
 				A20F56681C6C823100029B9D /* LaunchScreen.storyboard in Resources */,
 				A20F56651C6C823100029B9D /* Assets.xcassets in Resources */,
 				A2C189B61C75B4BB007A45F5 /* User.storyboard in Resources */,
+				A27F9C261DC3DCFF0013C628 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

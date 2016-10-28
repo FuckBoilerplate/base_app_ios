@@ -227,8 +227,6 @@ open class RxGcm: NSObject, GGLInstanceIDDelegate {
         // TODO: - Implement receiver delegate!!!
 //        gcmConfig.receiverDelegate = appGCMReceiverDelegate
         GCMService.sharedInstance().start(with: gcmConfig)
-        
-        
     }
     
     
