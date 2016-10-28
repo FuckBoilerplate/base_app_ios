@@ -6,33 +6,41 @@
 //  Copyright © 2016 Roberto Frontado. All rights reserved.
 //
 
-class SyncScreens {
+protocol SyncScreensMatcher {
+    func matchesTarget(_ key: String) -> Bool
+}
 
-    fileprivate var pendingScreens: [String]!
+class SyncScreens {
+    
+    private var pendingScreens: [String]!
     
     init() {
         pendingScreens = []
     }
     
-    func addScreen(_ screen: String) {
+    func addScreen(screen: String) {
         if !pendingScreens.contains(screen) {
             pendingScreens.append(screen)
         }
     }
     
-    func needToSync(_ candidate: String) -> Bool {
+    func needToSync(matcher: SyncScreensMatcher) -> Bool {
         var needToSync = false
         
-        for screen in pendingScreens {
-            if candidate == screen {
+        var index = 0
+        
+        for i in 0..<pendingScreens.count {
+            if matcher.matchesTarget(pendingScreens[i]) {
                 needToSync = true
+                index = i
                 break
             }
         }
         
         if needToSync {
-            pendingScreens.removeObject(candidate)
+            pendingScreens.removeObject(index)
         }
         return needToSync
     }
+    
 }
