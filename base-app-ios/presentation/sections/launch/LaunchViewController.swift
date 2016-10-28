@@ -11,7 +11,7 @@ import SystemConfiguration
 
 class LaunchViewController: BaseViewController<LaunchPresenter> {
 
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         wireframe.dashboard()
     }

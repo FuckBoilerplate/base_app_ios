@@ -17,6 +17,7 @@ class StartFresh
 		Helper.moveFileDeleting('DataModule.txt', data+'foundation/internal/di/DataModule.swift')
 		Helper.moveFileDeleting('RestApi.txt', data+'foundation/net/RestApi.swift')
 		Helper.moveFileDeleting('RestApiMoya.txt', data+'foundation/net/RestApiMoya.swift')
+		Helper.moveFileDeleting('MoyaEndpoints.txt', data+'foundation/net/MoyaEndpoints.swift')
 		Helper.moveFileDeleting('RxCacheProviders.txt', data+'foundation/cache/RxCacheProviders.swift')
 
 		puts("Removing tests files")
@@ -45,6 +46,8 @@ class StartFresh
 	    Helper.removeDir(presentation+'sections/dashboard')
 		puts("You'll need to remove /base-app-ios/presentation/sections/dashboard reference manually! :(")
 	    Helper.moveFileDeleting('PresentationModule.txt', presentation+'internal/di/PresentationModule.swift')
+
+		Helper.moveFileDeleting('LaunchViewController.txt', presentation+'sections/launch/LaunchViewController.swift')
 
 		Helper.moveFileDeleting('Wireframe.txt', presentation+'sections/Wireframe.swift')
 

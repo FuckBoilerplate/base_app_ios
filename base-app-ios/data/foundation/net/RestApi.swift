@@ -12,25 +12,25 @@ import ObjectMapper
 
 protocol RestApi {
 
-    func getUserByName(username: String) -> Observable<Response>
-    func getUsers(lastIdQueried: Int?, perPage: Int) -> Observable<Response>
+    func getUserByName(_ username: String) -> Observable<Response>
+    func getUsers(_ lastIdQueried: Int?, perPage: Int) -> Observable<Response>
 }
 
 // Fixed Moya scheduler issue
 extension RxMoyaProvider {
     
-    func requestBackground(token: Target) -> Observable<Response> {
-        return request(token).observeOn(SerialDispatchQueueScheduler(globalConcurrentQueueQOS: .Background))
+    func requestBackground(_ token: Target) -> Observable<Response> {
+        return request(token).observeOn(SerialDispatchQueueScheduler(qos: .background))
     }
 }
 
 extension ObservableType where E == Response {
     
-    func mapObjectBackground<T: Mappable>(type: T.Type) -> Observable<T> {
-        return mapObject(type).observeOn(SerialDispatchQueueScheduler(globalConcurrentQueueQOS: .Background))
+    func mapObjectBackground<T: Mappable>(_ type: T.Type) -> Observable<T> {
+        return mapObject(type).observeOn(SerialDispatchQueueScheduler(qos: .background))
     }
     
-    func mapArrayBackground<T: Mappable>(type: T.Type) -> Observable<[T]> {
-        return mapArray(type).observeOn(SerialDispatchQueueScheduler(globalConcurrentQueueQOS: .Background))
+    func mapArrayBackground<T: Mappable>(_ type: T.Type) -> Observable<[T]> {
+        return mapArray(type).observeOn(SerialDispatchQueueScheduler(qos: .background))
     }
 }

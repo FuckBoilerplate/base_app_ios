@@ -3,15 +3,16 @@
 //  R.swift.Library
 //
 //  Created by Mathijs Kadijk on 11-01-16.
-//  Copyright © 2016 Mathijs Kadijk. All rights reserved.
+//  From: https://github.com/mac-cain13/R.swift.Library
+//  License: MIT License
 //
 
 import Foundation
 
 public protocol ImageResourceType {
 
-  /// Bundle this image is in or nil for main bundle
-  var bundle: NSBundle? { get }
+  /// Bundle this image is in
+  var bundle: Bundle { get }
 
   /// Name of the image
   var name: String { get }
@@ -19,13 +20,13 @@ public protocol ImageResourceType {
 
 public struct ImageResource: ImageResourceType {
 
-  /// Bundle this image is in or nil for main bundle
-  public let bundle: NSBundle?
+  /// Bundle this image is in
+  public let bundle: Bundle
 
   /// Name of the image
   public let name: String
 
-  public init(bundle: NSBundle?, name: String) {
+  public init(bundle: Bundle, name: String) {
     self.bundle = bundle
     self.name = name
   }

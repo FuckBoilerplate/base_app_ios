@@ -10,29 +10,29 @@ import UIKit
 
 extension UIImage {
     
-    class func imageWithColor(color: UIColor) -> UIImage {
-        let img = imageWithColor(color, size: CGSizeMake(1, 1))
+    class func imageWithColor(_ color: UIColor) -> UIImage {
+        let img = imageWithColor(color, size: CGSize(width: 1, height: 1))
         return img
     }
     
-    class func imageWithColor(color: UIColor, size: CGSize) -> UIImage {
+    class func imageWithColor(_ color: UIColor, size: CGSize) -> UIImage {
         
-        let rect = CGRectMake(0, 0, size.width, size.height)
+        let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
         UIGraphicsBeginImageContext(rect.size)
         let context = UIGraphicsGetCurrentContext()
-        CGContextSetFillColorWithColor(context, color.CGColor)
-        CGContextFillRect(context, rect)
+        context?.setFillColor(color.cgColor)
+        context?.fill(rect)
         
         let img = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        return img
+        return img!
     }
     
-    class func resizableImageWithColor(color: UIColor, cornerRadius: CGFloat) -> UIImage{
+    class func resizableImageWithColor(_ color: UIColor, cornerRadius: CGFloat) -> UIImage{
         
         let minEdgeSize = cornerRadius * 2 + 1
-        let rect = CGRectMake(0, 0, minEdgeSize, minEdgeSize)
+        let rect = CGRect(x: 0, y: 0, width: minEdgeSize, height: minEdgeSize)
         let roundedRect = UIBezierPath(roundedRect: rect, cornerRadius: cornerRadius)
         roundedRect.lineWidth = 0
         UIGraphicsBeginImageContextWithOptions(rect.size, false, 0)
@@ -44,7 +44,7 @@ extension UIImage {
         let img = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        return img.resizableImageWithCapInsets(UIEdgeInsets(top: cornerRadius, left: cornerRadius, bottom: cornerRadius, right: cornerRadius))
+        return img!.resizableImage(withCapInsets: UIEdgeInsets(top: cornerRadius, left: cornerRadius, bottom: cornerRadius, right: cornerRadius))
     }
     
 }

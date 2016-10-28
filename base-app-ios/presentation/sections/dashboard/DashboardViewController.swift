@@ -22,19 +22,19 @@ class DashboardViewController: BaseViewController<DashboardPresenter> {
         
         presenter.getItemsMenu()
             .safely()
-            .subscribeNext { items in
+            .subscribe(onNext: { items in
                 self.dataSource.items = items
                 self.tableView.reloadData()
-        }
+        })
         
         dataSource = OkTableViewDataSource()
         delegate = OkRxTableViewDelegate(dataSource: dataSource, onItemClicked: { (item, position) in
             switch(item.type) {
-            case .User:
+            case .user:
                 self.showUser()
-            case .Users:
+            case .users:
                 self.showUsers()
-            case .Search:
+            case .search:
                 self.showUserSearch()
             }
         })
@@ -45,20 +45,20 @@ class DashboardViewController: BaseViewController<DashboardPresenter> {
     }
     
     // MARK: - Private methods
-    private func changeMainViewController(viewController: UIViewController) {
+    fileprivate func changeMainViewController(_ viewController: UIViewController) {
         let nvc: UINavigationController = UINavigationController(rootViewController: viewController)
         self.slideMenuController()?.changeMainViewController(nvc, close: true)
     }
     
-    private func showUsers() {
+    fileprivate func showUsers() {
         changeMainViewController(R.storyboard.user.usersViewController()!)
     }
     
-    private func showUser() {
+    fileprivate func showUser() {
         changeMainViewController(R.storyboard.user.userViewController()!)
     }
     
-    private func showUserSearch() {
+    fileprivate func showUserSearch() {
         changeMainViewController(R.storyboard.user.searchUserViewController()!)
     }
 }

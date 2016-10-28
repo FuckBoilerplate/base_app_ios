@@ -1,6 +1,6 @@
 //
 //  GetGcmReceiversUIForeground.swift
-//  Example
+//  RxGcm
 //
 //  Created by Roberto Frontado on 4/4/16.
 //  Copyright © 2016 Roberto Frontado. All rights reserved.
@@ -13,7 +13,7 @@ class GetGcmReceiversUIForeground {
     
     static var presentedViewControllers = [UIViewController]()
     
-    func retrieve(screenName: String) -> (gcmReceiverUIForeground: GcmReceiverUIForeground, targetScreen: Bool)? {
+    func retrieve(_ screenName: String) -> (gcmReceiverUIForeground: GcmReceiverUIForeground, targetScreen: Bool)? {
         
         var receiverCandidate: (gcmReceiverUIForeground: GcmReceiverUIForeground, targetScreen: Bool)? = nil
     
@@ -21,7 +21,7 @@ class GetGcmReceiversUIForeground {
             
             if let gcmReceiverUIForeground = viewController as? GcmReceiverUIForeground {
                 
-                let targetScreen = gcmReceiverUIForeground.target() == screenName
+                let targetScreen = gcmReceiverUIForeground.matchesTarget(screenName)
                 receiverCandidate = (gcmReceiverUIForeground: gcmReceiverUIForeground, targetScreen: targetScreen)
                 
                 if targetScreen {

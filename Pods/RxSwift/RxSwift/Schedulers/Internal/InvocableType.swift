@@ -1,6 +1,6 @@
 //
 //  InvocableType.swift
-//  Rx
+//  RxSwift
 //
 //  Created by Krunoslav Zaher on 11/7/15.
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
@@ -13,7 +13,7 @@ protocol InvocableType {
 }
 
 protocol InvocableWithValueType {
-    typealias Value
+    associatedtype Value
 
-    func invoke(value: Value)
+    func invoke(_ value: Value)
 }

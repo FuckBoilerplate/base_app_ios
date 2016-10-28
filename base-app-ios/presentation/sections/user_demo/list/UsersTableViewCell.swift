@@ -15,15 +15,15 @@ class UsersTableViewCell: UITableViewCell, OkViewCell {
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var userImageView: UIImageView!
     
-    func configureItem(item: User) {
+    func configureItem(_ item: User) {
         userNameLabel.text = item.login
         userImageView.image = nil
-        if let imageURL = NSURL(string: item.getAvatarUrl()) {
-            userImageView.sd_setImageWithURL(imageURL)
+        if let imageURL = URL(string: item.getAvatarUrl()) {
+            userImageView.sd_setImage(with: imageURL)
         }
     }
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         // If the cell is selected, deselect it!
         if selected {

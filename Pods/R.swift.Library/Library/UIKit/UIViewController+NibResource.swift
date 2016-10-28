@@ -3,7 +3,8 @@
 //  R.swift Library
 //
 //  Created by Mathijs Kadijk on 06-12-15.
-//  Copyright © 2015 Mathijs Kadijk. All rights reserved.
+//  From: https://github.com/mac-cain13/R.swift.Library
+//  License: MIT License
 //
 
 import Foundation
@@ -13,7 +14,7 @@ public extension UIViewController {
   /**
    Returns a newly initialized view controller with the nib resource (R.nib.*).
    
-   - parameter nib: The name of the nib resource (R.nib.*) to associate with the view controller.
+   - parameter nib: The nib resource (R.nib.*) to associate with the view controller.
    
    - returns: A newly initialized UIViewController object.
   */

@@ -29,7 +29,7 @@ class Presenter {
         self.wireframeRepository = wireframeRepository
     }
     
-    func dataForNextScreen<T>(object: T) -> Observable<Void> {
+    func dataForNextScreen<T>(_ object: T) -> Observable<Void> {
         return wireframeRepository.setWireframeCurrentObject(object)
     }
 }

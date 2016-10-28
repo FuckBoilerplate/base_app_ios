@@ -18,29 +18,29 @@ class UserViewController: BaseViewController<UserPresenter> {
         super.viewDidLoad()
         // If it is the first viewController of the navigationController, then add the MenuButton to the navigationBar
         if self.navigationController?.viewControllers.first == self {
-            let menuButton = UIBarButtonItem(title: "Menu", style: UIBarButtonItemStyle.Plain, target: self, action: "menuButtonPressed:")
+            let menuButton = UIBarButtonItem(title: "Menu", style: UIBarButtonItemStyle.plain, target: self, action: #selector(UserViewController.menuButtonPressed(_:)))
             navigationItem.leftBarButtonItem = menuButton
         }
         
         presenter.getCurrentUser()
             .safelyReport(self)
-            .subscribeNext { user in self.showUser(user) }
+            .subscribe(onNext: { user in self.showUser(user) })
     }
     
     // MARK: - Private methods
-    private func showUser(user: User) {
+    fileprivate func showUser(_ user: User) {
         userNameLabel.text = user.login
-        if let imageURL = NSURL(string: user.getAvatarUrl()) {
-            userImageView.sd_setImageWithURL(imageURL)
+        if let imageURL = URL(string: user.getAvatarUrl()) {
+            userImageView.sd_setImage(with: imageURL)
         }
     }
     
-    func menuButtonPressed(sender: UIButton) {
+    func menuButtonPressed(_ sender: UIButton) {
         slideMenuController()?.openLeft()
     }
 
     // MARK: - Actions
-    @IBAction func findUserButtonPressed(sender: UIButton) {
+    @IBAction func findUserButtonPressed(_ sender: UIButton) {
         wireframe.searchUserScreen()
     }
 }

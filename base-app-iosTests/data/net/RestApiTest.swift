@@ -8,17 +8,17 @@
 
 import XCTest
 import RxSwift
-import Nimble
 import Moya
 import ObjectMapper
 import Moya_ObjectMapper
 import Google
+import Nimble
 @testable import base_app_ios
 
 class RestApiTest: XCTestCase {
     
-    private let VALID_USERNAME = "RefineriaWeb"
-    private let INVALID_USERNAME = ""
+    fileprivate let VALID_USERNAME = "RefineriaWeb"
+    fileprivate let INVALID_USERNAME = ""
     
     var restApiUT: RestApi!
     
@@ -32,11 +32,11 @@ class RestApiTest: XCTestCase {
         
         restApiUT.getUserByName(VALID_USERNAME)
             .mapObject(User.self)
-            .subscribeNext { user in
+            .subscribe(onNext: { user in
                 success = true
                 expect(user.id).notTo(beNil())
                 expect(user.id).notTo(equal(0))
-        }
+        })
         expect(success).toEventually(beTrue())
     }
     
@@ -45,10 +45,10 @@ class RestApiTest: XCTestCase {
         
         restApiUT.getUserByName(INVALID_USERNAME)
             .mapObject(User.self)
-            .subscribeNext { user in
+            .subscribe(onNext: { user in
                 success = true
                 expect(user.id).to(beNil())
-        }
+        })
         expect(success).toEventually(beTrue())
     }
     
@@ -57,10 +57,10 @@ class RestApiTest: XCTestCase {
         
         restApiUT.getUsers(nil, perPage: 25)
             .mapArray(User.self)
-            .subscribeNext { users in
+            .subscribe(onNext: { users in
                 success = true
                 expect(users.count).notTo(equal(0))
-        }
+        })
         expect(success).toEventually(beTrue())
     }
 }

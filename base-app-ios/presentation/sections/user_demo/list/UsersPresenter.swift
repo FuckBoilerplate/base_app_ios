@@ -11,14 +11,14 @@ import OkDataSources
 
 class UsersPresenter: Presenter {
 
-    private let userRepository: UserRepository
+    fileprivate let userRepository: UserRepository
 
     init(wireframeRepository: WireframeRepository, userRepository: UserRepository) {
         self.userRepository = userRepository
         super.init(wireframeRepository: wireframeRepository)
     }
 
-    func nextPage(user: User?) -> Observable<[User]> {
+    func nextPage(_ user: User?) -> Observable<[User]> {
         return userRepository.getUsers(user?.id, refresh: false)
     }
 

@@ -7,6 +7,7 @@
 //
 
 import Swinject
+import SwinjectStoryboard
 
 extension SwinjectStoryboard {
     
