@@ -3,7 +3,8 @@
 //  R.swift Library
 //
 //  Created by Mathijs Kadijk on 06-12-15.
-//  Copyright © 2015 Mathijs Kadijk. All rights reserved.
+//  From: https://github.com/mac-cain13/R.swift.Library
+//  License: MIT License
 //
 
 import Foundation
@@ -11,13 +12,13 @@ import Foundation
 /// Segue identifier protocol
 public protocol StoryboardSegueIdentifierType: IdentifierType {
   /// Type of the segue itself
-  typealias SegueType
+  associatedtype SegueType
 
   /// Type of the source view controller
-  typealias SourceType
+  associatedtype SourceType
 
   /// Type of the destination view controller
-  typealias DestinationType
+  associatedtype DestinationType
 }
 
 /// Segue identifier
@@ -44,10 +45,10 @@ public struct StoryboardSegueIdentifier<Segue, Source, Destination>: StoryboardS
   }
 
   /// Create a new StoryboardSegue based on the identifier and source view controller
-  public func storyboardSegueWithSource(sourceViewController: Source)
+  public func storyboardSegue(withSource source: Source)
     -> StoryboardSegue<Segue, Source, Destination>
   {
-    return StoryboardSegue(identifier: self, sourceViewController: sourceViewController)
+    return StoryboardSegue(identifier: self, source: source)
   }
 }
 
@@ -63,7 +64,7 @@ public struct TypedStoryboardSegueInfo<Segue, Source, Destination>: StoryboardSe
   public typealias DestinationType = Destination
 
   /// Segue destination view controller
-  public let destinationViewController: Destination
+  public let destination: Destination
 
   /// Segue identifier
   public let identifier: String
@@ -72,7 +73,7 @@ public struct TypedStoryboardSegueInfo<Segue, Source, Destination>: StoryboardSe
   public let segue: Segue
 
   /// Segue source view controller
-  public let sourceViewController: Source
+  public let source: Source
 }
 
 /// Segue with identifier and source view controller
@@ -81,15 +82,15 @@ public struct StoryboardSegue<Segue, Source, Destination> {
   public let identifier: StoryboardSegueIdentifier<Segue, Source, Destination>
 
   /// Segue source view controller
-  public let sourceViewController: Source
+  public let source: Source
 
   /**
    Create a new segue based on the identifier and source view controller
 
    - returns: A new StoryboardSegue
    */
-  public init(identifier: StoryboardSegueIdentifier<Segue, Source, Destination>, sourceViewController: Source) {
+  public init(identifier: StoryboardSegueIdentifier<Segue, Source, Destination>, source: Source) {
     self.identifier = identifier
-    self.sourceViewController = sourceViewController
+    self.source = source
   }
 }

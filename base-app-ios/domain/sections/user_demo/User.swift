@@ -20,7 +20,8 @@ struct User {
         self.avatarUrl = avatarUrl
     }
     
-    init?(_ map: Map) {
+    init?(map: Map) {
+        
     }
     
     func getAvatarUrl() -> String {
@@ -29,7 +30,7 @@ struct User {
         }
         
         if avatarUrl.isEmpty { return avatarUrl }
-        return avatarUrl.componentsSeparatedByString("\\?")[0]
+        return avatarUrl.components(separatedBy: "\\?")[0]
     }
     
 }

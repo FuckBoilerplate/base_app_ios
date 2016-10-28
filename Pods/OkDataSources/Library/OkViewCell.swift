@@ -10,12 +10,12 @@ public protocol OkViewCell {
     static var reuseIdentifier: String { get }
     static var identifier: String { get }
     
-    typealias ItemType
+    associatedtype ItemType
     
-    func configureItem(item: ItemType)
+    func configureItem(_ item: ItemType)
 }
 
 public extension OkViewCell {
-    public static var reuseIdentifier: String { return String(Self) + "ReuseIdentifier" }
-    public static var identifier: String { return String(Self) + "Identifier" }
+    public static var reuseIdentifier: String { return String(describing: Self.self) + "ReuseIdentifier" }
+    public static var identifier: String { return String(describing: Self.self) + "Identifier" }
 }

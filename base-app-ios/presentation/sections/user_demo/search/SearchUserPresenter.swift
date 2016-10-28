@@ -10,14 +10,14 @@ import RxSwift
 
 class SearchUserPresenter: Presenter {
 
-    private let userRepository: UserRepository
+    fileprivate let userRepository: UserRepository
     
     init(wireframeRepository: WireframeRepository, userRepository: UserRepository) {
         self.userRepository = userRepository
         super.init(wireframeRepository: wireframeRepository)
     }
     
-    func getUserByName(username: String) -> Observable<User> {
+    func getUserByName(_ username: String) -> Observable<User> {
         return userRepository.searchByUserName(username)
     }
     

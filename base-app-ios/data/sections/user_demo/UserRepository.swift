@@ -20,7 +20,7 @@ class UserRepository: Repository {
         super.init(restApi: restApi, rxProviders: rxProviders)
     }
     
-    func searchByUserName(nameUser: String) -> Observable<User> {
+    func searchByUserName(_ nameUser: String) -> Observable<User> {
         return restApi.getUserByName(nameUser)
             .flatMap { (response) -> Observable<User> in
             
@@ -29,7 +29,7 @@ class UserRepository: Repository {
                 }
                 
                 do {
-                    let responseUser: User = try response.mapObject()
+                    let responseUser: User = try response.mapObject(User.self)
                     return Observable.just(responseUser)
                 } catch {
                     return self.buildObservableError("Error mapping the response")
@@ -37,7 +37,7 @@ class UserRepository: Repository {
         }
     }
     
-    func getUsers(lastIdQueried: Int?, refresh: Bool) -> Observable<[User]> {
+    func getUsers(_ lastIdQueried: Int?, refresh: Bool) -> Observable<[User]> {
         var oLoader = restApi.getUsers(lastIdQueried, perPage: UserRepository.USERS_PER_PAGE)
             .flatMap { (response) -> Observable<[User]> in
                 
@@ -46,7 +46,7 @@ class UserRepository: Repository {
                 }
                 
                 do {
-                    let responseUser: [User] = try response.mapArray()
+                    let responseUser: [User] = try response.mapArray(User.self)
                     return Observable.just(responseUser)
                 } catch {
                     return self.buildObservableError("Error mapping the response")
@@ -54,7 +54,7 @@ class UserRepository: Repository {
         }
         
         if lastIdQueried == UserRepository.FIRST_ID_QUERIED {
-            let provider = RxCacheProviders.GetUsers(evict: refresh)
+            let provider = RxCacheProviders.getUsers(evict: refresh)
             oLoader = rxProviders.cache(oLoader, provider: provider)
         }
         

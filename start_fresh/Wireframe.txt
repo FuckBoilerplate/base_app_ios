@@ -8,6 +8,7 @@
 
 import UIKit
 import Swinject
+import SwinjectStoryboard
 import RxSwift
 
 class Wireframe {
@@ -17,10 +18,66 @@ class Wireframe {
     func popCurrentScreen() {
         // Pop if there is a Navigation Controller
         if let navigationController = UIApplication.topViewController()! as? UINavigationController {
-            navigationController.popViewControllerAnimated(true)
+            navigationController.popViewController(animated: true)
         } else { // If not, dismiss
-            UIApplication.topViewController()?.dismissViewControllerAnimated(true, completion: nil)
+            UIApplication.topViewController()?.dismiss(animated: true, completion: nil)
         }
     }
     
+}
+
+// MARK: - Private Methods
+extension Wireframe {
+    
+    fileprivate func getViewController<T: UIViewController>(_ storyboardName: String, viewControllerClass t: T.Type) -> T {
+        let storyboard = SwinjectStoryboard.create(name: storyboardName, bundle: nil, container: SwinjectStoryboard.defaultContainer)
+        
+        return storyboard.instantiateViewController(withIdentifier: String(describing: T.self)) as! T
+    }
+    
+    // MARK: - Present Methods
+    fileprivate func presentViewController<T: UIViewController>(_ storyboardName: String, viewControllerClass t: T.Type) {
+        let storyboard = SwinjectStoryboard.create(name: storyboardName, bundle: nil, container: SwinjectStoryboard.defaultContainer)
+        
+        let viewController = storyboard.instantiateViewController(withIdentifier: String(describing: T.self)) as! T
+        
+        UIApplication.topViewController()!.present(viewController, animated: true, completion: nil)
+    }
+    
+    fileprivate func presentViewController(_ viewController: UIViewController) {
+        
+        UIApplication.topViewController()!.present(viewController, animated: true, completion: nil)
+    }
+    
+    // MARK: - Push Methods
+    fileprivate func pushViewController<T: UIViewController>(_ storyboardName: String, viewControllerClass t: T.Type) {
+        let storyboard = SwinjectStoryboard.create(name: storyboardName, bundle: nil, container: SwinjectStoryboard.defaultContainer)
+        
+        let viewController = storyboard.instantiateViewController(withIdentifier: String(describing: T.self)) as! T
+        
+        
+        // Use your own implementation of a Slide Menu Controller
+        
+        // Push if there is a Navigation Controller
+//        if let navigationController = UIApplication.topViewController()!.slideMenuController()?.mainViewController as? UINavigationController {
+//            navigationController.pushViewController(viewController, animated: true)
+//        } else { // If not, Present
+//            presentViewController(viewController)
+//        }
+    }
+    
+    fileprivate func pushViewController(_ viewController: UIViewController) {
+        
+        // Use your own implementation of a Slide Menu Controller
+        
+        // Push if there is a Navigation Controller
+        
+//        if let navigationController = UIApplication.topViewController()!.slideMenuController()?.mainViewController as? UINavigationController {
+//            navigationController.pushViewController(viewController, animated: true)
+//        } else if let navigationController = UIApplication.topViewController()?.parent as? UINavigationController {
+//            navigationController.pushViewController(viewController, animated: true)
+//        } else { // If not, Present
+//            presentViewController(viewController)
+//        }
+    }
 }

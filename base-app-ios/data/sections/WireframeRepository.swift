@@ -16,12 +16,12 @@ class WireframeRepository: Repository {
     }
     
     func getWireframeCurrentObject<T>() -> Observable<T> {
-        let provider = RxCacheProviders.GetWireframeCurrentObject(evict: false)
+        let provider = RxCacheProviders.getWireframeCurrentObject(evict: false)
         return rxProviders.cache(RxCache.errorObservable(T), provider: provider)
     }
     
-    func setWireframeCurrentObject<T>(object: T) -> Observable<Void> {
-        let provider = RxCacheProviders.GetWireframeCurrentObject(evict: true)
+    func setWireframeCurrentObject<T>(_ object: T) -> Observable<Void> {
+        let provider = RxCacheProviders.getWireframeCurrentObject(evict: true)
         return rxProviders.cache(Observable.just(object), provider: provider)
             .map { _ in }
     }

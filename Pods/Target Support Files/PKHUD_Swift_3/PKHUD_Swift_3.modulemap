@@ -1,0 +1,6 @@
+framework module PKHUD {
+  umbrella header "PKHUD_Swift_3-umbrella.h"
+
+  export *
+  module * { export * }
+}

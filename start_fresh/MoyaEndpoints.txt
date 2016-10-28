@@ -1,0 +1,89 @@
+//
+//  MoyaEndpoints.swift
+//  base-app-ios
+//
+//  Created by Roberto Frontado on 10/27/16.
+//  Copyright © 2016 Roberto Frontado. All rights reserved.
+//
+
+import Moya
+import ObjectMapper
+
+// MARK: - Moya Configuration!
+
+// MARK: - Header Api Version
+let HEADER_API_VERSION = "Accept: application/vnd.github.v3+json"
+
+// MARK: - Endpoints
+public enum MoyaEndpoints {
+    case example(username: String)
+}
+
+extension MoyaEndpoints: TargetType {
+    
+    public var task: Task {
+        return Task.request
+    }
+    
+    // MARK: - Endpoint -> Base URL
+    public var baseURL: URL {
+        return URL(string: "https://your.api.com")!
+    }
+    
+    // MARK: - Endpoint -> Path
+    public var path: String {
+        switch self {
+        case .example(let username):
+            return "/example/\(username.URLEscapedString)"
+        }
+    }
+    
+    // MARK: - Endpoint -> Method
+    public var method: Moya.Method {
+        switch self {
+        default:
+            return .get
+        }
+    }
+    
+    // : - Endpoint -> Parameters
+    public var parameters: [String: Any]? {
+        switch self {
+        default:
+            return nil
+        }
+    }
+    
+    // MARK: - Endpoint -> Headers
+    public var headers: [String: String] {
+        // Default value
+        return [String: String]()
+    }
+
+    // MARK: - Endpoint -> Sample Data
+    public var sampleData: Data {
+        switch self {
+        default:
+            return "[{\"name\": \"Repo Name\"}]".data(using: String.Encoding.utf8)!
+        }
+    }
+}
+
+// MARK: - Endpoint Closure
+let endpointClosure = { (target: MoyaEndpoints) -> Endpoint<MoyaEndpoints> in
+    let endpoint: Endpoint<MoyaEndpoints> = Endpoint<MoyaEndpoints>(URL: url(target), sampleResponseClosure: {.networkResponse(200, target.sampleData)}, method: target.method, parameters: target.parameters)
+    // Sign all non-authenticating requests
+    
+    // Headers
+    return endpoint.adding(newHttpHeaderFields: target.headers)
+}
+
+public func url(_ route: TargetType) -> String {
+    return route.baseURL.absoluteString + route.path
+}
+
+public extension String {
+    var URLEscapedString: String {
+        return self.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlHostAllowed)!
+    }
+}

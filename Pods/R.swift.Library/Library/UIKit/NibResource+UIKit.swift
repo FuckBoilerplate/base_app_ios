@@ -3,7 +3,8 @@
 //  R.swift.Library
 //
 //  Created by Mathijs Kadijk on 06-01-16.
-//  Copyright © 2016 Mathijs Kadijk. All rights reserved.
+//  From: https://github.com/mac-cain13/R.swift.Library
+//  License: MIT License
 //
 
 import Foundation
@@ -18,7 +19,7 @@ public extension NibResourceType {
 
    - returns: An array containing the top-level objects from the NIB
    */
-  public func instantiateWithOwner(ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> [AnyObject] {
-    return UINib(resource: self).instantiateWithOwner(ownerOrNil, options: optionsOrNil)
+  public func instantiate(withOwner ownerOrNil: Any?, options optionsOrNil: [AnyHashable : Any]? = [:]) -> [Any] {
+    return UINib(resource: self).instantiate(withOwner: ownerOrNil, options: optionsOrNil)
   }
 }

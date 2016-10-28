@@ -1,5 +1,10 @@
+[![Version](https://img.shields.io/cocoapods/v/OkDataSources.svg?style=flat)](http://cocoapods.org/pods/OkDataSources)
+[![License](https://img.shields.io/cocoapods/l/OkDataSources.svg?style=flat)](http://cocoapods.org/pods/OkDataSources)
+[![Platform](https://img.shields.io/cocoapods/p/OkDataSources.svg?style=flat)](http://cocoapods.org/pods/OkDataSources)
+[![Language](https://img.shields.io/badge/language-swift-orange.svg?style=flat)](https://developer.apple.com/swift)
+
 # OkDataSources
-Wrappers for iOS TableView and CollectionView DataSources to simply its api at a minimum.
+Wrappers for iOS TableView and CollectionView DataSources to simply its api at a minimum. Also it has a cool PagerView and SlidingTabs!
 
 ## Setup
 Add OkDataSources pod to the podfile
@@ -13,6 +18,12 @@ For RxSwift extension, this project will include it as a dependency.  So you can
 ```swift
 pod 'OkDataSources'
 pod 'OkDataSources/RxSwift'
+```
+
+OkDataSources also is available using [Carthage](https://github.com/Carthage/Carthage). To install it add the following dependency to your `Cartfile`:
+
+```swift
+github "robertofrontado/OkDataSources"
 ```
 
 ## Usage
@@ -51,8 +62,8 @@ class TableViewCell: UITableViewCell, OkViewCell {
 
 In the **Storyboard** the cell needs to have an identifier like this **"\\(CLASSNAME)Idenfitier"** (For instance: **TableViewCellReuseIdenfitier**)
 
-![TableViewCell - 1](http://i.imgur.com/SAj4XMP.png)
-![TableViewCell - 2](http://i.imgur.com/HNfk3GT.png)
+![TableViewCell - 1](https://github.com/FuckBoilerplate/OkDataSources/blob/master/Screenshots/Screenshot-TableViewClass.png)
+![TableViewCell - 2](https://github.com/FuckBoilerplate/OkDataSources/blob/master/Screenshots/Screenshot-TableViewIdentifier.png)
 
 If you want to receive feedback about items selection, you need to add an `OkTableViewDelegate` to your `ViewController`, so `onItemClicked` block its going to be called every time the user clicks an item.
 
@@ -109,8 +120,8 @@ class CollectionViewCell: UICollectionViewCell, OkViewCell {
 
 In the **Storyboard** the cells needs to have an identifier like this **"\\(CLASSNAME)ReuseIdenfitier"** (For instance: **CollectionViewCellReuseIdentifier**)
 
-![CollectionViewCell - 1](http://i.imgur.com/BatGgD8.png)
-![CollectionViewCell - 2](http://i.imgur.com/pYtw3Jr.png)
+![CollectionViewCell - 1](https://github.com/FuckBoilerplate/OkDataSources/blob/master/Screenshots/Screenshot-CollectionViewClass.png)
+![CollectionViewCell - 2](https://github.com/FuckBoilerplate/OkDataSources/blob/master/Screenshots/Screenshot-CollectionViewReuseIdentifier.png)
 
 If you want to receive feedback about items selection, you need to add an `OkCollectionViewDelegate` to your `ViewController`, so `onItemClicked` block its going to be called every time the user clicks an item.
 
@@ -226,5 +237,67 @@ delegate = OkRxCollectionViewDelegate(dataSource: dataSource,
             return Observable.just(self.getMockItems(self.dataSource.items.count))
         }   
 ```
+
+## PagerView 
+
+Here is an example [PagerViewController](https://github.com/FuckBoilerplate/OkDataSources/blob/master/OkDataSourcesExample/OkDataSourcesExample/ViewControllers/PagerViewController.swift)
+
+The most convinient way is to use Storyboard. Drag a view to Storyboard and set Class to [OkPagerView](https://github.com/FuckBoilerplate/OkDataSources/blob/master/Library/OkPagerView.swift#L22)
+
+Your ViewController will need to implement the [OkPagerViewDataSource](https://github.com/FuckBoilerplate/OkDataSources/blob/master/Library/OkPagerView.swift#L11) protocol
+
+```swift
+public protocol OkPagerViewDataSource {
+    
+    func viewControllerAtIndex(index: Int) -> UIViewController?
+    func numberOfPages() -> Int?
+}
+```
+
+And if you want, there is a [OkPagerViewDelegate](https://github.com/FuckBoilerplate/OkDataSources/blob/master/Library/OkPagerView.swift#L17) protocol
+
+```swift
+public protocol OkPagerViewDelegate {
+    
+    func onPageSelected(viewController: UIViewController, index: Int)
+}
+```
+
+## SlidingTabs
+
+Here is an example [PagerViewController](https://github.com/FuckBoilerplate/OkDataSources/blob/master/OkDataSourcesExample/OkDataSourcesExample/ViewControllers/PagerViewController.swift)
+
+The most convinient way is to use Storyboard. Drag a view to Storyboard and set Class to [OkSlidingTabs](https://github.com/FuckBoilerplate/OkDataSources/blob/master/Library/OkSlidingTabs.swift#L21)
+
+You can customize this attributes through the Storyboard:
+
+- `xPadding: CGFloat`
+- `xMargin: CGFloat`
+- `labelTextColor: UIColor`
+- `labelBgColor: UIColor`
+- `indicatorColor: UIColor`
+- `indicatorHeight: CGFloat`
+- `distributeEvenly: Bool` 
+
+And If you want to use a different font you'll need to do:
+`slidingTabs.font = newFont`
+
+Your ViewController will need to implement the [OkSlidingTabsDataSource](https://github.com/FuckBoilerplate/OkDataSources/blob/master/Library/OkSlidingTabs.swift#L11) protocol
+
+```swift
+public protocol OkSlidingTabsDataSource {
+    func numberOfTabs() -> Int
+    func titleAtIndex(index: Int) -> String
+}
+```
+
+And if you want, there is a [OkSlidingTabsDelegate](https://github.com/FuckBoilerplate/OkDataSources/blob/master/Library/OkSlidingTabs.swift#L16) protocol
+
+```swift
+public protocol OkSlidingTabsDelegate {
+    func onTabSelected(index: Int)
+}
+```
+ 
 ##Credits
 This approach is based on https://github.com/Karumi/BothamUI

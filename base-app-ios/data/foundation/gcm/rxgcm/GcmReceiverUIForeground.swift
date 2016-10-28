@@ -1,9 +1,9 @@
 //
 //  GcmReceiverUIForeground.swift
-//  RxGcm_swift
+//  RxGcm
 //
-//  Created by Jaime Vidal on 4/4/16.
-//  Copyright © 2016 Jaime Vidal. All rights reserved.
+//  Created by Roberto Frontado on 4/4/16.
+//  Copyright © 2016 Roberto Frontado. All rights reserved.
 //
 
 import RxSwift
@@ -16,19 +16,22 @@ import RxSwift
 
 public protocol GcmReceiverUIForeground {
     /**
-    * Called when ViewController matches with the desired target specified in the bundle notification.
-    * @see GcmReceiverUIForeground
-    */
-    func onTargetNotification(oMessage: Observable<RxMessage>)
+     * Called when ViewController matches with the desired target specified in the bundle notification.
+     * @see GcmReceiverUIForeground
+     */
+    func onTargetNotification(_ oMessage: Observable<RxMessage>)
     
     /**
-    * Called when ViewController does not match with the desired target specified in the bundle notification.
-    * @see GcmReceiverUIForeground
-    */
-    func onMismatchTargetNotification(oMessage: Observable<RxMessage>)
+     * Called when ViewController does not match with the desired target specified in the bundle notification.
+     * @see GcmReceiverUIForeground
+     */
+    func onMismatchTargetNotification(_ oMessage: Observable<RxMessage>)
     
     /**
-    * @return The value provided in the bundle notification by the server to be used as a filter when updating data model or seeking for the activity/fragment to be notified.
-    */
-    func target() -> String
+     * Determines if the implementing class is interested on be notified when updating the data model or seeking for the activity/fragment to be notified.
+     * @param key The value provided in the bundle notification by the server
+     * @return true if the implementing class is interested on be notified
+     
+     */
+    func matchesTarget(_ key: String) -> Bool
 }
