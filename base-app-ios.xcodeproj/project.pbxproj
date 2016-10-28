@@ -46,6 +46,7 @@
 		A26486711C98147C003BFE21 /* ApplicationModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = A264866C1C98147C003BFE21 /* ApplicationModule.swift */; };
 		A26486741C98147C003BFE21 /* PresentationModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = A264866F1C98147C003BFE21 /* PresentationModule.swift */; };
 		A264867A1C9814A7003BFE21 /* DomainModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26486781C9814A7003BFE21 /* DomainModule.swift */; };
+		A28CCE561DC3C23600850E4A /* MoyaEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28CCE551DC3C23600850E4A /* MoyaEndpoints.swift */; };
 		A29D5ADF1CBBD48200A6D1E3 /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29D5ADD1CBBD48200A6D1E3 /* Presenter.swift */; };
 		A29D5AEB1CBBE74700A6D1E3 /* DashboardPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29D5AEA1CBBE74700A6D1E3 /* DashboardPresenter.swift */; };
 		A29D5AED1CBBE88E00A6D1E3 /* LaunchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29D5AEC1CBBE88E00A6D1E3 /* LaunchPresenter.swift */; };
@@ -136,6 +137,7 @@
 		A264866C1C98147C003BFE21 /* ApplicationModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationModule.swift; sourceTree = "<group>"; };
 		A264866F1C98147C003BFE21 /* PresentationModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationModule.swift; sourceTree = "<group>"; };
 		A26486781C9814A7003BFE21 /* DomainModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DomainModule.swift; sourceTree = "<group>"; };
+		A28CCE551DC3C23600850E4A /* MoyaEndpoints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MoyaEndpoints.swift; path = "base-app-ios/Data/foundation/net/MoyaEndpoints.swift"; sourceTree = SOURCE_ROOT; };
 		A29D5ADD1CBBD48200A6D1E3 /* Presenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Presenter.swift; path = "base-app-ios/presentation/foundation/Presenter.swift"; sourceTree = SOURCE_ROOT; };
 		A29D5AEA1CBBE74700A6D1E3 /* DashboardPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DashboardPresenter.swift; path = "base-app-ios/presentation/sections/dashboard/DashboardPresenter.swift"; sourceTree = SOURCE_ROOT; };
 		A29D5AEC1CBBE88E00A6D1E3 /* LaunchPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LaunchPresenter.swift; path = "base-app-ios/presentation/sections/launch/LaunchPresenter.swift"; sourceTree = SOURCE_ROOT; };
@@ -228,6 +230,7 @@
 		A20956E01CCA7C2D00C67D9D /* net */ = {
 			isa = PBXGroup;
 			children = (
+				A28CCE551DC3C23600850E4A /* MoyaEndpoints.swift */,
 				A20956E11CCA7C2D00C67D9D /* RestApi.swift */,
 				A20956E21CCA7C2D00C67D9D /* RestApiMoya.swift */,
 			);
@@ -838,6 +841,7 @@
 				A24681651DC2B6ED0051EC73 /* GcmReceiverData.swift in Sources */,
 				A2A3182F1CBBF0FC008F04F8 /* UsersPresenter.swift in Sources */,
 				A264867A1C9814A7003BFE21 /* DomainModule.swift in Sources */,
+				A28CCE561DC3C23600850E4A /* MoyaEndpoints.swift in Sources */,
 				A29D5AEB1CBBE74700A6D1E3 /* DashboardPresenter.swift in Sources */,
 				A29D5AED1CBBE88E00A6D1E3 /* LaunchPresenter.swift in Sources */,
 				A24681631DC2B6ED0051EC73 /* GcmMessageReceiver.swift in Sources */,
